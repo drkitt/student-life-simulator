@@ -1,0 +1,2 @@
+rootProject.name = "StudentLifeSimulator"
+include ':app'
