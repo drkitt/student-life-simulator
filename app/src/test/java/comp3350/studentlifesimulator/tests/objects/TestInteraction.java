@@ -1,10 +1,14 @@
 package comp3350.studentlifesimulator.tests.objects;
 
+import org.junit.Test;
+
 import comp3350.studentlifesimulator.objects.Interaction;
 
 import static org.junit.Assert.*;
 
 public class TestInteraction {
+
+    @Test
     public void testValidInteractions() {
         Interaction study = new Interaction("Study");
         assertEquals("Study", study.getInteractionName());
@@ -15,6 +19,7 @@ public class TestInteraction {
         assertEquals(2, exercise.getValue());
     }
 
+    @Test
     public void testInvalidInteractionValues() {
         assertThrows(
                 IllegalArgumentException.class,
