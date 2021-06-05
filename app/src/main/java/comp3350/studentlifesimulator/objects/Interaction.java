@@ -5,7 +5,7 @@ public class Interaction {
     private int value;
 
     // Interaction type represents the energy consumed by the interaction
-    // Defaults to 1
+    // Defaults to 1; Max value of 4, ADJUST BASED ON ENERGY-BAR LIMITS
     public Interaction(String newInteraction) {
         interactionName = newInteraction;
         value = 1;

@@ -26,6 +26,7 @@ public class TestInteraction {
                 ()->new Interaction("InvalidAction", -1)
         );
 
+        //TO-DO: determine energy cost value limits
         assertThrows(
                 IllegalArgumentException.class,
                 ()->new Interaction("InvalidAction", 10)
