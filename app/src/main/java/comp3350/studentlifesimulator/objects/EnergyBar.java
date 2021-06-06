@@ -1,7 +1,5 @@
 package comp3350.studentlifesimulator.objects;
 
-// Leaving this uncommented until we we have coding standards ;)
-
 public class EnergyBar {
     private int currentEnergy;
     private final int maxEnergy;
