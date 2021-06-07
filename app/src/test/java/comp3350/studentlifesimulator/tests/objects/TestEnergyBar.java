@@ -41,28 +41,34 @@ public class TestEnergyBar {
     }
 
     @Test
-    public void testChangingEnergy() {
+    public void testAdjustingEnergy() {
         EnergyBar energy = new EnergyBar(4, 4);
+
         assertEquals(4, energy.getCurrentEnergy());
 
         energy.setCurrentEnergy(3);
         assertEquals(3, energy.getCurrentEnergy());
 
+        assertTrue(energy.canAdjustEnergy(1));
         energy.adjustEnergy(1);
         assertEquals(4, energy.getCurrentEnergy());
 
+        assertFalse(energy.canAdjustEnergy(1));
         assertThrows(
                 IllegalArgumentException.class,
                 () -> energy.adjustEnergy(1)
         );
         assertEquals(4, energy.getCurrentEnergy());
 
+        assertTrue(energy.canAdjustEnergy(-2));
         energy.adjustEnergy(-2);
         assertEquals(2, energy.getCurrentEnergy());
 
+        assertTrue(energy.canAdjustEnergy(-2));
         energy.adjustEnergy(-2);
         assertEquals(0, energy.getCurrentEnergy());
 
+        assertFalse(energy.canAdjustEnergy(-1));
         assertThrows(
                 IllegalArgumentException.class,
                 () -> energy.adjustEnergy(-1)
