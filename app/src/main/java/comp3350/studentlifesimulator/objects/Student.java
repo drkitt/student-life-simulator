@@ -18,6 +18,7 @@ public class Student
     {
         studentID = newStudentID;
         studentName = newStudentName;
+        energyBar = new EnergyBar(STARTING_ENERGY, STARTING_ENERGY);
     }
 
     public String getStudentID()
