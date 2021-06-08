@@ -2,7 +2,7 @@ package comp3350.studentlifesimulator.objects;
 
 public class Student
 {
-    private final int STARTING_ENERGY = 10;
+    private static final int STARTING_ENERGY = 10;
     private String studentID;
     private String studentName;
     private EnergyBar energyBar;
@@ -21,6 +21,10 @@ public class Student
         energyBar = new EnergyBar(STARTING_ENERGY, STARTING_ENERGY);
     }
 
+    public static int getStartingEnergy() {
+        return (STARTING_ENERGY);
+    }
+
     public String getStudentID()
     {
         return (studentID);
@@ -31,7 +35,11 @@ public class Student
         return (studentName);
     }
 
-    public boolean doAction(Action toDo) {
-        return false;
+    public int getCurrentEnergy() {
+        return energyBar.getCurrentEnergy();
+    }
+
+    public void doAction(Action toDo) {
+        energyBar.adjustEnergy(-toDo.getEnergyUnit());  // TODO: Remove the negation once actions with negative energy values are formally allowed
     }
 }
