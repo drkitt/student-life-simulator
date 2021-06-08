@@ -3,6 +3,7 @@ package comp3350.studentlifesimulator.tests.objects;
 import org.junit.Test;
 
 import comp3350.studentlifesimulator.objects.Student;
+import comp3350.studentlifesimulator.objects.Action;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +22,7 @@ public class TestStudent {
     @Test
     public void testDoAction() {
         Student student = new Student("Son Johnsmith");
-        // Whoops, can't do anything yet cause the student doesn't have an energy bar yet in this branch
+        Action possibleAction = new Action("Action that takes less than the student's total energy", -1, 1);
+        assertTrue(student.doAction(possibleAction));
     }
 }
