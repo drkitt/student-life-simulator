@@ -3,6 +3,7 @@ package comp3350.studentlifesimulator.tests.objects;
 import org.junit.Test;
 
 import comp3350.studentlifesimulator.objects.Action;
+import comp3350.studentlifesimulator.objects.Student;
 
 import static org.junit.Assert.*;
 
@@ -35,7 +36,7 @@ public class TestAction {
 
         assertThrows(
                 IllegalArgumentException.class,
-                ()->new Action("InvalidAction", 10, 10)
+                ()->new Action("InvalidAction", Student.getStartingEnergy() + 1, 10)
         );
 
         assertThrows(
