@@ -17,4 +17,10 @@ public class TestStudent {
         assertEquals("Smith Johnson",playerWithID.getStudentName());
         assertEquals("12345",playerWithID.getStudentID());
     }
+
+    @Test
+    public void testDoAction() {
+        Student student = new Student("Son Johnsmith");
+        // Whoops, can't do anything yet cause the student doesn't have an energy bar yet in this branch
+    }
 }

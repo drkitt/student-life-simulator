@@ -26,4 +26,8 @@ public class Student
     {
         return (studentName);
     }
+
+    public boolean doAction(Action toDo) {
+        return false;
+    }
 }
