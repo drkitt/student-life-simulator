@@ -36,7 +36,7 @@ public class TestAction {
 
         assertThrows(
                 IllegalArgumentException.class,
-                ()->new Action("InvalidAction", Student.getStartingEnergy() + 1, 10)
+                ()->new Action("InvalidAction", Student.getMaxEnergy() + 1, 10)
         );
 
         assertThrows(
