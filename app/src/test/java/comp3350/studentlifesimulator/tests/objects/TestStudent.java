@@ -22,7 +22,14 @@ public class TestStudent {
     @Test
     public void testDoAction() {
         Student student = new Student("Son Johnsmith");
-        Action possibleAction = new Action("Action that takes less than the student's total energy", -1, 1);
-        assertTrue(student.doAction(possibleAction));
+        Action possibleAction = new Action("Action that takes less than the student's total energy", 1, 1);
+        student.doAction(possibleAction);
+        assertEquals(Student.getMaxEnergy() - possibleAction.getEnergyUnit(), student.getCurrentEnergy());
+
+        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", 10, 1);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> student.doAction(impossibleAction)
+        );
     }
 }
