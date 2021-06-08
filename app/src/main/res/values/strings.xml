@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StudentLifeSimulator</string>
+    <string name="register_btn">REGISTER</string>
 </resources>

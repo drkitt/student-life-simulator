@@ -15,14 +15,13 @@ public class Course {
     }
 
     public String getCourseName() {
+
         return courseName;
     }
 
     public String toString() {
-        return "Course{" +
-                "courseID='" + courseID + '\'' +
-                ", courseName='" + courseName + '\'' +
-                '}';
+
+        return courseID + " - "+ courseName;
     }
 
     public boolean equals(Course other) {
