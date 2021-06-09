@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentLifeSimulator">
         <activity android:name="comp3350.studentlifesimulator.presentation.CoursesActivity">
-
         </activity>
         <activity android:name="comp3350.studentlifesimulator.application.MainActivity">
             <intent-filter>

@@ -28,8 +28,9 @@ public class CoursesActivity extends AppCompatActivity {
         courseArray.add(new Course("COMP 2150" , "Object Oriented Programming"));
         courseArray.add(new Course("COMP 3350" , "Software Engineering"));
 
-        courseList.setAdapter(new ArrayAdapter<>(this , android.R.layout.simple_list_item_1 , courseArray));
+        courseList.setAdapter(new ArrayAdapter<>(this , android.R.layout.simple_list_item_multiple_choice , courseArray));
     }
+
 
 
 }
