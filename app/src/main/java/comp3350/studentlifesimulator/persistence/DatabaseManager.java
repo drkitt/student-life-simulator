@@ -1,65 +1,50 @@
 package comp3350.studentlifesimulator.persistence;
 
 public class DatabaseManager {
-    private static Database database = new Database();
+    private final static Database DATABASE = new Database();
 
     public DatabaseManager() {
-
     }
 
-    // BASE METHODS FOR GETTING INFO AT START
+    public Object[] getClasses() { // TODO: Change so that it returns list of Class object
+        Object[] classes = new Object[DATABASE.studentKey - DATABASE.classesKey];
 
-    public String[] getClasses() {
-        String[] classes = null;
+        for (int i = DATABASE.classesKey; i < DATABASE.studentKey; i++) {
+            classes[i - DATABASE.classesKey] = DATABASE.getObject(i);
+        }
 
         return classes;
     }
 
     public Object getStudent() { // TODO: Change so that it returns Student object
-        Object student = null;
-
-        return student;
+        return DATABASE.getObject(DATABASE.studentKey);
     }
 
     public int getMaxEnergy() {
-        int maxEnergy = -1;
-
-        return maxEnergy;
+        return DATABASE.getInt(DATABASE.energyKey);
     }
 
     public int insertString(String data) {
-        int key = -1;
-
-        return key;
+        return DATABASE.insertString(data);
     }
 
     public int insertInt(int data) {
-        int key = -1;
-
-        return key;
+        return DATABASE.insertInt(data);
     }
 
     public int insertObject(Object data) {
-        int key = -1;
-
-        return key;
+        return DATABASE.insertObject(data);
     }
 
     public String getString(int key) {
-        String data = null;
-
-        return data;
+        return DATABASE.getString(key);
     }
 
     public int getInt(int key) {
-        int data = -1;
-
-        return data;
+        return DATABASE.getInt(key);
     }
 
     public Object getObject(int key) {
-        Object data = null;
-
-        return data;
+        return DATABASE.getObject(key);
     }
 }

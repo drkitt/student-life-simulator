@@ -1,111 +1,85 @@
 package comp3350.studentlifesimulator.persistence;
 
 public class Database {
-    private class DataNode {
-        public DataNode next;
-        public String[] data;
+    private class DataRow {
+        public String[] stringData;
+        public int[] intData;
+        public Object[] objectData;
         public int size;
 
-        public DataNode() {
-            next = null;
-            data = new String[10];
+        public DataRow(int type) {
+            if (type == STRING) {
+                stringData = new String[MAX_DATA_SIZE];
+            }
+            else if (type == INTEGER) {
+                intData = new int[MAX_DATA_SIZE];
+            }
+            else if (type == OBJECT) {
+                objectData = new Object[MAX_DATA_SIZE];
+            }
+
             size = 0;
         }
     }
 
-    private DataNode[] table;
-    private int[] sizes;
+    private final int MAX_DATA_SIZE = 100;
+    private final int STRING = 0;
+    private final int INTEGER = 1;
+    private final int OBJECT = 2;
+
+    private DataRow[] table;
+
+    public int classesKey;
+    public int studentKey;
+    public int energyKey;
 
     public Database() {
-        table = new DataNode[10];
-        sizes = new int[10];
+        table = new DataRow[3];
+        table[STRING] = new DataRow(STRING);
+        table[INTEGER] = new DataRow(INTEGER);
+        table[OBJECT] = new DataRow(OBJECT);
 
-        for (int i = 0; i < table.length; i++) {
-            table[i] = new DataNode();
-            sizes[i] = 0;
-        }
+        classesKey = 0; // TODO: fill with Class objects (and Student object at studentKey)
+        studentKey = 4;
+        energyKey = INTEGER;
     }
 
     public int insertString(String data) {
+        int key = table[STRING].size;
 
+        table[STRING].stringData[table[STRING].size] = data;
+        table[STRING].size++;
+
+        return key;
     }
 
     public int insertInt(int data) {
+        int key = table[INTEGER].size;
 
+        table[INTEGER].intData[table[INTEGER].size] = data;
+        table[INTEGER].size++;
+
+        return key;
     }
 
-    public Object insertObject(int data) {
+    public int insertObject(Object data) {
+        int key = table[OBJECT].size;
 
+        table[OBJECT].objectData[table[OBJECT].size] = data;
+        table[OBJECT].size++;
+
+        return key;
     }
 
-    // Temporarily keeping this for reference while I remake previous stub database
-
-    /*public int createDatabase() {
-        int databaseID = size + 1;
-        DataNode database;
-
-        database = getNode(size);
-        database.next = new DataNode();
-        size++;
-
-        return databaseID;
+    public String getString(int key) {
+        return table[STRING].stringData[key];
     }
 
-    public String[] getData(int id) {
-        String[] targetData = {};
-        DataNode target;
-
-        if (id != 0) {
-            target = getNode(id);
-            targetData = target.data;
-        }
-
-        return targetData;
+    public int getInt(int key) {
+        return table[INTEGER].intData[key];
     }
 
-    public boolean addData(int id, String data) {
-        boolean added = false;
-        DataNode target;
-
-        if (id != 0) {
-            target = getNode(id);
-
-            if (target != null) {
-                insert(target, data);
-                added = true;
-            }
-        }
-
-        return added;
+    public Object getObject(int key) {
+        return table[OBJECT].objectData[key];
     }
-
-    private DataNode getNode(int id) {
-        DataNode target = null;
-
-        if (id <= size) {
-            target = head;
-
-            for (int i = 0; i < id; i++) {
-                target = target.next;
-            }
-        }
-
-        return target;
-    }
-
-    private void insert(DataNode node, String data) {
-        String[] temp;
-
-        if (node.size >= node.data.length) {
-            temp = node.data;
-            node.data = new String[temp.length + 10];
-
-            for (int i = 0; i < node.data.length; i++) {
-                node.data[i] = temp[i];
-            }
-        }
-
-        node.data[node.size] = data;
-        node.size++;
-    }*/
 }
