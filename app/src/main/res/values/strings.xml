@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">StudentLifeSimulator</string>
     <string name="register_btn">REGISTER</string>
+    <string name="menu_desc">Select courses to be enrolled in</string>
 </resources>
