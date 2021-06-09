@@ -1,92 +1,65 @@
 package comp3350.studentlifesimulator.persistence;
 
 public class DatabaseManager {
-    private class DataNode {
-        public DataNode next;
-        public String[] data;
-        public int size;
-
-        public DataNode() {
-            next = null;
-            data = new String[10];
-            size = 0;
-        }
-    }
-
-    private DataNode head;
-    private int size;
+    private static Database database = new Database();
 
     public DatabaseManager() {
-        head = new DataNode();
-        size = 0;
+
     }
 
-    public int createDatabase() {
-        int databaseID = size + 1;
-        DataNode database;
+    // BASE METHODS FOR GETTING INFO AT START
 
-        database = getNode(size);
-        database.next = new DataNode();
-        size++;
+    public String[] getClasses() {
+        String[] classes = null;
 
-        return databaseID;
+        return classes;
     }
 
-    public String[] getData(int id) {
-        String[] targetData = {};
-        DataNode target;
+    public Object getStudent() { // TODO: Change so that it returns Student object
+        Object student = null;
 
-        if (id != 0) {
-            target = getNode(id);
-            targetData = target.data;
-        }
-
-        return targetData;
+        return student;
     }
 
-    public boolean addData(int id, String data) {
-        boolean added = false;
-        DataNode target;
+    public int getMaxEnergy() {
+        int maxEnergy = -1;
 
-        if (id != 0) {
-            target = getNode(id);
-
-            if (target != null) {
-                insert(target, data);
-                added = true;
-            }
-        }
-
-        return added;
+        return maxEnergy;
     }
 
-    private DataNode getNode(int id) {
-        DataNode target = null;
+    public int insertString(String data) {
+        int key = -1;
 
-        if (id <= size) {
-            target = head;
-
-            for (int i = 0; i < id; i++) {
-                target = target.next;
-            }
-        }
-
-        return target;
+        return key;
     }
 
-    private void insert(DataNode node, String data) {
-        String[] temp;
+    public int insertInt(int data) {
+        int key = -1;
 
-        if (node.size >= node.data.length) {
-            temp = node.data;
-            node.data = new String[temp.length + 10];
+        return key;
+    }
 
-            for (int i = 0; i < node.data.length; i++) {
-                node.data[i] = temp[i];
-            }
-        }
+    public int insertObject(Object data) {
+        int key = -1;
 
-        node.data[node.size] = data;
-        node.size++;
+        return key;
+    }
+
+    public String getString(int key) {
+        String data = null;
+
+        return data;
+    }
+
+    public int getInt(int key) {
+        int data = -1;
+
+        return data;
+    }
+
+    public Object getObject(int key) {
+        Object data = null;
+
+        return data;
     }
 }
