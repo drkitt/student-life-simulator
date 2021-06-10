@@ -7,8 +7,12 @@ public class Course {
     private final String courseName;
 
     public Course(String ID, String name){
-        courseID = ID;
-        courseName = name;
+
+        if(ID == null || name == null){
+            throw new NullPointerException("Invalid course argument passed in");
+        }
+        courseID = ID.trim();
+        courseName = name.trim();
     }
 
     public String getCourseID() {
@@ -24,15 +28,12 @@ public class Course {
     }
 
     public boolean equals(Course other) {
-        boolean result = false;
+        boolean result;
         if(other != null) {
-
-            if(other.courseID == null || other.courseName == null ||
-                courseID == null || courseName == null){
-                throw new NullPointerException("Invalid course argument passed in");
-            }
-
             result = other.courseID.equals(courseID) && other.courseName.equals(courseName);
+        }
+        else{
+            throw new NullPointerException("Invalid course argument passed in");
         }
         return result;
     }

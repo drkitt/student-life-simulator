@@ -16,12 +16,9 @@ public class TestCourses {
 
     @Test
     public void testNull(){
-        Course nullCourse = new Course(null , null);
-        assertNull(nullCourse.getCourseID());
-        assertNull(nullCourse.getCourseName());
         try {
-            nullCourse.equals(new Course(null , null));
-            nullCourse.equals(new Course("", ""));
+            Course nullCourse = new Course(null , null);
+            new Course("4550" , "Unknown Course").equals(null);
            fail("Null Pointer Exception expected");
         }catch (NullPointerException e){
             System.out.println(e.getMessage());
@@ -33,7 +30,7 @@ public class TestCourses {
         Course invalidCourse = new Course("" , "");
         assertEquals("" , invalidCourse.getCourseName());
         assertEquals("" , invalidCourse.getCourseName());
-        assertFalse(invalidCourse.equals(new Course(" " , "")));
+        assertTrue(invalidCourse.equals(new Course("  " , "")));
         assertTrue(invalidCourse.equals(new Course("" , "")));
     }
 }
