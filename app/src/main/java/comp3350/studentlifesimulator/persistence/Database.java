@@ -1,85 +1,94 @@
 package comp3350.studentlifesimulator.persistence;
 
+import comp3350.studentlifesimulator.objects.Student;
+import comp3350.studentlifesimulator.objects.Course;
+import comp3350.studentlifesimulator.objects.EnergyBar;
+
+import java.util.ArrayList;
+
 public class Database {
-    private class DataRow {
-        public String[] stringData;
-        public int[] intData;
-        public Object[] objectData;
-        public int size;
+    private Student student;
+    private EnergyBar energyBar;
+    private ArrayList<Course> courses;
+    private ArrayList<Course> selected;
 
-        public DataRow(int type) {
-            if (type == STRING) {
-                stringData = new String[MAX_DATA_SIZE];
-            }
-            else if (type == INTEGER) {
-                intData = new int[MAX_DATA_SIZE];
-            }
-            else if (type == OBJECT) {
-                objectData = new Object[MAX_DATA_SIZE];
-            }
-
-            size = 0;
-        }
-    }
-
-    private final int MAX_DATA_SIZE = 100;
-    private final int STRING = 0;
-    private final int INTEGER = 1;
-    private final int OBJECT = 2;
-
-    private DataRow[] table;
-
-    public int classesKey;
-    public int studentKey;
-    public int energyKey;
+    private final int MAX_ENERGY = 20;
 
     public Database() {
-        table = new DataRow[3];
-        table[STRING] = new DataRow(STRING);
-        table[INTEGER] = new DataRow(INTEGER);
-        table[OBJECT] = new DataRow(OBJECT);
-
-        classesKey = 0; // TODO: fill with Class objects (and Student object at studentKey)
-        studentKey = 4;
-        energyKey = INTEGER;
+        initializeData();
     }
 
-    public int insertString(String data) {
-        int key = table[STRING].size;
-
-        table[STRING].stringData[table[STRING].size] = data;
-        table[STRING].size++;
-
-        return key;
+    public void updateStudentState(Student newStudent) {
+        student = new Student(newStudent.getStudentID(), newStudent.getStudentName());
     }
 
-    public int insertInt(int data) {
-        int key = table[INTEGER].size;
-
-        table[INTEGER].intData[table[INTEGER].size] = data;
-        table[INTEGER].size++;
-
-        return key;
+    public void addSelectedCourse(Course course) {
+        selected.add(new Course(course.getCourseID(), course.getCourseName()));
     }
 
-    public int insertObject(Object data) {
-        int key = table[OBJECT].size;
+    public boolean removeSelectedCourse(String courseID) {
+        int index = 0;
+        int count = 0;
+        boolean removed = false;
 
-        table[OBJECT].objectData[table[OBJECT].size] = data;
-        table[OBJECT].size++;
+        while (count < courses.size()) {
+            if(courses.get(count).getCourseID() == courseID) {
+                index = count;
+                removed = true;
+                count = courses.size();
+            }
 
-        return key;
+            count++;
+        }
+
+        if (removed) {
+            courses.remove(index);
+        }
+
+        return removed;
     }
 
-    public String getString(int key) {
-        return table[STRING].stringData[key];
+    public Student getStudent() {
+        return new Student(student.getStudentID(), student.getStudentName());
     }
 
-    public int getInt(int key) {
-        return table[INTEGER].intData[key];
+    public ArrayList<Course> getCourses() {
+        return copyCourseList(courses);
     }
 
-    public Object getObject(int key) {
-        return table[OBJECT].objectData[key];
+    public ArrayList<Course> getSelectedCourses() {
+        return copyCourseList(selected);
+    }
+
+    private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
+        ArrayList<Course> tempCourses = new ArrayList<Course>();
+
+        for (int i = 0; i < courseList.size(); i++) {
+            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName()));
+        }
+
+        return tempCourses;
+    }
+
+    private void initializeData() {
+        Course course;
+
+        student = new Student("1234567", "Tired Student");
+
+        energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
+
+        courses = new ArrayList<Course>();
+        course = new Course("COMP1010", "Introductory Computer Science 1");
+        courses.add(course);
+        course = new Course("COMP1020", "Introductory Computer Science 2");
+        courses.add(course);
+        course = new Course("COMP2140", "Data Structures and Algorithms");
+        courses.add(course);
+        course = new Course("COMP2150", "Object Orientation");
+        courses.add(course);
+        course = new Course("COMP2160", "Programming Practices");
+        courses.add(course);
+
+        selected = new ArrayList<Course>();
     }
 }
