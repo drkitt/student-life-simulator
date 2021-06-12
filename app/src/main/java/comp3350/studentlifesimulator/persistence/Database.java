@@ -78,6 +78,7 @@ public class Database {
         energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
 
         courses = new ArrayList<>();
+
         course = new Course("COMP1010", "Introductory Computer Science 1");
         courses.add(course);
         course = new Course("COMP1020", "Introductory Computer Science 2");
