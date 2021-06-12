@@ -26,13 +26,13 @@ public class Database {
         selected.add(new Course(course.getCourseID(), course.getCourseName()));
     }
 
-    public boolean removeSelectedCourse(String courseID) {
+    public boolean removeSelectedCourse(Course course) {
         int index = 0;
         int count = 0;
         boolean removed = false;
 
         while (count < courses.size()) {
-            if(courses.get(count).getCourseID() == courseID) {
+            if(courses.get(count).equals(course)) {
                 index = count;
                 removed = true;
                 count = courses.size();
@@ -61,7 +61,7 @@ public class Database {
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
-        ArrayList<Course> tempCourses = new ArrayList<Course>();
+        ArrayList<Course> tempCourses = new ArrayList<>();
 
         for (int i = 0; i < courseList.size(); i++) {
             tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName()));
@@ -77,7 +77,8 @@ public class Database {
 
         energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
 
-        courses = new ArrayList<Course>();
+        courses = new ArrayList<>();
+
         course = new Course("COMP1010", "Introductory Computer Science 1");
         courses.add(course);
         course = new Course("COMP1020", "Introductory Computer Science 2");
@@ -89,6 +90,6 @@ public class Database {
         course = new Course("COMP2160", "Programming Practices");
         courses.add(course);
 
-        selected = new ArrayList<Course>();
+        selected = new ArrayList<>();
     }
 }
