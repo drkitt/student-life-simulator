@@ -26,13 +26,13 @@ public class Database {
         selected.add(new Course(course.getCourseID(), course.getCourseName()));
     }
 
-    public boolean removeSelectedCourse(String courseID) {
+    public boolean removeSelectedCourse(Course course) {
         int index = 0;
         int count = 0;
         boolean removed = false;
 
         while (count < courses.size()) {
-            if(courses.get(count).getCourseID().equals(courseID)) {
+            if(courses.get(count).equals(course)) {
                 index = count;
                 removed = true;
                 count = courses.size();
