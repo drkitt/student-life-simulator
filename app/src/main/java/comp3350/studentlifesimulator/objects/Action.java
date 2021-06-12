@@ -5,19 +5,20 @@ public class Action {
     private int energyUnit;
     private int timeUnit;
 
-    // Defaults to 1; Max value of 4, ADJUST BASED ON ENERGY-BAR LIMITS
+    // Units default to 1
     public Action(String newAction) {
         actionName = newAction;
         energyUnit = 1;
         timeUnit = 1;
     }
 
+    // Values must stay within ENERGY-BAR and TIME limits
     public Action(String newAction, int newEnergy, int newTime) {
-        if (newEnergy < 1 || newEnergy > Student.getMaxEnergy()) {
+        if (newEnergy < -Student.getMaxEnergy() || newEnergy == 0 || newEnergy > Student.getMaxEnergy()) {
             throw new IllegalArgumentException("Actions must have an energy value within the energy bar limits.");
         }
 
-        if (newTime < 1 || newTime > 4) { // TO-DO: Use the limits created by the global time!!
+        if (newTime < 1) { // Every action must have a positive non-zero time value
             throw new IllegalArgumentException("Actions must have a time value within the global time limits.");
         }
 
