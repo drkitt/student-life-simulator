@@ -18,7 +18,7 @@ public class Action {
             throw new IllegalArgumentException("Actions must have an energy value within the energy bar limits.");
         }
 
-        if (newTime < 1 || newTime > 4) { // TODO: Use the limits created by the global time!!
+        if (newTime < 1) { // Every action must have a positive non-zero time value
             throw new IllegalArgumentException("Actions must have a time value within the global time limits.");
         }
 
