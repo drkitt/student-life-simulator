@@ -1,14 +1,13 @@
 package comp3350.studentlifesimulator.objects;
 
-
 public class Course {
 
     private final String courseID;
     private final String courseName;
 
-    public Course(String ID, String name){
+    public Course(String ID, String name) {
 
-        if(ID == null || name == null){
+        if(ID == null || name == null) {
             throw new NullPointerException("Invalid course argument passed in");
         }
         courseID = ID.trim();
