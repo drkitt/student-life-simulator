@@ -10,6 +10,7 @@ import com.example.studentlifesimulator.R;
 
 import java.util.ArrayList;
 
+import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Course;
 
 public class CoursesActivity extends AppCompatActivity {
@@ -22,12 +23,7 @@ public class CoursesActivity extends AppCompatActivity {
 
         courseList = findViewById(R.id.courses);
 
-        ArrayList <Course> courseArray = new ArrayList<>();
-        courseArray.add(new Course("COMP 1020" , "Introduction to Programming"));
-        courseArray.add(new Course("COMP 2140" , "Introduction to Data Structure & Algorithms"));
-        courseArray.add(new Course("COMP 2150" , "Object Oriented Programming"));
-        courseArray.add(new Course("COMP 3350" , "Software Engineering"));
-
+        ArrayList <Course> courseArray = DatabaseManager.getAvailableCourses();
         courseList.setAdapter(new ArrayAdapter<>(this , android.R.layout.simple_list_item_multiple_choice , courseArray));
     }
 
