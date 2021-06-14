@@ -13,6 +13,10 @@ public class EnergyBar {
         setCurrentEnergy(initialEnergy);
     }
 
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
     public int getCurrentEnergy() {
         return currentEnergy;
     }

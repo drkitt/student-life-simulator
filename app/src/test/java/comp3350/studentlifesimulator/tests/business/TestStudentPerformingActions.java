@@ -17,12 +17,12 @@ public class TestStudentPerformingActions {
         StudentPerformingActions spa = new StudentPerformingActions();
         Student student = new Student("Son Johnsmith's near-identical twin");
 
-        Action possibleAction = new Action("Action that takes less than the student's total energy", 1, 1);
+        Action possibleAction = new Action("Action that takes less than the student's total energy", 1, 1, student.getMaxEnergy());
         boolean result = spa.makeStudentPerformAction(student, possibleAction);
         assertTrue(result);
-        assertEquals(Student.getMaxEnergy() - possibleAction.getEnergyUnit(), student.getCurrentEnergy());
+        assertEquals(student.getMaxEnergy() - possibleAction.getEnergyUnit(), student.getCurrentEnergy());
 
-        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", 10, 1);
+        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", 10, 1, student.getMaxEnergy());
         assertFalse(spa.makeStudentPerformAction(student, impossibleAction));
         assertThrows(
                 IllegalArgumentException.class,

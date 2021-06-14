@@ -12,14 +12,14 @@ public class Student {
         energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
     }
 
-    public Student(String newStudentID,String newStudentName) {
+    public Student(String newStudentID,String newStudentName, EnergyBar energy) {
         studentID = newStudentID;
         studentName = newStudentName;
-        energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
+        energyBar = energy;
     }
 
-    public static int getMaxEnergy() {
-        return (MAX_ENERGY);
+    public int getMaxEnergy() {
+        return (energyBar.getMaxEnergy());
     }
 
     public String getStudentID()
