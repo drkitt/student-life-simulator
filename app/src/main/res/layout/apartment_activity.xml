@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="72dp"
-        android:text="@string/energy_label"
+        android:text="@string/energy_lbl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/energyBar" />
 
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
-        android:text="@string/study_button"
+        android:text="@string/study_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="95dp"
-        android:contentDescription="@string/background_description"
+        android:contentDescription="@string/background_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
         android:layout_width="241dp"
         android:layout_height="245dp"
         android:layout_marginTop="304dp"
-        android:contentDescription="@string/student_description"
+        android:contentDescription="@string/student_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
