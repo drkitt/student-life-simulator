@@ -4,4 +4,6 @@
     <string name="energy_label">Energy</string>
     <string name="background_description">The student\'s surroundings</string>
     <string name="student_description">The student</string>
+    <string name="register_btn">REGISTER</string>
+    <string name="menu_desc">Select courses to be enrolled in</string>
 </resources>
