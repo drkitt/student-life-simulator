@@ -7,41 +7,78 @@
 
     <TextView
         android:id="@+id/currentTime"
-        android:layout_width="253dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="529dp"
-        android:layout_marginBottom="818dp"
-        android:text="TextView"
+        android:layout_width="252dp"
+        android:layout_height="107dp"
+        android:layout_marginStart="16dp"
         android:textAlignment="viewStart"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.134" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/energyBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="162dp"
         android:layout_height="23dp"
-        android:layout_marginStart="363dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="812dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="16dp"
         android:indeterminate="false"
         android:max="100"
         android:progress="50"
         android:rotation="-90"
         android:scaleX="0.75"
         android:scaleY="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/energyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="72dp"
+        android:text="@string/energy_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/energyBar" />
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/background_description"
+        app:layout_constraintBottom_toBottomOf="@+id/student"
+        app:layout_constraintEnd_toEndOf="@+id/student"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="@+id/student"
+        app:layout_constraintTop_toTopOf="@+id/student"
+        app:layout_constraintVertical_bias="0.497"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/student"
+        android:layout_width="249dp"
+        android:layout_height="244dp"
+        android:layout_marginStart="177dp"
+        android:layout_marginEnd="176dp"
+        android:contentDescription="@string/student_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.472"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/studyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/study_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

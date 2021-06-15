@@ -14,6 +14,6 @@ public class ApartmentActivity extends AppCompatActivity {
         setContentView(R.layout.apartment_activity);
 
         TextView currentTime = findViewById(R.id.currentTime);
-        currentTime.setText("TODO get the time class in this branch!");
+        currentTime.setText("7:30 PM\nDay 1");
     }
 }
