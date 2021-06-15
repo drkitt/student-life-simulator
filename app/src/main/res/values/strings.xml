@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StudentLifeSimulator</string>
+    <string name="study_button">Study</string>
+    <string name="energy_label">Energy</string>
+    <string name="background_description">The student\'s surroundings</string>
+    <string name="student_description">The student</string>
 </resources>
