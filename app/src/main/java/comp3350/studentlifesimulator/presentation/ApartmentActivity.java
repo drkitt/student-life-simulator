@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.studentlifesimulator.R;
@@ -32,21 +33,26 @@ public class ApartmentActivity extends AppCompatActivity {
         student = new Student("Player");
         studentPerformingActions = new StudentPerformingActions();
         studyAction = new Action("Study", 1, 4);
+
         Button studyButton = findViewById(R.id.studyButton);
         studyButton.setOnClickListener(view -> doAction(studyAction));
+        ProgressBar energyBar = findViewById(R.id.energyBar);
+        energyBar.setMax(Student.getMaxEnergy());
 
-        displayCurrentTime(time.getCurrentTime());
+        displayCurrentTime();
+        displayCurrentEnergy();
     }
 
     private void doAction(Action action) {
         studentPerformingActions.makeStudentPerformAction(student, action, time);
 
-        displayCurrentTime(time.getCurrentTime());
+        displayCurrentTime();
+        displayCurrentEnergy();
     }
 
-    private void displayCurrentTime(int timeUnit) {
+    private void displayCurrentTime() {
         TextView timeView = findViewById(R.id.currentTime);
-        int hour = timeUnit * MINUTES_PER_TIME_UNIT / 60;
+        int hour = time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
         String suffix;
         if (hour < 12) {
             suffix = "AM";
@@ -57,9 +63,14 @@ public class ApartmentActivity extends AppCompatActivity {
             }
             suffix = "PM";
         }
-        int minute = timeUnit * MINUTES_PER_TIME_UNIT % 60;
+        int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
         String displayedTime = String.format(Locale.getDefault(), "%d:%02d %s\nDay %d", hour, minute, suffix, time.getDays());
 
         timeView.setText(displayedTime);
+    }
+
+    private void displayCurrentEnergy() {
+        ProgressBar energyBar = findViewById(R.id.energyBar);
+        energyBar.setProgress(student.getCurrentEnergy());
     }
 }
