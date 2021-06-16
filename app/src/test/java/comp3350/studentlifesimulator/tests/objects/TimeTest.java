@@ -12,7 +12,7 @@ public class TimeTest {
         assertEquals(10, timeTest.getTimePerDay());
         assertEquals(1, timeTest.getDays());
         assertEquals(0, timeTest.getCurrentTime());
-        assertEquals(9, timeTest.getStartTime());
+        assertEquals(32, timeTest.getStartTime());
     }
 
     @Test
@@ -23,5 +23,25 @@ public class TimeTest {
         timeTest2.incrementTime();
         assertEquals(0, timeTest2.getCurrentTime());
         assertEquals(2, timeTest2.getDays());
+    }
+
+    @Test
+    public void testAddToTimeUnit() {
+        Time timeTest3 = new Time(10);
+        assertEquals(0, timeTest3.getCurrentTime());
+        timeTest3.addToTime(1);
+        assertEquals(1, timeTest3.getCurrentTime());
+        timeTest3.addToTime(5);
+        assertEquals(6, timeTest3.getCurrentTime());
+
+        timeTest3.addToTime(4);
+        assertEquals(0, timeTest3.getCurrentTime());
+        timeTest3.addToTime(12);
+        assertEquals(2, timeTest3.getCurrentTime());
+
+        timeTest3.addToTime(0);
+        assertEquals(2, timeTest3.getCurrentTime());
+
+        assertThrows(IllegalArgumentException.class, () -> timeTest3.addToTime(-1));
     }
 }
