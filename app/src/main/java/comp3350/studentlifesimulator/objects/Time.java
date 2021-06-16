@@ -10,7 +10,7 @@ public class Time {
        this.unitsPerDay = unitsPerDay;
        this.day = 1;
        this.currentUnit = 0;
-       this.startTime = 9;
+       this.startTime = 32;
     }
 
     public int getDays() {
