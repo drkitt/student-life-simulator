@@ -9,8 +9,10 @@ public class Time {
     public Time(int startTime, int unitsPerDay) {
        this.unitsPerDay = unitsPerDay;
        this.day = 1;
-       this.startTime = startTime;
-       this.currentUnit = startTime;
+
+       this.currentUnit = 0;
+       addToTime(startTime);
+       this.startTime = currentUnit;
     }
 
     public Time(int unitsPerDay) {

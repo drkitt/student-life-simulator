@@ -12,7 +12,13 @@ public class TimeTest {
         assertEquals(10, timeTest.getTimePerDay());
         assertEquals(1, timeTest.getDays());
         assertEquals(0, timeTest.getCurrentTime());
-        assertEquals(32, timeTest.getStartTime());
+        assertEquals(0, timeTest.getStartTime());
+
+        timeTest = new Time(12, 10);
+        assertEquals(10, timeTest.getTimePerDay());
+        assertEquals(2 , timeTest.getDays());
+        assertEquals(2, timeTest.getCurrentTime());
+        assertEquals(2, timeTest.getStartTime());
     }
 
     @Test
