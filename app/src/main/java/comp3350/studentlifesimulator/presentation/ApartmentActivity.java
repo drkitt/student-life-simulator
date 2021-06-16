@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.studentlifesimulator.R;
 
@@ -44,7 +45,11 @@ public class ApartmentActivity extends AppCompatActivity {
     }
 
     private void doAction(Action action) {
-        studentPerformingActions.makeStudentPerformAction(student, action, time);
+        boolean result = studentPerformingActions.makeStudentPerformAction(student, action, time);
+
+        if (!result) {
+            Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
+        }
 
         displayCurrentTime();
         displayCurrentEnergy();
