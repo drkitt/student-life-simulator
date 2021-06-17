@@ -2,6 +2,7 @@ package comp3350.studentlifesimulator.tests.objects;
 
 import org.junit.Test;
 
+import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 
@@ -11,6 +12,8 @@ public class TestAction {
 
     @Test
     public void testValidActionValues() {
+        Student student = DatabaseManager.getStudent();
+
         Action study = new Action("Study");
         assertEquals("Study", study.getActionName());
         assertEquals(1, study.getTimeUnit());
@@ -41,17 +44,17 @@ public class TestAction {
     public void testInvalidActionValues() {
         assertThrows(
                 IllegalArgumentException.class,
-                ()->new Action("InvalidAction", 0, 0 )
+                ()->new Action("InvalidAction", 0, 0)
         );
 
         assertThrows(
                 IllegalArgumentException.class,
-                ()->new Action("InvalidAction", 4, 0 )
+                ()->new Action("InvalidAction", 4, 0)
         );
 
         assertThrows(
                 IllegalArgumentException.class,
-                ()->new Action("InvalidAction", 4, 0 )
+                ()->new Action("InvalidAction", 4, 0)
         );
 
         assertThrows(

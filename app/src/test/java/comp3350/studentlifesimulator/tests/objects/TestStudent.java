@@ -2,6 +2,7 @@ package comp3350.studentlifesimulator.tests.objects;
 
 import org.junit.Test;
 
+import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Action;
 
@@ -11,17 +12,13 @@ public class TestStudent {
 
     @Test
     public void testStudentCredentials() {
-        Student playerNoID = new Student("John Smithson");
-        assertEquals("John Smithson",playerNoID.getStudentName());
-
-        Student playerWithID = new Student( "12345","Smith Johnson");
-        assertEquals("Smith Johnson",playerWithID.getStudentName());
-        assertEquals("12345",playerWithID.getStudentID());
+        Student player = new Student("John Smithson", new EnergyBar((Student.getMaxEnergy())));
+        assertEquals("John Smithson",player.getStudentName());
     }
 
     @Test
     public void testDoAction() {
-        Student student = new Student("Son Johnsmith");
+        Student student = new Student("Son Johnsmith", new EnergyBar(Student.getMaxEnergy()));
         Action possibleAction = new Action("Action that takes less than the student's total energy", 1, 1);
         student.doAction(possibleAction);
         assertEquals(Student.getMaxEnergy() - possibleAction.getEnergyUnit(), student.getCurrentEnergy());
