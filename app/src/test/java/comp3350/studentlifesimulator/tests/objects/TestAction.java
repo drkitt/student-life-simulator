@@ -1,5 +1,7 @@
 package comp3350.studentlifesimulator.tests.objects;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import comp3350.studentlifesimulator.objects.Action;
@@ -7,9 +9,9 @@ import comp3350.studentlifesimulator.objects.Student;
 
 import static org.junit.Assert.*;
 
-public class TestAction {
+public class TestAction extends TestCase {
+    public TestAction(String arg0) { super(arg0); }
 
-    @Test
     public void testValidActionValues() {
         Action study = new Action("Study");
         assertEquals("Study", study.getActionName());
@@ -37,7 +39,6 @@ public class TestAction {
         assertEquals(3, run.getTimeUnit());
     }
 
-    @Test
     public void testInvalidActionValues() {
         assertThrows(
                 IllegalArgumentException.class,
