@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.studentlifesimulator.R;
 
@@ -18,6 +19,7 @@ import comp3350.studentlifesimulator.objects.Course;
 public class CoursesActivity extends AppCompatActivity {
     ListView courseList;
     Button registerButton;
+    ArrayList <Course> courseArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class CoursesActivity extends AppCompatActivity {
 
         registerButton = findViewById(R.id.register_button);
 
-        ArrayList <Course> courseArray = DatabaseManager.getAvailableCourses();
+        courseArray = DatabaseManager.getAvailableCourses();
         courseList.setAdapter(new ArrayAdapter<>(this , android.R.layout.simple_list_item_multiple_choice , courseArray));
 
         registerButton = findViewById(R.id.register_button);
@@ -37,7 +39,22 @@ public class CoursesActivity extends AppCompatActivity {
 
     private void completeRegistration() {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
+        boolean coursesAreSelected = false;
 
-        startActivity(apartmentActivity);
+        for (int index =0; index < courseArray.size(); index++) {
+
+            if (courseList.isItemChecked(index)){
+                coursesAreSelected = true;
+                DatabaseManager.addCourse(courseArray.get(index));
+            }
+        }
+
+        if (!coursesAreSelected) {
+            Toast.makeText(this, "Pick a course!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            startActivity(apartmentActivity);
+        }
+
     }
 }
