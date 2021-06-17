@@ -5,8 +5,9 @@ import comp3350.studentlifesimulator.objects.Time;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class TimeTest {
-    @Test
+public class TestTime extends TestCase {
+    public TestTime(String arg0) { super(arg0); }
+
     public void testTimeConstructor() {
         Time timeTest = new Time(10);
         assertEquals(10, timeTest.getTimePerDay());
@@ -21,7 +22,6 @@ public class TimeTest {
         assertEquals(2, timeTest.getStartTime());
     }
 
-    @Test
     public void testTimeUnitIncrement() {
         Time timeTest2 = new Time(2);
         timeTest2.incrementTime();
@@ -31,7 +31,6 @@ public class TimeTest {
         assertEquals(2, timeTest2.getDays());
     }
 
-    @Test
     public void testAddToTimeUnit() {
         Time timeTest3 = new Time(10);
         assertEquals(0, timeTest3.getCurrentTime());
