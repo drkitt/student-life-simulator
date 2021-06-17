@@ -2,6 +2,7 @@ package comp3350.studentlifesimulator.application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;

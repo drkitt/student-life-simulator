@@ -6,11 +6,17 @@ public class Time {
     private int currentUnit;
     private int startTime;
 
-    public Time(int unitsPerDay) {
+    public Time(int startTime, int unitsPerDay) {
        this.unitsPerDay = unitsPerDay;
        this.day = 1;
+
        this.currentUnit = 0;
-       this.startTime = 9;
+       addToTime(startTime);
+       this.startTime = currentUnit;
+    }
+
+    public Time(int unitsPerDay) {
+        this(0, unitsPerDay);
     }
 
     public int getDays() {
@@ -41,4 +47,19 @@ public class Time {
         return currentUnit;
     }
 
+    public int addToTime(int timeStep) {
+        if (timeStep < 0) {
+            throw new IllegalArgumentException("Time step must be non-negative");
+        }
+
+        int newTime = currentUnit + timeStep;
+
+        while (newTime >= unitsPerDay) {
+            day++;
+            newTime -= unitsPerDay;
+        }
+
+        currentUnit = newTime;
+        return currentUnit;
+    }
 }

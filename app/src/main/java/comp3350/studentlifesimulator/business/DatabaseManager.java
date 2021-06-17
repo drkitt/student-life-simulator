@@ -17,8 +17,8 @@ public class DatabaseManager {
         DATABASE.addSelectedCourse(course);
     }
 
-    public static void removeCourse(Course course) {
-        DATABASE.removeSelectedCourse(course);
+    public static boolean removeCourse(Course course) {
+        return DATABASE.removeSelectedCourse(course);
     }
 
     public static Student getStudent() {
