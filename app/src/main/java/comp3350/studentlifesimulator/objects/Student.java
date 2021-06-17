@@ -37,10 +37,10 @@ public class Student {
     }
 
     public boolean canDoAction(Action toDo) {
-        return energyBar.canAdjustEnergy(-toDo.getEnergyUnit());    // TODO: Read the other todo
+        return energyBar.canAdjustEnergy(toDo.getEnergyUnit());
     }
 
     public void doAction(Action toDo) {
-        energyBar.adjustEnergy(-toDo.getEnergyUnit());  // TODO: Remove the negation once actions with negative energy values are formally allowed
+        energyBar.adjustEnergy(toDo.getEnergyUnit());
     }
 }
