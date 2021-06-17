@@ -1,4 +1,4 @@
-package comp3350.studentlifesimulator.application;
+package comp3350.studentlifesimulator.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.example.studentlifesimulator.R;
-
-import comp3350.studentlifesimulator.presentation.CoursesActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button newGame;

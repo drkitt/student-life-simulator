@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#7E6964"
     android:orientation="vertical"
-    tools:context="comp3350.studentlifesimulator.application.MainActivity">
+    tools:context="comp3350.studentlifesimulator.presentation.MainActivity">
 
     <Button
         android:id="@+id/newGameButton"
