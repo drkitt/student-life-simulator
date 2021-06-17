@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
+import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
@@ -16,7 +17,8 @@ public class TestStudentPerformingActions {
     @Test
     public void TestPerformingAction() {
         StudentPerformingActions spa = new StudentPerformingActions();
-        Student student = new Student("Son Johnsmith's near-identical twin");
+        EnergyBar energyBar = new EnergyBar(Student.getMaxEnergy());
+        Student student = new Student("Son Johnsmith's near-identical twin", energyBar);
         Time time = new Time(10);
 
         Action possibleAction = new Action("Action that takes less than the student's total energy", -5, 1);

@@ -12,14 +12,12 @@ public class Database {
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
 
-    private final int MAX_ENERGY = 20;
-
     public Database() {
         initializeData();
     }
 
     public void updateStudentState(Student newStudent) {
-        student = new Student(newStudent.getStudentID(), newStudent.getStudentName());
+        student = new Student(newStudent.getStudentName(), new EnergyBar(newStudent.getCurrentEnergy()));
     }
 
     public void addSelectedCourse(Course course) {
@@ -49,7 +47,7 @@ public class Database {
     }
 
     public Student getStudent() {
-        return new Student(student.getStudentID(), student.getStudentName());
+        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()));
     }
 
     public ArrayList<Course> getCourses() {
@@ -73,9 +71,9 @@ public class Database {
     private void initializeData() {
         Course course;
 
-        student = new Student("1234567", "Tired Student");
+        energyBar = new EnergyBar(EnergyBar.getMaxEnergy());
 
-        energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
+        student = new Student("Tired Student", energyBar);
 
         courses = new ArrayList<>();
 

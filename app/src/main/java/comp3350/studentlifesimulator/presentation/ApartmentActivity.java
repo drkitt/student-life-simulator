@@ -12,6 +12,7 @@ import com.example.studentlifesimulator.R;
 
 import java.util.Locale;
 
+import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
@@ -31,7 +32,7 @@ public class ApartmentActivity extends AppCompatActivity {
         setContentView(R.layout.apartment_activity);
 
         time = new Time(4 * 8, 60 * 24 / MINUTES_PER_TIME_UNIT);
-        student = new Student("Player");
+        student = DatabaseManager.getStudent();
         studentPerformingActions = new StudentPerformingActions();
         studyAction = new Action("Study", -1, 4);
 
