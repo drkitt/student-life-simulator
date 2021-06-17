@@ -19,8 +19,7 @@ public class Database {
     }
 
     public void updateStudentState(Student newStudent) {
-        energyBar = new EnergyBar(newStudent.getCurrentEnergy(), newStudent.getMaxEnergy());
-        student = new Student(newStudent.getStudentID(), newStudent.getStudentName(), energyBar);
+        student = new Student(newStudent.getStudentName(), new EnergyBar(newStudent.getCurrentEnergy()));
     }
 
     public void addSelectedCourse(Course course) {
@@ -50,7 +49,7 @@ public class Database {
     }
 
     public Student getStudent() {
-        return new Student(student.getStudentID(), student.getStudentName(), energyBar);
+        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()));
     }
 
     public ArrayList<Course> getCourses() {
@@ -74,9 +73,9 @@ public class Database {
     private void initializeData() {
         Course course;
 
-        energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
+        energyBar = new EnergyBar(MAX_ENERGY);
 
-        student = new Student("1234567", "Tired Student", energyBar);
+        student = new Student("Tired Student", energyBar);
 
         courses = new ArrayList<>();
 

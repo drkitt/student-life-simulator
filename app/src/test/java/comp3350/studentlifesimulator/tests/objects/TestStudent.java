@@ -12,22 +12,18 @@ public class TestStudent {
 
     @Test
     public void testStudentCredentials() {
-        Student playerNoID = new Student("John Smithson");
-        assertEquals("John Smithson",playerNoID.getStudentName());
-
-        Student playerWithID = new Student( "12345","Smith Johnson", new EnergyBar(10,10));
-        assertEquals("Smith Johnson",playerWithID.getStudentName());
-        assertEquals("12345",playerWithID.getStudentID());
+        Student player = new Student("John Smithson", new EnergyBar((Student.getMaxEnergy())));
+        assertEquals("John Smithson",player.getStudentName());
     }
 
     @Test
     public void testDoAction() {
-        Student student = new Student("Son Johnsmith");
-        Action possibleAction = new Action("Action that takes less than the student's total energy", 1, 1, student.getMaxEnergy());
+        Student student = new Student("Son Johnsmith", new EnergyBar(Student.getMaxEnergy()));
+        Action possibleAction = new Action("Action that takes less than the student's total energy", 1, 1);
         student.doAction(possibleAction);
-        assertEquals(student.getMaxEnergy() - possibleAction.getEnergyUnit(), student.getCurrentEnergy());
+        assertEquals(Student.getMaxEnergy() - possibleAction.getEnergyUnit(), student.getCurrentEnergy());
 
-        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", 10, 1, student.getMaxEnergy());
+        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", 10, 1);
         assertThrows(
             IllegalArgumentException.class,
             () -> student.doAction(impossibleAction)

@@ -2,19 +2,21 @@ package comp3350.studentlifesimulator.objects;
 
 public class EnergyBar {
     private int currentEnergy;
-    private final int maxEnergy;
+    private static final int MAX_ENERGY = 10;
 
-    public EnergyBar(int maximumEnergy, int initialEnergy) {
-        if (maximumEnergy <= 0) {
-            throw new IllegalArgumentException("Maximum energy must be positive");
+    public EnergyBar(int initialEnergy) {
+        if (initialEnergy < 0) {
+            throw new IllegalArgumentException("Initial energy must be positive");
         }
-        maxEnergy = maximumEnergy;
+        if (initialEnergy > MAX_ENERGY) {
+            throw new IllegalArgumentException("Initial energy must be less than MAX_ENERGY");
+        }
 
         setCurrentEnergy(initialEnergy);
     }
 
-    public int getMaxEnergy() {
-        return maxEnergy;
+    public static int getMaxEnergy() {
+        return MAX_ENERGY;
     }
 
     public int getCurrentEnergy() {
@@ -25,7 +27,7 @@ public class EnergyBar {
         if (newEnergy < 0) {
             throw new IllegalArgumentException("Current energy must be non-negative");
         }
-        if (newEnergy > maxEnergy) {
+        if (newEnergy > MAX_ENERGY) {
             throw new IllegalArgumentException("Current energy can't exceed max energy");
         }
 
@@ -37,6 +39,6 @@ public class EnergyBar {
     }
 
     public boolean canAdjustEnergy(int delta) {
-        return 0 <= currentEnergy + delta && currentEnergy + delta <= maxEnergy;
+        return 0 <= currentEnergy + delta && currentEnergy + delta <= MAX_ENERGY;
     }
 }
