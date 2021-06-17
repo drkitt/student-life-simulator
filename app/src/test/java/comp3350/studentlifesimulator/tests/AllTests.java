@@ -17,6 +17,7 @@ public class AllTests {
         suite = new TestSuite("All tests");
         testObjects();
         testBusiness();
+
         return suite;
     }
 

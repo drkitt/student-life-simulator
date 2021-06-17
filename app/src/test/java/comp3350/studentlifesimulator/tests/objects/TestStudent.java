@@ -2,8 +2,6 @@ package comp3350.studentlifesimulator.tests.objects;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Action;
@@ -15,7 +13,7 @@ public class TestStudent extends TestCase {
 
     public void testStudentCredentials() {
         Student player = new Student("John Smithson", new EnergyBar((Student.getMaxEnergy())));
-        assertEquals("John Smithson",player.getStudentName());
+        assertEquals("John Smithson", player.getStudentName());
     }
 
     public void testDoAction() {

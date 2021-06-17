@@ -19,7 +19,7 @@ import comp3350.studentlifesimulator.objects.Course;
 public class CoursesActivity extends AppCompatActivity {
     ListView courseList;
     Button registerButton;
-    ArrayList <Course> courseArray;
+    ArrayList<Course> courseArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class CoursesActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.register_button);
 
         courseArray = DatabaseManager.getAvailableCourses();
-        courseList.setAdapter(new ArrayAdapter<>(this , android.R.layout.simple_list_item_multiple_choice , courseArray));
+        courseList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, courseArray));
 
         registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(view -> completeRegistration());
@@ -41,9 +41,8 @@ public class CoursesActivity extends AppCompatActivity {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
         boolean coursesAreSelected = false;
 
-        for (int index =0; index < courseArray.size(); index++) {
-
-            if (courseList.isItemChecked(index)){
+        for (int index = 0; index < courseArray.size(); index++) {
+            if (courseList.isItemChecked(index)) {
                 coursesAreSelected = true;
                 DatabaseManager.addCourse(courseArray.get(index));
             }
@@ -55,6 +54,5 @@ public class CoursesActivity extends AppCompatActivity {
         else {
             startActivity(apartmentActivity);
         }
-
     }
 }

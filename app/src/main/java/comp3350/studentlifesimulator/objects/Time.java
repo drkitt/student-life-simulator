@@ -9,7 +9,6 @@ public class Time {
     public Time(int startTime, int unitsPerDay) {
        this.unitsPerDay = unitsPerDay;
        this.day = 1;
-
        this.currentUnit = 0;
        addToTime(startTime);
        this.startTime = currentUnit;
@@ -35,7 +34,7 @@ public class Time {
         return startTime;
     }
 
-    public int incrementTime() {
+    public void incrementTime() {
         if (currentUnit + 1 < unitsPerDay) {
             currentUnit++;
         }
@@ -43,16 +42,14 @@ public class Time {
             day++;
             currentUnit = 0;
         }
-
-        return currentUnit;
     }
 
-    public int addToTime(int timeStep) {
+    public void addToTime(int timeStep) {
+        int newTime = currentUnit + timeStep;
+
         if (timeStep < 0) {
             throw new IllegalArgumentException("Time step must be non-negative");
         }
-
-        int newTime = currentUnit + timeStep;
 
         while (newTime >= unitsPerDay) {
             day++;
@@ -60,6 +57,5 @@ public class Time {
         }
 
         currentUnit = newTime;
-        return currentUnit;
     }
 }

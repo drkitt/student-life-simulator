@@ -2,18 +2,11 @@ package comp3350.studentlifesimulator.tests.business;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 
 public class TestStudentPerformingActions extends TestCase {
     public TestStudentPerformingActions(String arg0) { super(arg0); }
