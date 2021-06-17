@@ -5,11 +5,11 @@ Project Repository: https://github.com/drkitt/student-life-simulator
 
 ```
 Developers - Group 10
-   - Alex Kitt
-   - Caleb Beynon
-   - Haotian Chen
-   - Kyle Calinisan
-   - Oghenekome Egbedi
+   - Alex Kitt (drkitt)
+   - Caleb Beynon (CM-beynon)
+   - Haotian Chen (kyl-dc)
+   - Kyle Calinisan (komeegbedi)
+   - Oghenekome Egbedi (MrNoboddy)
 ```
 
 * Dev Log: The log is maintained as google-doc shared amongst team members. It contains a summary of meeting notes, design decisions and work entries. The current assigned dev tasks are also included in this file.
