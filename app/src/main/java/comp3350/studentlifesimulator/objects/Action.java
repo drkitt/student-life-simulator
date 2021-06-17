@@ -13,8 +13,8 @@ public class Action {
     }
 
     // Values must stay within ENERGY-BAR and TIME limits
-    public Action(String newAction, int newEnergy, int newTime, int studentMaxEnergy) {
-        if (newEnergy < -studentMaxEnergy || newEnergy == 0 || newEnergy > studentMaxEnergy) {
+    public Action(String newAction, int newEnergy, int newTime) {
+        if (newEnergy < -Student.getMaxEnergy() || newEnergy == 0 || newEnergy > Student.getMaxEnergy()) {
             throw new IllegalArgumentException("Actions must have an energy value within the energy bar limits.");
         }
 
