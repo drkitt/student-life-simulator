@@ -8,7 +8,7 @@ import comp3350.studentlifesimulator.tests.objects.TestAction;
 import comp3350.studentlifesimulator.tests.objects.TestCourses;
 import comp3350.studentlifesimulator.tests.objects.TestEnergyBar;
 import comp3350.studentlifesimulator.tests.objects.TestStudent;
-import comp3350.studentlifesimulator.tests.objects.TimeTest;
+import comp3350.studentlifesimulator.tests.objects.TestTime;
 
 public class AllTests {
     public static TestSuite suite;
@@ -25,7 +25,7 @@ public class AllTests {
         suite.addTestSuite(TestCourses.class);
         suite.addTestSuite(TestEnergyBar.class);
         suite.addTestSuite(TestStudent.class);
-        suite.addTestSuite(TimeTest.class);
+        suite.addTestSuite(TestTime.class);
     }
 
     private static void testBusiness() {

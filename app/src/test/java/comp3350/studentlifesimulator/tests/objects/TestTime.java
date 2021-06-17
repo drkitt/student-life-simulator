@@ -5,8 +5,8 @@ import comp3350.studentlifesimulator.objects.Time;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class TimeTest extends TestCase {
-    public TimeTest(String arg0) { super(arg0); }
+public class TestTime extends TestCase {
+    public TestTime(String arg0) { super(arg0); }
 
     public void testTimeConstructor() {
         Time timeTest = new Time(10);
