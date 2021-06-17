@@ -34,7 +34,7 @@ public class ApartmentActivity extends AppCompatActivity {
         time = new Time(4 * 8, 60 * 24 / MINUTES_PER_TIME_UNIT);
         student = DatabaseManager.getStudent();
         studentPerformingActions = new StudentPerformingActions();
-        studyAction = new Action("Study", 1, 4);
+        studyAction = new Action("Study", -1, 4);
 
         Button studyButton = findViewById(R.id.studyButton);
         studyButton.setOnClickListener(view -> doAction(studyAction));
