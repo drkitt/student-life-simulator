@@ -13,8 +13,7 @@ public class Student {
         return (EnergyBar.getMaxEnergy());
     }
 
-    public String getStudentName()
-    {
+    public String getStudentName() {
         return (studentName);
     }
 

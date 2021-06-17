@@ -2,7 +2,6 @@ package comp3350.studentlifesimulator.tests.objects;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 

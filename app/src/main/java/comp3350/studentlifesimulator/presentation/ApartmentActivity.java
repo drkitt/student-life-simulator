@@ -19,12 +19,11 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 public class ApartmentActivity extends AppCompatActivity {
-
-    private static final int MINUTES_PER_TIME_UNIT = 15;
     private Time time;
     private Student student;
     private StudentPerformingActions studentPerformingActions;
     private Action studyAction;
+    private static final int MINUTES_PER_TIME_UNIT = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

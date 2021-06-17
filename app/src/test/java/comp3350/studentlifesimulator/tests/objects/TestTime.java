@@ -1,52 +1,56 @@
 package comp3350.studentlifesimulator.tests.objects;
 
 import junit.framework.TestCase;
+
 import comp3350.studentlifesimulator.objects.Time;
+
 import static org.junit.Assert.*;
-import org.junit.Test;
 
 public class TestTime extends TestCase {
     public TestTime(String arg0) { super(arg0); }
 
     public void testTimeConstructor() {
-        Time timeTest = new Time(10);
-        assertEquals(10, timeTest.getTimePerDay());
-        assertEquals(1, timeTest.getDays());
-        assertEquals(0, timeTest.getCurrentTime());
-        assertEquals(0, timeTest.getStartTime());
+        Time clock = new Time(10);
+        assertEquals(10, clock.getTimePerDay());
+        assertEquals(1, clock.getDays());
+        assertEquals(0, clock.getCurrentTime());
+        assertEquals(0, clock.getStartTime());
 
-        timeTest = new Time(12, 10);
-        assertEquals(10, timeTest.getTimePerDay());
-        assertEquals(2 , timeTest.getDays());
-        assertEquals(2, timeTest.getCurrentTime());
-        assertEquals(2, timeTest.getStartTime());
+        clock = new Time(12, 10);
+        assertEquals(10, clock.getTimePerDay());
+        assertEquals(2 , clock.getDays());
+        assertEquals(2, clock.getCurrentTime());
+        assertEquals(2, clock.getStartTime());
     }
 
     public void testTimeUnitIncrement() {
-        Time timeTest2 = new Time(2);
-        timeTest2.incrementTime();
-        assertEquals(1, timeTest2.getCurrentTime());
-        timeTest2.incrementTime();
-        assertEquals(0, timeTest2.getCurrentTime());
-        assertEquals(2, timeTest2.getDays());
+        Time  incrementingClock = new Time(2);
+        incrementingClock.incrementTime();
+        assertEquals(1, incrementingClock.getCurrentTime());
+        incrementingClock.incrementTime();
+        assertEquals(0, incrementingClock.getCurrentTime());
+        assertEquals(2, incrementingClock.getDays());
     }
 
     public void testAddToTimeUnit() {
-        Time timeTest3 = new Time(10);
-        assertEquals(0, timeTest3.getCurrentTime());
-        timeTest3.addToTime(1);
-        assertEquals(1, timeTest3.getCurrentTime());
-        timeTest3.addToTime(5);
-        assertEquals(6, timeTest3.getCurrentTime());
+        Time addingClock = new Time(10);
+        assertEquals(0, addingClock.getCurrentTime());
+        addingClock.addToTime(1);
+        assertEquals(1, addingClock.getCurrentTime());
+        addingClock.addToTime(5);
+        assertEquals(6, addingClock.getCurrentTime());
 
-        timeTest3.addToTime(4);
-        assertEquals(0, timeTest3.getCurrentTime());
-        timeTest3.addToTime(12);
-        assertEquals(2, timeTest3.getCurrentTime());
+        addingClock.addToTime(4);
+        assertEquals(0, addingClock.getCurrentTime());
+        addingClock.addToTime(12);
+        assertEquals(2, addingClock.getCurrentTime());
 
-        timeTest3.addToTime(0);
-        assertEquals(2, timeTest3.getCurrentTime());
+        addingClock.addToTime(0);
+        assertEquals(2, addingClock.getCurrentTime());
 
-        assertThrows(IllegalArgumentException.class, () -> timeTest3.addToTime(-1));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> addingClock.addToTime(-1)
+        );
     }
 }

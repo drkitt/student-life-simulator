@@ -2,8 +2,6 @@ package comp3350.studentlifesimulator.tests.objects;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
@@ -38,7 +36,7 @@ public class TestAction extends TestCase {
 
         Action run = new Action("Run", -Student.getMaxEnergy(), 3);
         assertEquals("Run", run.getActionName());
-        assertEquals( -Student.getMaxEnergy(), run.getEnergyUnit());
+        assertEquals(-Student.getMaxEnergy(), run.getEnergyUnit());
         assertEquals(3, run.getTimeUnit());
     }
 

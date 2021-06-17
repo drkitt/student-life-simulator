@@ -30,7 +30,7 @@ public class Database {
         boolean removed = false;
 
         while (count < courses.size()) {
-            if(courses.get(count).equals(course)) {
+            if (courses.get(count).equals(course)) {
                 index = count;
                 removed = true;
                 count = courses.size();
