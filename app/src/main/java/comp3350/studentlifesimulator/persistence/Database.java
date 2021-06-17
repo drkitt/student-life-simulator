@@ -12,8 +12,6 @@ public class Database {
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
 
-    private final int MAX_ENERGY = 20;
-
     public Database() {
         initializeData();
     }
@@ -73,7 +71,7 @@ public class Database {
     private void initializeData() {
         Course course;
 
-        energyBar = new EnergyBar(MAX_ENERGY);
+        energyBar = new EnergyBar(EnergyBar.getMaxEnergy());
 
         student = new Student("Tired Student", energyBar);
 
