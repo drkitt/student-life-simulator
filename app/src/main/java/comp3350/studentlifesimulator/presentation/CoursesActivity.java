@@ -41,7 +41,7 @@ public class CoursesActivity extends AppCompatActivity {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
         boolean coursesAreSelected = false;
 
-        for(int index =0; index < courseArray.size(); index++) {
+        for (int index =0; index < courseArray.size(); index++) {
 
             if (courseList.isItemChecked(index)){
                 coursesAreSelected = true;
