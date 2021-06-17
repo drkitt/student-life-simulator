@@ -17,14 +17,14 @@ public class TestCourses extends TestCase {
     }
 
     public void testNull() {
-        try {
-            Course nullCourse = new Course(null , null);
-            new Course("COMP4550" , "Unknown Course").equals(null);
-            fail("Null Pointer Exception expected");
-        }
-        catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
+        assertThrows(
+                NullPointerException.class,
+                () -> new Course(null , null)
+        );
+        assertThrows(
+                NullPointerException.class,
+                () -> new Course("COMP4550" , "Unknown Course").equals(null)
+        );
     }
 
     public void testEdgeCases() {
