@@ -6,7 +6,7 @@ import comp3350.studentlifesimulator.objects.EnergyBar;
 
 import java.util.ArrayList;
 
-public class Database {
+public class Database implements DatabaseAccessInterface {
     private Student student;
     private EnergyBar energyBar;
     private ArrayList<Course> courses;
@@ -16,7 +16,15 @@ public class Database {
         initializeData();
     }
 
-    public void updateStudentState(Student newStudent) {
+    public void openDB(String databasePath) {
+        // TODO: do something with this method
+    }
+
+    public void closeDB() {
+        // TODO: do something with this method
+    }
+
+    public void updateStudent(Student newStudent) {
         student = new Student(newStudent.getStudentName(), new EnergyBar(newStudent.getCurrentEnergy()));
     }
 
