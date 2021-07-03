@@ -1,36 +1,59 @@
 package comp3350.studentlifesimulator.business;
 
+import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 import comp3350.studentlifesimulator.persistence.Database;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
-import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import java.util.ArrayList;
 
 public class DatabaseManager {
-    private final static DatabaseAccessInterface DATABASE = new Database(); // TODO: modify to work with stub and main
+    private final static String HSQL = "HSQL";
+    private final static String STUB = "STUB";
+
+    private static DatabaseAccessInterface HSQL_DATABASE;
+    private static DatabaseAccessInterface STUB_DATABASE = new Database();
+    private static DatabaseAccessInterface database;
+
+    public static void setDatabase(DatabaseAccessInterface newDatabase) {
+        if (database == null) {
+            HSQL_DATABASE = newDatabase;
+            database = HSQL_DATABASE;
+        }
+    }
+
+    public static void switchDatabase() {
+        if (database != null) {
+            if (database.getDBType().equals(HSQL)) {
+                database = STUB_DATABASE;
+            }
+            else if (database.getDBType().equals(STUB)) {
+                database = HSQL_DATABASE;
+            }
+        }
+    }
 
     public static void updateStudent(Student student) {
-        DATABASE.updateStudent(student);
+        database.updateStudent(student);
     }
 
     public static void addCourse(Course course) {
-        DATABASE.addSelectedCourse(course);
+        database.addSelectedCourse(course);
     }
 
     public static boolean removeCourse(Course course) {
-        return DATABASE.removeSelectedCourse(course);
+        return database.removeSelectedCourse(course);
     }
 
     public static Student getStudent() {
-        return DATABASE.getStudent();
+        return database.getStudent();
     }
 
     public static ArrayList<Course> getAvailableCourses() {
-        return DATABASE.getCourses();
+        return database.getCourses();
     }
 
     public static ArrayList<Course> getSelectedCourses() {
-        return DATABASE.getSelectedCourses();
+        return database.getSelectedCourses();
     }
 }

@@ -7,6 +7,8 @@ import comp3350.studentlifesimulator.objects.EnergyBar;
 import java.util.ArrayList;
 
 public class Database implements DatabaseAccessInterface {
+    private final static String DB_TYPE = "STUB";
+
     private Student student;
     private EnergyBar energyBar;
     private ArrayList<Course> courses;
@@ -64,6 +66,10 @@ public class Database implements DatabaseAccessInterface {
 
     public ArrayList<Course> getSelectedCourses() {
         return copyCourseList(selected);
+    }
+
+    public String getDBType() {
+        return DB_TYPE;
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {

@@ -21,4 +21,6 @@ public interface DatabaseAccessInterface {
     void addSelectedCourse(Course course);
 
     boolean removeSelectedCourse(Course course);
+
+    String getDBType();
 }

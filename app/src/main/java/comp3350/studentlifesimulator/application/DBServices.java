@@ -1,9 +1,10 @@
 package comp3350.studentlifesimulator.application;
 
+import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.persistence.DatabaseAccess;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
-public class Services {
+public class DBServices {
     private static DatabaseAccessInterface database = null;
 
     public static boolean openDatabaseAccess(String databaseName) {
@@ -11,7 +12,9 @@ public class Services {
 
         if (database == null) {
             database = new DatabaseAccess(databaseName);
-            database.openDB(Main.getPath());
+            database.openDB(Main.getDBPath());
+
+            DatabaseManager.setDatabase(database);
 
             opened = true;
         }

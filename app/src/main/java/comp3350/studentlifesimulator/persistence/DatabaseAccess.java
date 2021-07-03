@@ -10,11 +10,13 @@ import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.Student;
 
 public class DatabaseAccess implements DatabaseAccessInterface {
+    private final static String DB_TYPE = "HSQL";
+
     private String database;
 
     private Statement statement1, statement2, statement3;
     private Connection connection;
-    private ResultSet result1;
+    private ResultSet results;
 
     private String command;
 
@@ -32,25 +34,25 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             statement1 = connection.createStatement();
             statement2 = connection.createStatement();
             statement3 = connection.createStatement();
+
+            System.out.println("Opened DB path: " + databasePath);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("Opened DB, with path: " + database);
     }
 
     public void closeDB() {
         try {
             command = "shutdown compact";
-            result1 = statement1.executeQuery(command);
+            results = statement1.executeQuery(command);
             connection.close();
+
+            System.out.println("Closed DB named: " + database);
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("Closed DB, with path: " + database);
     }
 
     public Student getStudent() {
@@ -73,5 +75,9 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
     public boolean removeSelectedCourse(Course course) {
         return false;
+    }
+
+    public String getDBType() {
+        return DB_TYPE;
     }
 }
