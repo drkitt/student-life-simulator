@@ -38,4 +38,8 @@ public class Action {
     public int getTimeUnit() {
         return timeUnit;
     }
+
+    public int getPointsUnit() {
+        return pointsUnit;
+    }
 }
