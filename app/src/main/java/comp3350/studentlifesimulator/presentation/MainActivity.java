@@ -32,43 +32,54 @@ public class MainActivity extends AppCompatActivity {
         newGame.setOnClickListener(view -> switchActivity());
     }
 
+    private void switchActivity() {
+        Intent coursesActivity = new Intent(this, CoursesActivity.class);
+
+        startActivity(coursesActivity);
+    }
+
     private void copyDatabaseToDevice() {
-        final String DB_PATH = "db";
+        final String PATH = "db";
 
         String[] assetNames;
         Context context = getApplicationContext();
-        File dbDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
+        File targetDirectory = context.getDir(PATH, Context.MODE_PRIVATE);
         AssetManager assetManager = getAssets();
 
         try {
-            assetNames = assetManager.list(DB_PATH);
+            assetNames = assetManager.list(PATH);
             for (int i = 0; i < assetNames.length; i++) {
-                assetNames[i] = DB_PATH + "/" + assetNames[i];
+                assetNames[i] = PATH + "/" + assetNames[i];
             }
 
-            copyAssetsToDirectory(assetNames, dbDirectory);
+            copyAssetsToDirectory(assetNames, targetDirectory);
 
-            Main.setDBPath(dbDirectory.toString() + "/" + Main.getDBName());
+            Main.setDBPath(targetDirectory.toString() + "/" + Main.getDBName());
         }
-        catch (IOException ioe) {
-            ioe.printStackTrace();
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void copyAssetsToDirectory(String[] assets, File dbDirectory) throws IOException {
+    private void copyAssetsToDirectory(String[] assets, File targetDirectory) throws IOException {
         AssetManager assetManager = getAssets();
+        String[] components;
+        String copyPath;
+        char[] buffer;
+        File outFile;
+        InputStreamReader in;
+        FileWriter out;
+        int count;
 
         for (String asset : assets) {
-            String[] components = asset.split("/");
-            String copyPath = dbDirectory.toString() + "/" + components[components.length - 1];
-            char[] buffer = new char[1024];
-            int count;
-
-            File outFile = new File(copyPath);
+            components = asset.split("/");
+            copyPath = targetDirectory.toString() + "/" + components[components.length - 1];
+            buffer = new char[1024];
+            outFile = new File(copyPath);
 
             if (!outFile.exists()) {
-                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
-                FileWriter out = new FileWriter(outFile);
+                in = new InputStreamReader(assetManager.open(asset));
+                out = new FileWriter(outFile);
 
                 count = in.read(buffer);
                 while (count != -1) {
@@ -80,11 +91,5 @@ public class MainActivity extends AppCompatActivity {
                 in.close();
             }
         }
-    }
-
-    private void switchActivity() {
-        Intent coursesActivity = new Intent(this, CoursesActivity.class);
-
-        startActivity(coursesActivity);
     }
 }

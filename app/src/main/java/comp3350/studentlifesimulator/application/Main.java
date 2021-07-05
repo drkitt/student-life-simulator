@@ -5,7 +5,7 @@ public class Main {
     private static String databasePath = "/db/StudentDB";
 
     public static void main(String[] args) {
-        DBServices.openDatabaseAccess(databaseName);
+        DatabaseServices.openDatabaseAccess(databaseName);
     }
 
     public static String getDBPath() {
@@ -22,6 +22,6 @@ public class Main {
     }
 
     public static void openDBAccess() {
-        DBServices.openDatabaseAccess(databaseName);
+        DatabaseServices.openDatabaseAccess(databaseName);
     }
 }

@@ -1,5 +1,6 @@
 package comp3350.studentlifesimulator.business;
 
+import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 import comp3350.studentlifesimulator.persistence.Database;
 import comp3350.studentlifesimulator.objects.Student;
@@ -15,15 +16,12 @@ public class DatabaseManager {
     private static DatabaseAccessInterface STUB_DATABASE = new Database();
     private static DatabaseAccessInterface database;
 
-    public static void setDatabase(DatabaseAccessInterface newDatabase) {
+    public static void switchDatabase() {
         if (database == null) {
-            HSQL_DATABASE = newDatabase;
+            HSQL_DATABASE = DatabaseServices.getDatabaseAccess();
             database = HSQL_DATABASE;
         }
-    }
-
-    public static void switchDatabase() {
-        if (database != null) {
+        else {
             if (database.getDBType().equals(HSQL)) {
                 database = STUB_DATABASE;
             }

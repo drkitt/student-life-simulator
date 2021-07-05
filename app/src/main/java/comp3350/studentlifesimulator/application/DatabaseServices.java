@@ -4,7 +4,7 @@ import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.persistence.DatabaseAccess;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
-public class DBServices {
+public class DatabaseServices {
     private static DatabaseAccessInterface database = null;
 
     public static boolean openDatabaseAccess(String databaseName) {
@@ -14,7 +14,7 @@ public class DBServices {
             database = new DatabaseAccess(databaseName);
             database.openDB(Main.getDBPath());
 
-            DatabaseManager.setDatabase(database);
+            DatabaseManager.switchDatabase();
 
             opened = true;
         }
@@ -22,14 +22,14 @@ public class DBServices {
         return opened;
     }
 
-    public static DatabaseAccessInterface getDatabaseAccess() {
-        return null;
-    }
-
     public static void closeDatabaseAccess() {
         if (database != null) {
             database.closeDB();
             database = null;
         }
+    }
+
+    public static DatabaseAccessInterface getDatabaseAccess() {
+        return database;
     }
 }

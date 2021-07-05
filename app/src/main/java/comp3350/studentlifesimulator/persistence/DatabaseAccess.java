@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.Student;
@@ -14,9 +13,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
     private String database;
 
-    private Statement statement1, statement2, statement3;
+    private Statement statement;
     private Connection connection;
-    private ResultSet results;
 
     private String command;
 
@@ -31,11 +29,9 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
             url = "jdbc:hsqldb:file:" + databasePath;
             connection = DriverManager.getConnection(url, "SA", "");
-            statement1 = connection.createStatement();
-            statement2 = connection.createStatement();
-            statement3 = connection.createStatement();
+            statement = connection.createStatement();
 
-            System.out.println("Opened DB path: " + databasePath);
+            System.out.println("Opened DB path: " + databasePath); // TODO: remove print statements
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -45,7 +41,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public void closeDB() {
         try {
             command = "shutdown compact";
-            results = statement1.executeQuery(command);
+            statement.executeQuery(command);
             connection.close();
 
             System.out.println("Closed DB named: " + database);
