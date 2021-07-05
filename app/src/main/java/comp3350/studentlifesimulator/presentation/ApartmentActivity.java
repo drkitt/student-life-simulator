@@ -44,29 +44,31 @@ public class ApartmentActivity extends AppCompatActivity {
     }
 
     private void displayActions(){ // FOR DEVS: Action values are in the google doc!
-        //STUDY ACTIONS
-        marathonAction = new Action("Marathon Study", -1, 4);
+        //=============== STUDY ACTIONS ==============
+        //TODO: Figure our how to get remaining time or re-visit with a decision from the team
+        //currently, marathon takes 1/4 of the day = 24 units out of 96 total
+        marathonAction = new Action("Marathon Study", student.getCurrentEnergy(), 24);
         Button marathonButton = findViewById(R.id.marathonButton);
         marathonButton.setOnClickListener(view -> doAction(marathonAction));
 
-        studyAction = new Action("Study", -1, 4);
+        studyAction = new Action("Study", -5, 5);
         Button studyButton = findViewById(R.id.studyButton);
         studyButton.setOnClickListener(view -> doAction(studyAction));
 
-        quickStudyAction = new Action("Quick Study", -1, 4);
+        quickStudyAction = new Action("Quick Study", -1, 1);
         Button quickStudyButton = findViewById(R.id.quickStudyButton);
         quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
 
-        //REST ACTIONS
-        hibernateAction = new Action("Hibernate", Student.getMaxEnergy(), 8);
+        //=============== REST ACTIONS ==============
+        hibernateAction = new Action("Hibernate", Student.getMaxEnergy(), 48);
         Button hibernateButton = findViewById(R.id.hibernateButton);
         hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
 
-        sleepAction = new Action("Sleep", Student.getMaxEnergy(), 8);
+        sleepAction = new Action("Sleep", 5, 5);
         Button sleepButton = findViewById(R.id.sleepButton);
         sleepButton.setOnClickListener(view -> doAction(sleepAction));
 
-        napAction = new Action("Nap", Student.getMaxEnergy(), 8);
+        napAction = new Action("Nap", 1, 1);
         Button napButton = findViewById(R.id.napButton);
         sleepButton.setOnClickListener(view -> doAction(napAction));
     }
