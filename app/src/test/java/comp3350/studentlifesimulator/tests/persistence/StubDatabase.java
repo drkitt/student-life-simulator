@@ -1,25 +1,20 @@
-package comp3350.studentlifesimulator.persistence;
+package comp3350.studentlifesimulator.tests.persistence;
 
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
+import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import java.util.ArrayList;
 
-public class Database implements DatabaseAccessInterface {
-    private final static String DB_TYPE = "STUB";
-
+public class StubDatabase implements DatabaseAccessInterface {
     private Student student;
     private EnergyBar energyBar;
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
 
-    public Database() {
-        initializeData();
-    }
-
     public void openDB(String databasePath) {
-        // TODO: do something with this method
+        initializeData();
     }
 
     public void closeDB() {
@@ -66,10 +61,6 @@ public class Database implements DatabaseAccessInterface {
 
     public ArrayList<Course> getSelectedCourses() {
         return copyCourseList(selected);
-    }
-
-    public String getDBType() {
-        return DB_TYPE;
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {

@@ -14,7 +14,7 @@ public class DatabaseServices {
             database = new DatabaseAccess(databaseName);
             database.openDB(Main.getDBPath());
 
-            DatabaseManager.switchDatabase();
+            DatabaseManager.setDatabase(database);
 
             opened = true;
         }
