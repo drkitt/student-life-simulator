@@ -22,6 +22,21 @@ public class DatabaseServices {
         return opened;
     }
 
+    public static boolean openDatabaseAccess(DatabaseAccessInterface newDatabase) {
+        boolean opened = false;
+
+        if (database == null) {
+            database = newDatabase;
+            database.openDB(Main.getDBPath());
+
+            DatabaseManager.setDatabase(database);
+
+            opened = true;
+        }
+
+        return opened;
+    }
+
     public static void closeDatabaseAccess() {
         if (database != null) {
             database.closeDB();

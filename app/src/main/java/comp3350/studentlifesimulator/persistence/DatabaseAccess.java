@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
 
-import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
@@ -15,8 +14,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     private String database;
 
     private Connection connection;
-    private Statement statement;
-    private ResultSet results;
+    private Statement statement1, statement2, statement3;
+    private ResultSet results1, results2, results3;
     private String command;
 
     public DatabaseAccess(String databaseName) {
@@ -30,7 +29,9 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
             url = "jdbc:hsqldb:file:" + databasePath;
             connection = DriverManager.getConnection(url, "SA", "");
-            statement = connection.createStatement();
+            statement1 = connection.createStatement();
+            statement2 = connection.createStatement();
+            statement3 = connection.createStatement();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +41,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public void closeDB() {
         try {
             command = "SHUTDOWN COMPACT";
-            statement.executeQuery(command);
+            statement1.executeQuery(command);
             connection.close();
         }
         catch (Exception e) {
@@ -56,13 +57,13 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM STUDENTS";
-            results = statement.executeQuery(command);
+            results1 = statement1.executeQuery(command);
 
-            if(results.next()) {
-                studentName = results.getString("STUDENTNAME");
-                maxEnergy = results.getInt("MAXENERGY"); // TODO: do something with max energy
-                currEnergy = results.getInt("CURRENTENERGY");
-                student = new Student(studentName,new EnergyBar(currEnergy));
+            if(results1.next()) {
+                studentName = results1.getString("STUDENTNAME");
+                maxEnergy = results1.getInt("MAXENERGY"); // TODO: Pull max energy from database!!!
+                currEnergy = results1.getInt("CURRENTENERGY");
+                student = new Student(studentName, new EnergyBar(currEnergy));
             }
         }
         catch (Exception e) {
@@ -74,6 +75,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
     public void updateStudent(Student newStudent) {
         try {
+            command = "UPDATE STUDENTS SET STUDENTNAME = " + newStudent.getStudentName() +
+                    ", MAXENERGY = " + Student.getMaxEnergy() + ", CURRENTENERGY = " +
+                    newStudent.getCurrentEnergy();
+            statement1.executeUpdate(command);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -81,27 +86,56 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     }
 
     public ArrayList<Course> getCourses() {
+        ArrayList<Course> courses = null;
+        String courseID;
+        String courseName;
+
         try {
+            command = "SELECT * FROM COURSES";
+            results2 = statement2.executeQuery(command);
+
+            courses = new ArrayList<>();
+            while (results2.next()) {
+                courseID = results2.getString("COURSEID");
+                courseName = results2.getString("COURSENAME");
+                courses.add(new Course(courseID, courseName));
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return courses;
     }
 
     public ArrayList<Course> getSelectedCourses() {
+        ArrayList<Course> courses = null;
+        String courseID;
+        String courseName;
+
         try {
+            command = "SELECT * FROM SELECEDCOURSES";
+            results3 = statement3.executeQuery(command);
+
+            courses = new ArrayList<>();
+            while (results3.next()) {
+                courseID = results3.getString("COURSEID");
+                courseName = results3.getString("COURSENAME");
+                courses.add(new Course(courseID, courseName));
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return courses;
     }
 
     public void addSelectedCourse(Course course) {
         try {
+            command = "INSERT INTO SELECTEDCOURSES VALUES ('" + course.getCourseID() +
+                    "', '" + course.getCourseName() + "')";
+            statement3.executeUpdate(command);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -109,12 +143,18 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     }
 
     public boolean removeSelectedCourse(Course course) {
+        boolean deleted = false;
+
         try {
+            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = " + course.getCourseID();
+            statement3.executeUpdate(command);
+
+            deleted = true;
         }
         catch (Exception e) {
             e.printStackTrace();
         }
 
-        return false;
+        return deleted;
     }
 }
