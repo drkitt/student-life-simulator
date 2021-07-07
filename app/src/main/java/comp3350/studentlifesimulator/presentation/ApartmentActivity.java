@@ -70,7 +70,7 @@ public class ApartmentActivity extends AppCompatActivity {
 
         napAction = new Action("Nap", 1, 1, 1);
         Button napButton = findViewById(R.id.napButton);
-        sleepButton.setOnClickListener(view -> doAction(napAction));
+        napButton.setOnClickListener(view -> doAction(napAction));
     }
 
     private void doAction(Action action) {
