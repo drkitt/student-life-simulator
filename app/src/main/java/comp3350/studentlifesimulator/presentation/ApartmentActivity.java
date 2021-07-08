@@ -3,6 +3,7 @@ package comp3350.studentlifesimulator.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +32,8 @@ public class ApartmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apartment_activity);
 
+        //Uses EventManager method: to initialize data in the EventManager and fetch from database.
+
         time = new Time(4 * 8, 60 * 24 / MINUTES_PER_TIME_UNIT);
         student = DatabaseManager.getStudent();
         studentPerformingActions = new StudentPerformingActions();
@@ -38,6 +41,8 @@ public class ApartmentActivity extends AppCompatActivity {
         ProgressBar energyBar = findViewById(R.id.energyBar);
         energyBar.setMax(Student.getMaxEnergy());
 
+        //ENUM value for states and feed into this method
+        //Uses EventManager method: getPossibleActions() and pass it to displayActions to determine layouts
         displayActions();
         displayCurrentTime();
         displayCurrentEnergy();
@@ -49,7 +54,20 @@ public class ApartmentActivity extends AppCompatActivity {
         //currently, marathon takes 1/4 of the day = 24 units out of 96 total
         marathonAction = new Action("Marathon Study", student.getCurrentEnergy(), 24, 1);
         Button marathonButton = findViewById(R.id.marathonButton);
-        marathonButton.setOnClickListener(view -> doAction(marathonAction));
+        hibernateAction = new Action("Hibernate", Student.getMaxEnergy(), 48, 1);
+        Button hibernateButton = findViewById(R.id.hibernateButton);
+
+        marathonButton.setOnClickListener(view -> {
+            doAction(marathonAction);
+            marathonButton.setVisibility(View.INVISIBLE);
+            hibernateButton.setVisibility(View.VISIBLE);
+        });
+
+        hibernateButton.setOnClickListener(view -> {
+            doAction(hibernateAction);
+            marathonButton.setVisibility(View.VISIBLE);
+            hibernateButton.setVisibility(View.INVISIBLE);
+        });
 
         studyAction = new Action("Study", -5, 5, 1);
         Button studyButton = findViewById(R.id.studyButton);
@@ -60,9 +78,7 @@ public class ApartmentActivity extends AppCompatActivity {
         quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
 
         //=============== REST ACTIONS ==============
-        hibernateAction = new Action("Hibernate", Student.getMaxEnergy(), 48, 1);
-        Button hibernateButton = findViewById(R.id.hibernateButton);
-        hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
+
 
         sleepAction = new Action("Sleep", 5, 5, 1);
         Button sleepButton = findViewById(R.id.sleepButton);
