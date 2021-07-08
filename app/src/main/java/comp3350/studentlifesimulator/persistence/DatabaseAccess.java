@@ -6,16 +6,18 @@ import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
 
+import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
+import comp3350.studentlifesimulator.objects.Time;
 
 public class DatabaseAccess implements DatabaseAccessInterface {
     private String database;
 
     private Connection connection;
-    private Statement statement1, statement2, statement3;
-    private ResultSet results1, results2, results3;
+    private Statement statement1, statement2, statement3, statement4, statement5;
+    private ResultSet results;
     private String command;
 
     public DatabaseAccess(String databaseName) {
@@ -32,6 +34,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             statement1 = connection.createStatement();
             statement2 = connection.createStatement();
             statement3 = connection.createStatement();
+            statement4 = connection.createStatement();
+            statement5 = connection.createStatement();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -52,17 +56,15 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public Student getStudent() {
         Student student = null;
         String studentName;
-        int maxEnergy;
         int currEnergy;
 
         try {
             command = "SELECT * FROM STUDENTS";
-            results1 = statement1.executeQuery(command);
+            results = statement1.executeQuery(command);
 
-            if(results1.next()) {
-                studentName = results1.getString("STUDENTNAME");
-                maxEnergy = results1.getInt("MAXENERGY"); // TODO: Pull max energy from database!!!
-                currEnergy = results1.getInt("CURRENTENERGY");
+            if(results.next()) {
+                studentName = results.getString("STUDENTNAME");
+                currEnergy = results.getInt("CURRENTENERGY");
                 student = new Student(studentName, new EnergyBar(currEnergy));
             }
         }
@@ -75,9 +77,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
     public void updateStudent(Student newStudent) {
         try {
-            command = "UPDATE STUDENTS SET STUDENTNAME = " + newStudent.getStudentName() +
-                    ", MAXENERGY = " + Student.getMaxEnergy() + ", CURRENTENERGY = " +
-                    newStudent.getCurrentEnergy();
+            command = "UPDATE STUDENTS SET STUDENTNAME = '" + newStudent.getStudentName() +
+                    "', CURRENTENERGY = " + newStudent.getCurrentEnergy() + " WHERE STUDENTID = 0";
             statement1.executeUpdate(command);
         }
         catch (Exception e) {
@@ -92,12 +93,12 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM COURSES";
-            results2 = statement2.executeQuery(command);
+            results = statement2.executeQuery(command);
 
             courses = new ArrayList<>();
-            while (results2.next()) {
-                courseID = results2.getString("COURSEID");
-                courseName = results2.getString("COURSENAME");
+            while (results.next()) {
+                courseID = results.getString("COURSEID");
+                courseName = results.getString("COURSENAME");
                 courses.add(new Course(courseID, courseName));
             }
         }
@@ -115,12 +116,12 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM SELECEDCOURSES";
-            results3 = statement3.executeQuery(command);
+            results = statement3.executeQuery(command);
 
             courses = new ArrayList<>();
-            while (results3.next()) {
-                courseID = results3.getString("COURSEID");
-                courseName = results3.getString("COURSENAME");
+            while (results.next()) {
+                courseID = results.getString("COURSEID");
+                courseName = results.getString("COURSENAME");
                 courses.add(new Course(courseID, courseName));
             }
         }
@@ -156,5 +157,65 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         }
 
         return deleted;
+    }
+
+    public ArrayList<Action> getActions(int key) {
+        ArrayList<Action> actions = new ArrayList<>();
+        String actionName;
+        int energyUnit;
+        int timeUnit;
+
+        try {
+            command = "SELECT * FROM ACTIONS WHERE VIEWID = " + key;
+            results = statement4.executeQuery(command);
+
+            while (results.next()) {
+                actionName = results.getString("ACTIONNAME");
+                energyUnit = results.getInt("ENERGYUNIT");
+                timeUnit = results.getInt("TIMEUNIT");
+                actions.add(new Action(actionName, energyUnit, timeUnit));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return actions;
+    }
+
+    public Time getTime() {
+        Time time = null;
+        int currentTime;
+        int timeInDay;
+        int days;
+
+        try {
+            command = "SELECT * FROM TIMES";
+            results = statement5.executeQuery(command);
+
+            if (results.next()) {
+                currentTime = results.getInt("CURRENTTIME");
+                timeInDay = results.getInt("TIMEINDAY");
+                days = results.getInt("DAYS");
+                time = new Time(currentTime + (timeInDay * days), timeInDay);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return time;
+    }
+
+    public void updateTime(Time time) {
+        try {
+            command = "UPDATE TIMES SET CURRENTTIME = " + time.getCurrentTime() +
+                    ", TIMEINDAY = " + time.getTimePerDay() + ", DAYS = " + time.getDays() +
+                    " WHERE TIMEID = 0";
+            statement5.executeUpdate(command);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -14,7 +14,7 @@ public class DatabaseServices {
             database = new DatabaseAccess(databaseName);
             database.openDB(Main.getDBPath());
 
-            DatabaseManager.setDatabase(database);
+            DatabaseManager.setDatabase();
 
             opened = true;
         }
@@ -29,7 +29,7 @@ public class DatabaseServices {
             database = newDatabase;
             database.openDB(Main.getDBPath());
 
-            DatabaseManager.setDatabase(database);
+            DatabaseManager.setDatabase();
 
             opened = true;
         }

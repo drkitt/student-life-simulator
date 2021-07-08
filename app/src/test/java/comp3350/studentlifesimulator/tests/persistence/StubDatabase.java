@@ -1,24 +1,31 @@
 package comp3350.studentlifesimulator.tests.persistence;
 
+import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
+import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import java.util.ArrayList;
 
 public class StubDatabase implements DatabaseAccessInterface {
     private Student student;
-    private EnergyBar energyBar;
+    private Time time;
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
+    private ArrayList<Action>[] actions;
 
     public void openDB(String databasePath) {
         initializeData();
     }
 
     public void closeDB() {
-        // TODO: do something with this method
+        student = null;
+        time = null;
+        courses = null;
+        selected = null;
+        actions = null;
     }
 
     public void updateStudent(Student newStudent) {
@@ -63,11 +70,26 @@ public class StubDatabase implements DatabaseAccessInterface {
         return copyCourseList(selected);
     }
 
+
+    public ArrayList<Action> getActions(int key) {
+        return actions[key];
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void updateTime(Time newTime) {
+        time = new Time(newTime.getCurrentTime() +
+                (newTime.getDays() * newTime.getTimePerDay()), newTime.getTimePerDay());
+    }
+
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
         ArrayList<Course> tempCourses = new ArrayList<>();
 
         for (int i = 0; i < courseList.size(); i++) {
-            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName()));
+            tempCourses.add(new Course(courseList.get(i).getCourseID(),
+                    courseList.get(i).getCourseName()));
         }
 
         return tempCourses;
@@ -75,10 +97,11 @@ public class StubDatabase implements DatabaseAccessInterface {
 
     private void initializeData() {
         Course course;
+        Action action;
 
-        energyBar = new EnergyBar(EnergyBar.getMaxEnergy());
+        student = new Student("Anne Otherstudent", new EnergyBar(12));
 
-        student = new Student("Tired Student", energyBar);
+        time = new Time(0, 96);
 
         courses = new ArrayList<>();
 
@@ -94,5 +117,47 @@ public class StubDatabase implements DatabaseAccessInterface {
         courses.add(course);
 
         selected = new ArrayList<>();
+
+        actions = new ArrayList[4];
+
+        actions[0] = new ArrayList<>();
+
+        action = new Action("Nap", 1, 4);
+        actions[0].add(action);
+
+        actions[1] = new ArrayList<>();
+
+        action = new Action("Nap", 1, 4);
+        actions[1].add(action);
+        action = new Action("Quick Study", -1, 4);
+        actions[1].add(action);
+        action = new Action("Listen to Instructor", -2, 4);
+        actions[1].add(action);
+        action = new Action("Talk with Friends", -1, 4);
+        actions[1].add(action);
+
+        actions[2] = new ArrayList<>();
+
+        action = new Action("Hibernate", 12, 48);
+        actions[2].add(action);
+        action = new Action("Sleep", 5, 16);
+        actions[2].add(action);
+        action = new Action("Nap", 1, 4);
+        actions[2].add(action);
+
+        actions[3] = new ArrayList<>();
+
+        action = new Action("Marathon Study", -6, 32);
+        actions[3].add(action);
+        action = new Action("Study", -3, 16);
+        actions[3].add(action);
+        action = new Action("Quick Study", -1, 4);
+        actions[3].add(action);
+        action = new Action("Hibernate", 12, 48);
+        actions[3].add(action);
+        action = new Action("Sleep", 5, 16);
+        actions[3].add(action);
+        action = new Action("Nap", 1, 4);
+        actions[3].add(action);
     }
 }

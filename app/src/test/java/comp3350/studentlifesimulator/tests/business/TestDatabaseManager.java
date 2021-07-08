@@ -3,9 +3,7 @@ package comp3350.studentlifesimulator.tests.business;
 import junit.framework.TestCase;
 
 import comp3350.studentlifesimulator.application.DatabaseServices;
-import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.DatabaseManager;
-import comp3350.studentlifesimulator.persistence.DatabaseAccess;
 import comp3350.studentlifesimulator.tests.persistence.StubDatabase;
 
 public class TestDatabaseManager extends TestCase {

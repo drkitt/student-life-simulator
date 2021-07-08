@@ -2,8 +2,10 @@ package comp3350.studentlifesimulator.persistence;
 
 import java.util.ArrayList;
 
+import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.Student;
+import comp3350.studentlifesimulator.objects.Time;
 
 public interface DatabaseAccessInterface {
     void openDB(String databasePath);
@@ -21,4 +23,10 @@ public interface DatabaseAccessInterface {
     void addSelectedCourse(Course course);
 
     boolean removeSelectedCourse(Course course);
+
+    ArrayList<Action> getActions(int key);
+
+    Time getTime();
+
+    void updateTime(Time time);
 }
