@@ -46,6 +46,7 @@ public class CoursesActivity extends AppCompatActivity {
             if (courseList.isItemChecked(index)) {
                 numOfCoursesSelected++;
                 DatabaseManager.addCourse(courseArray.get(index));
+                System.out.println("Courses Activity"+courseArray.get(index));
             }
         }
 

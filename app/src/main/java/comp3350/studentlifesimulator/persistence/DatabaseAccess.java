@@ -115,7 +115,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         String courseName;
 
         try {
-            command = "SELECT * FROM SELECEDCOURSES";
+            command = "SELECT * FROM SELECTEDCOURSES";
             results = statement3.executeQuery(command);
 
             courses = new ArrayList<>();
@@ -137,6 +137,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             command = "INSERT INTO SELECTEDCOURSES VALUES ('" + course.getCourseID() +
                     "', '" + course.getCourseName() + "')";
             statement3.executeUpdate(command);
+            System.out.println("Database Error" + course.getCourseID());
         }
         catch (Exception e) {
             e.printStackTrace();
