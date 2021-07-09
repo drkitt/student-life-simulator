@@ -137,7 +137,6 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             command = "INSERT INTO SELECTEDCOURSES VALUES ('" + course.getCourseID() +
                     "', '" + course.getCourseName() + "')";
             statement3.executeUpdate(command);
-            System.out.println("Database Error" + course.getCourseID());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -165,6 +164,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         String actionName;
         int energyUnit;
         int timeUnit;
+        int score;
 
         try {
             command = "SELECT * FROM ACTIONS WHERE VIEWID = " + key;
@@ -174,7 +174,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 actionName = results.getString("ACTIONNAME");
                 energyUnit = results.getInt("ENERGYUNIT");
                 timeUnit = results.getInt("TIMEUNIT");
-                actions.add(new Action(actionName, energyUnit, timeUnit ,0));
+                score = results.getInt("SCORE");
+                actions.add(new Action(actionName, energyUnit, timeUnit, score));
             }
         }
         catch (Exception e) {
@@ -199,10 +200,6 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 timeInDay = results.getInt("TIMEINDAY");
                 days = results.getInt("DAYS");
                 time = new Time(currentTime + (timeInDay * days), timeInDay);
-                System.out.println(currentTime);
-                System.out.println(timeInDay);
-                System.out.println("CURRENT TIME FROM TIME OBJECT:"+time.getCurrentTime());
-                //CALEB HELP!
             }
         }
         catch (Exception e) {

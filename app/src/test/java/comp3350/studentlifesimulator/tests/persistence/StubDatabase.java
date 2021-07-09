@@ -99,7 +99,7 @@ public class StubDatabase implements DatabaseAccessInterface {
         Course course;
         Action action;
 
-        student = new Student("Anne Otherstudent", new EnergyBar(10/*12*/));
+        student = new Student("Anne Otherstudent", new EnergyBar(12));
 
         time = new Time(0, 96);
 
@@ -122,42 +122,42 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         actions[0] = new ArrayList<>();
 
-        action = new Action("Nap", 1, 4);
+        action = new Action("Nap", 1, 4, 2);
         actions[0].add(action);
 
         actions[1] = new ArrayList<>();
 
-        action = new Action("Nap", 1, 4);
+        action = new Action("Nap", 1, 4, 2);
         actions[1].add(action);
-        action = new Action("Quick Study", -1, 4);
+        action = new Action("Quick Study", -1, 4, 5);
         actions[1].add(action);
-        action = new Action("Listen to Instructor", -2, 4);
+        action = new Action("Listen to Instructor", -2, 4, 6);
         actions[1].add(action);
-        action = new Action("Talk with Friends", -1, 4);
+        action = new Action("Talk with Friends", -1, 4, 3);
         actions[1].add(action);
 
         actions[2] = new ArrayList<>();
 
-        action = new Action("Hibernate", 10/*12*/, 48);
+        action = new Action("Hibernate", 12, 48, 12);
         actions[2].add(action);
-        action = new Action("Sleep", 5, 16);
+        action = new Action("Sleep", 5, 16, 6);
         actions[2].add(action);
-        action = new Action("Nap", 1, 4);
+        action = new Action("Nap", 1, 4, 2);
         actions[2].add(action);
 
         actions[3] = new ArrayList<>();
 
-        action = new Action("Marathon Study", -6, 32);
+        action = new Action("Marathon Study", -6, 32, 24);
         actions[3].add(action);
-        action = new Action("Study", -3, 16);
+        action = new Action("Study", -3, 16, 18);
         actions[3].add(action);
-        action = new Action("Quick Study", -1, 4);
+        action = new Action("Quick Study", -1, 4, 5);
         actions[3].add(action);
-        action = new Action("Hibernate", 10/*12*/, 48);
+        action = new Action("Hibernate", 12, 48, 12);
         actions[3].add(action);
-        action = new Action("Sleep", 5, 16);
+        action = new Action("Sleep", 5, 16, 6);
         actions[3].add(action);
-        action = new Action("Nap", 1, 4);
+        action = new Action("Nap", 1, 4, 2);
         actions[3].add(action);
     }
 }

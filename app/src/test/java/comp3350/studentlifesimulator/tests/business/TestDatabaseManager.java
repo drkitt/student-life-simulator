@@ -13,23 +13,22 @@ public class TestDatabaseManager extends TestCase {
     public TestDatabaseManager(String arg0) { super(arg0); }
 
     public void testCourseSelection() {
-        StubDatabase database = new StubDatabase();
-        DatabaseServices.openDatabaseAccess(database);
-        ArrayList<Course> courses = database.getCourses();
+        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        ArrayList<Course> courses = DatabaseManager.getAvailableCourses();
 
         assertEquals(courses.get(0).getCourseID(), "COMP1010");
 
-        database.addSelectedCourse(courses.get(4));
-        assertEquals(database.getSelectedCourses().get(0).getCourseID(),
+        DatabaseManager.addCourse(courses.get(4));
+        assertEquals(DatabaseManager.getSelectedCourses().get(0).getCourseID(),
                 courses.get(4).getCourseID());
 
-        database.addSelectedCourse(courses.get(0));
-        database.addSelectedCourse(courses.get(1));
-        database.addSelectedCourse(courses.get(2));
-        database.addSelectedCourse(courses.get(3));
-        database.addSelectedCourse(courses.get(4));
+        DatabaseManager.addCourse(courses.get(0));
+        DatabaseManager.addCourse(courses.get(1));
+        DatabaseManager.addCourse(courses.get(2));
+        DatabaseManager.addCourse(courses.get(3));
+        DatabaseManager.addCourse(courses.get(4));
         for (int i = 0; i < 5; i++) {
-            assertEquals(database.getSelectedCourses().get(i + 1).getCourseID(),
+            assertEquals(DatabaseManager.getSelectedCourses().get(i + 1).getCourseID(),
                     courses.get(i).getCourseID());
         }
     }
