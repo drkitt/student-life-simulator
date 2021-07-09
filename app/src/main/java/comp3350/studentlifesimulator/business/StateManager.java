@@ -112,6 +112,6 @@ public class StateManager {
     }
 
     private static int calculatePercentage(int value, int total) {
-        return (value / total) * 100;
+        return (value / 100) * total;
     }
 }
