@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
+import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
@@ -44,9 +45,9 @@ public class ApartmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apartment_activity);
 
-        //Uses EventManager method: to initialize data in the EventManager and fetch from database.
-        time = new Time(4 * 8, 60 * 24 / MINUTES_PER_TIME_UNIT);
-        student = DatabaseManager.getStudent();
+        StateManager.initialize();
+        time = StateManager.getTime();
+        student = StateManager.getCurrentStudent();
         studentPerformingActions = new StudentPerformingActions();
 
         ProgressBar energyBar = findViewById(R.id.energyBar);
