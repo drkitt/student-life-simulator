@@ -199,6 +199,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 timeInDay = results.getInt("TIMEINDAY");
                 days = results.getInt("DAYS");
                 time = new Time(currentTime + (timeInDay * days), timeInDay);
+                System.out.println(currentTime);
+                System.out.println(timeInDay);
+                System.out.println("CURRENT TIME FROM TIME OBJECT:"+time.getCurrentTime());
+                //CALEB HELP!
             }
         }
         catch (Exception e) {

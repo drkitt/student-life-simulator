@@ -78,16 +78,25 @@ public class ApartmentActivity extends AppCompatActivity {
         //Action attendAction, skipAction;
 
         switch (curState) {
+            // Currently, the actions are being pulled in the order that they are stored in the database
+            // It's got a weird ordering for each state
             case IN_CLASS_LOW:
+//                for (int i=0; i<actionList.size(); i++){
+//                    System.out.println(actionList.get(i).getActionName());
+//                }
                 napAction = actionList.get(0);
                 napButton.setOnClickListener(view -> doAction(napAction));
+
                 break;
 
             case IN_CLASS_HIGH:
-                napAction = actionList.get(1);
-                quickStudyAction = actionList.get(3);
+//                for (int i=0; i<actionList.size(); i++){
+//                    System.out.println(actionList.get(i).getActionName());
+//                }
                 listenAction = actionList.get(0);
-                talkAction = actionList.get(4);
+                napAction = actionList.get(1);
+                quickStudyAction = actionList.get(2);
+                talkAction = actionList.get(3);
                 napButton.setOnClickListener(view -> doAction(napAction));
                 quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
                 listenButton.setOnClickListener(view -> doAction((listenAction)));
@@ -95,21 +104,28 @@ public class ApartmentActivity extends AppCompatActivity {
                 break;
 
             case LOW_ENERGY:
+//                for (int i=0; i<actionList.size(); i++){
+//                    System.out.println(actionList.get(i).getActionName());
+//                }
                 hibernateAction = actionList.get(0);
-                sleepAction = actionList.get(2);
                 napAction = actionList.get(1);
+                sleepAction = actionList.get(2);
                 hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
                 sleepButton.setOnClickListener(view -> doAction(sleepAction));
                 napButton.setOnClickListener(view -> doAction(napAction));
                 break;
 
             case FREE_TIME:
-                marathonAction = actionList.get(1);
-                studyAction = actionList.get(5);
-                quickStudyAction = actionList.get(3);
+//                for (int i=0; i<actionList.size(); i++){
+//                    System.out.println(actionList.get(i).getActionName());
+//                }
                 hibernateAction = actionList.get(0);
-                sleepAction = actionList.get(4);
+                marathonAction = actionList.get(1);
                 napAction = actionList.get(2);
+                quickStudyAction = actionList.get(3);
+                sleepAction = actionList.get(4);
+                studyAction = actionList.get(5);
+
                 marathonButton.setOnClickListener(view -> doAction(marathonAction));
                 studyButton.setOnClickListener((view -> doAction(studyAction)));
                 quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
@@ -119,20 +135,33 @@ public class ApartmentActivity extends AppCompatActivity {
                 break;
 
             case HAS_CLASS:
-                marathonAction = actionList.get(1);
-                studyAction = actionList.get(5);
-                quickStudyAction = actionList.get(3);
                 hibernateAction = actionList.get(0);
-                sleepAction = actionList.get(4);
+                marathonAction = actionList.get(1);
                 napAction = actionList.get(2);
+                quickStudyAction = actionList.get(3);
+                sleepAction = actionList.get(4);
+                studyAction = actionList.get(5);
+
                 marathonButton.setOnClickListener(view -> doAction(marathonAction));
                 studyButton.setOnClickListener((view -> doAction(studyAction)));
                 quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
                 hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
                 sleepButton.setOnClickListener(view -> doAction(sleepAction));
                 napButton.setOnClickListener(view -> doAction(napAction));
-                attendButton.setOnClickListener(view -> StateManager.setInClass(true));
-                skipButton.setOnClickListener(view -> StateManager.setInClass(false));
+                attendButton.setOnClickListener(view -> {
+                    StateManager.setInClass(true);
+                    //Expected result is IN_CLASS_HIGH
+                    System.out.println("RESULT:"+StateManager.getState());
+                    setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
+                    displayActions(StateManager.getState());
+                });
+                skipButton.setOnClickListener(view -> {
+                    StateManager.setInClass(false);
+                    //Expected result is FREE TIME
+                    System.out.println("RESULT:"+StateManager.getState());
+                    setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
+                    displayActions(StateManager.getState());
+                });
                 break;
         }
     }

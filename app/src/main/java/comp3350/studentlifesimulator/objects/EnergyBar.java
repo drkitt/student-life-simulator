@@ -35,10 +35,15 @@ public class EnergyBar {
     }
 
     public void adjustEnergy(int delta) {
-        setCurrentEnergy(currentEnergy + delta);
+        if (currentEnergy + delta > MAX_ENERGY){
+            setCurrentEnergy(MAX_ENERGY);
+        }
+        else {
+            setCurrentEnergy(currentEnergy + delta);
+        }
     }
 
     public boolean canAdjustEnergy(int delta) {
-        return 0 <= currentEnergy + delta && currentEnergy + delta <= MAX_ENERGY;
+        return 0 <= currentEnergy + delta;
     }
 }
