@@ -29,6 +29,19 @@ public class StateManager {
         inClassHigh = DatabaseManager.getActions(1);
         lowEnergy = DatabaseManager.getActions(2);
         freeTime = DatabaseManager.getActions(3);
+
+        for (int i=0; i<inClassLow.size(); i++){
+            System.out.println(inClassLow.get(i).getActionName());
+        }
+        for (int i=0; i<inClassHigh.size(); i++){
+            System.out.println(inClassHigh.get(i).getActionName());
+        }
+        for (int i=0; i<lowEnergy.size(); i++){
+            System.out.println(lowEnergy.get(i).getActionName());
+        }
+        for (int i=0; i<freeTime.size(); i++){
+            System.out.println(freeTime.get(i).getActionName());
+        }
     }
 
     public static Student getCurrentStudent() {
