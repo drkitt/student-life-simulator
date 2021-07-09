@@ -173,7 +173,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 actionName = results.getString("ACTIONNAME");
                 energyUnit = results.getInt("ENERGYUNIT");
                 timeUnit = results.getInt("TIMEUNIT");
-                actions.add(new Action(actionName, energyUnit, timeUnit));
+                actions.add(new Action(actionName, energyUnit, timeUnit ,0));
             }
         }
         catch (Exception e) {
