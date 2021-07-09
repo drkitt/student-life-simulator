@@ -13,7 +13,7 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 public class DatabaseAccess implements DatabaseAccessInterface {
-    private String database;
+    private final String database;
 
     private Connection connection;
     private Statement statement1, statement2, statement3, statement4, statement5;

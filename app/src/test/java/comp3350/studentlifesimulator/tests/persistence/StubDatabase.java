@@ -99,7 +99,7 @@ public class StubDatabase implements DatabaseAccessInterface {
         Course course;
         Action action;
 
-        student = new Student("Anne Otherstudent", new EnergyBar(12));
+        student = new Student("Anne Otherstudent", new EnergyBar(10/*12*/));
 
         time = new Time(0, 96);
 
@@ -138,7 +138,7 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         actions[2] = new ArrayList<>();
 
-        action = new Action("Hibernate", 12, 48);
+        action = new Action("Hibernate", 10/*12*/, 48);
         actions[2].add(action);
         action = new Action("Sleep", 5, 16);
         actions[2].add(action);
@@ -153,7 +153,7 @@ public class StubDatabase implements DatabaseAccessInterface {
         actions[3].add(action);
         action = new Action("Quick Study", -1, 4);
         actions[3].add(action);
-        action = new Action("Hibernate", 12, 48);
+        action = new Action("Hibernate", 10/*12*/, 48);
         actions[3].add(action);
         action = new Action("Sleep", 5, 16);
         actions[3].add(action);
