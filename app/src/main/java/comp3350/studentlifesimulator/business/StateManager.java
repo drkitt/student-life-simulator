@@ -3,6 +3,7 @@ package comp3350.studentlifesimulator.business;
 import java.util.ArrayList;
 
 import comp3350.studentlifesimulator.objects.Action;
+import comp3350.studentlifesimulator.objects.ActionStates;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
@@ -38,44 +39,43 @@ public class StateManager {
         return clock;
     }
 
-    public static int getState() {
-        int state;
+    public static ActionStates getState() {
+        ActionStates state;
 
         if (hasClass() && currentStudent.getCurrentEnergy() > calculatePercentage(10, EnergyBar.getMaxEnergy())) {
-            state = 4;
+            state = ActionStates.HAS_CLASS;
         }
         else if (inClass) {
-
             if (currentStudent.getCurrentEnergy() > calculatePercentage(5, EnergyBar.getMaxEnergy())) {
-                state = 1;
+                state = ActionStates.IN_CLASS_HIGH;
             }
             else{
-               state = 0;
+               state = ActionStates.IN_CLASS_LOW;
             }
-
         }
         else if (currentStudent.getCurrentEnergy() <= calculatePercentage(15, EnergyBar.getMaxEnergy())) {
-            state = 2;
+            state = ActionStates.LOW_ENERGY;
         }
         else {
-            state = 3;
+            state = ActionStates.FREE_TIME;
         }
 
         return state;
     }
 
-    public static ArrayList<Action> getCurrentPossibleActions(int currState){
+    public static ArrayList<Action> getCurrentPossibleActions(ActionStates currState){
         ArrayList<Action> possibleEvent = null;
-        if(currState == 0){
+
+        if (currState == ActionStates.IN_CLASS_LOW) {
             possibleEvent = inClassLow;
         }
-        else if(currState == 1){
+        else if (currState == ActionStates.IN_CLASS_HIGH) {
             possibleEvent = inClassHigh;
         }
-        else if(currState == 2){
+        else if (currState == ActionStates.LOW_ENERGY) {
             possibleEvent = lowEnergy;
         }
-        else if(currState == 3) {
+        else if (currState == ActionStates.FREE_TIME) {
             possibleEvent = freeTime;
         }
 

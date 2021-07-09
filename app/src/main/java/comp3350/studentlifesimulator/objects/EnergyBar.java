@@ -2,7 +2,7 @@ package comp3350.studentlifesimulator.objects;
 
 public class EnergyBar {
     private int currentEnergy;
-    private static final int MAX_ENERGY = 10;
+    private static final int MAX_ENERGY = 12;
 
     public EnergyBar(int initialEnergy) {
         if (initialEnergy < 0) {
