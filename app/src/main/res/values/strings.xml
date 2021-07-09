@@ -10,7 +10,7 @@
     <string name="background_desc">The student\'s surroundings</string>
     <string name="student_desc">The student</string>
     <string name="register_btn">REGISTER</string>
-    <string name="new_game_btn">New Game</string>
+    <string name="new_game_btn">Start</string>
     <string name="menu_desc">Select courses to be enrolled in</string>
     <string name="attend_btn">Attend</string>
     <string name="listen_btn">listen</string>
