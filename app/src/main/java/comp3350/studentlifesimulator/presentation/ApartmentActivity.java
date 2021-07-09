@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
+import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
@@ -45,8 +46,9 @@ public class ApartmentActivity extends AppCompatActivity {
         setContentView(R.layout.apartment_activity);
 
         //Uses EventManager method: to initialize data in the EventManager and fetch from database.
-        time = new Time(4 * 8, 60 * 24 / MINUTES_PER_TIME_UNIT);
-        student = DatabaseManager.getStudent();
+        StateManager.initialize();
+        time = StateManager.getTime();
+        student = StateManager.getCurrentStudent();
         studentPerformingActions = new StudentPerformingActions();
 
         ProgressBar energyBar = findViewById(R.id.energyBar);
@@ -58,39 +60,86 @@ public class ApartmentActivity extends AppCompatActivity {
         hibernateButton = findViewById(R.id.hibernateButton);
         sleepButton = findViewById(R.id.sleepButton);
         napButton = findViewById(R.id.napButton);
-//        listenButton = findViewById(R.id.listenButton);
-//        talkButton = findViewById(R.id.talkButton);
-//        attendButton = findViewById(R.id.attendButton);
-//        skipButton = findViewById(R.id.skipButton);
+        listenButton = findViewById(R.id.listenButton);
+        talkButton = findViewById(R.id.talkButton);
+        attendButton = findViewById(R.id.attendButton);
+        skipButton = findViewById(R.id.skipClassButton);
 
-        setActionButtons();
-        displayActions(ActionStates.IN_CLASS_HIGH);
+        System.out.println("CURRENT STATE:"+StateManager.getState());
+
+        setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
+        displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();
     }
 
-    private void setActionButtons(){
+    private void setActionButtons(ActionStates curState, ArrayList<Action> actionList){
         Action marathonAction, studyAction, quickStudyAction;
         Action hibernateAction, sleepAction, napAction;
         Action listenAction, talkAction;
-        Action attendAction, skipAction;
+        //Action attendAction, skipAction;
 
-//        marathonButton.setOnClickListener(view -> doAction(marathonAction));
-//        studyButton.setOnClickListener(view -> doAction(studyAction));
-//        quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
-//
-//        hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
-//        sleepButton.setOnClickListener(view -> doAction(sleepAction));
-//        napButton.setOnClickListener(view -> doAction(napAction));
-//
-//        listenButton.setOnClickListener(view -> doAction(listenAction));
-//        talkButton.setOnClickListener(view -> doAction(talkAction));
-//
-//        attendButton.setOnClickListener(view -> doAction(attendAction));
-//        skipButton.setOnClickListener(view -> doAction(skipAction));
+        switch (curState) {
+            case IN_CLASS_LOW:
+                napAction = actionList.get(0);
+                napButton.setOnClickListener(view -> doAction(napAction));
+                break;
+
+            case IN_CLASS_HIGH:
+                napAction = actionList.get(0);
+                quickStudyAction = actionList.get(1);
+                listenAction = actionList.get(2);
+                talkAction = actionList.get(3);
+                napButton.setOnClickListener(view -> doAction(napAction));
+                quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
+                listenButton.setOnClickListener(view -> doAction((listenAction)));
+                talkButton.setOnClickListener(view -> doAction(talkAction));
+                break;
+
+            case LOW_ENERGY:
+                hibernateAction = actionList.get(0);
+                sleepAction = actionList.get(1);
+                napAction = actionList.get(2);
+                hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
+                sleepButton.setOnClickListener(view -> doAction(sleepAction));
+                napButton.setOnClickListener(view -> doAction(napAction));
+                break;
+
+            case FREE_TIME:
+                marathonAction = actionList.get(0);
+                studyAction = actionList.get(1);
+                quickStudyAction = actionList.get(2);
+                hibernateAction = actionList.get(3);
+                sleepAction = actionList.get(4);
+                napAction = actionList.get(5);
+                marathonButton.setOnClickListener(view -> doAction(marathonAction));
+                studyButton.setOnClickListener((view -> doAction(studyAction)));
+                quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
+                hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
+                sleepButton.setOnClickListener(view -> doAction(sleepAction));
+                napButton.setOnClickListener(view -> doAction(napAction));
+                break;
+
+            case HAS_CLASS:
+                marathonAction = actionList.get(0);
+                studyAction = actionList.get(1);
+                quickStudyAction = actionList.get(2);
+                hibernateAction = actionList.get(3);
+                sleepAction = actionList.get(4);
+                napAction = actionList.get(5);
+                marathonButton.setOnClickListener(view -> doAction(marathonAction));
+                studyButton.setOnClickListener((view -> doAction(studyAction)));
+                quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
+                hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
+                sleepButton.setOnClickListener(view -> doAction(sleepAction));
+                napButton.setOnClickListener(view -> doAction(napAction));
+                attendButton.setOnClickListener(view -> StateManager.setInClass(true));
+                skipButton.setOnClickListener(view -> StateManager.setInClass(false));
+                break;
+        }
     }
 
-    private void displayActions(ActionStates curState){ // FOR DEVS: Action values are in the google doc!
+    private void displayActions(ActionStates curState){
         switch (curState){
             case IN_CLASS_LOW:
                 marathonButton.setVisibility(View.INVISIBLE);
