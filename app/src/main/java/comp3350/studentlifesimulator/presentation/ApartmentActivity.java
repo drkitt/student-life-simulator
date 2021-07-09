@@ -65,8 +65,6 @@ public class ApartmentActivity extends AppCompatActivity {
         attendButton = findViewById(R.id.attendButton);
         skipButton = findViewById(R.id.skipClassButton);
 
-        System.out.println("CURRENT STATE:"+StateManager.getState());
-
         setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
         displayActions(StateManager.getState());
         displayCurrentTime();
