@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.studentlifesimulator.R;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
@@ -19,13 +20,24 @@ import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
+import comp3350.studentlifesimulator.objects.ActionStates;
+
 public class ApartmentActivity extends AppCompatActivity {
     private Time time;
     private Student student;
     private StudentPerformingActions studentPerformingActions;
-    private Action marathonAction, studyAction, quickStudyAction;
-    private Action hibernateAction, sleepAction, napAction;
     private static final int MINUTES_PER_TIME_UNIT = 15;
+
+    private Button marathonButton;
+    private Button studyButton;
+    private Button quickStudyButton;
+    private Button hibernateButton;
+    private Button sleepButton;
+    private Button napButton;
+    private Button listenButton;
+    private Button talkButton;
+    private Button attendButton;
+    private Button skipButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +45,6 @@ public class ApartmentActivity extends AppCompatActivity {
         setContentView(R.layout.apartment_activity);
 
         //Uses EventManager method: to initialize data in the EventManager and fetch from database.
-
         time = new Time(4 * 8, 60 * 24 / MINUTES_PER_TIME_UNIT);
         student = DatabaseManager.getStudent();
         studentPerformingActions = new StudentPerformingActions();
@@ -41,52 +52,111 @@ public class ApartmentActivity extends AppCompatActivity {
         ProgressBar energyBar = findViewById(R.id.energyBar);
         energyBar.setMax(Student.getMaxEnergy());
 
-        //ENUM value for states and feed into this method
-        //Uses EventManager method: getPossibleActions() and pass it to displayActions to determine layouts
-        displayActions();
+        marathonButton = findViewById(R.id.marathonButton);
+        studyButton = findViewById(R.id.studyButton);
+        quickStudyButton = findViewById(R.id.quickStudyButton);
+        hibernateButton = findViewById(R.id.hibernateButton);
+        sleepButton = findViewById(R.id.sleepButton);
+        napButton = findViewById(R.id.napButton);
+//        listenButton = findViewById(R.id.listenButton);
+//        talkButton = findViewById(R.id.talkButton);
+//        attendButton = findViewById(R.id.attendButton);
+//        skipButton = findViewById(R.id.skipButton);
+
+        setActionButtons();
+        displayActions(ActionStates.IN_CLASS_HIGH);
         displayCurrentTime();
         displayCurrentEnergy();
     }
 
-    private void displayActions(){ // FOR DEVS: Action values are in the google doc!
-        //=============== STUDY ACTIONS ==============
-        //TODO: Figure our how to get remaining time or re-visit with a decision from the team
-        //currently, marathon takes 1/4 of the day = 24 units out of 96 total
-        marathonAction = new Action("Marathon Study", student.getCurrentEnergy(), 24, 1);
-        Button marathonButton = findViewById(R.id.marathonButton);
-        hibernateAction = new Action("Hibernate", Student.getMaxEnergy(), 48, 1);
-        Button hibernateButton = findViewById(R.id.hibernateButton);
+    private void setActionButtons(){
+        Action marathonAction, studyAction, quickStudyAction;
+        Action hibernateAction, sleepAction, napAction;
+        Action listenAction, talkAction;
+        Action attendAction, skipAction;
 
-        marathonButton.setOnClickListener(view -> {
-            doAction(marathonAction);
-            marathonButton.setVisibility(View.INVISIBLE);
-            hibernateButton.setVisibility(View.VISIBLE);
-        });
+//        marathonButton.setOnClickListener(view -> doAction(marathonAction));
+//        studyButton.setOnClickListener(view -> doAction(studyAction));
+//        quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
+//
+//        hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
+//        sleepButton.setOnClickListener(view -> doAction(sleepAction));
+//        napButton.setOnClickListener(view -> doAction(napAction));
+//
+//        listenButton.setOnClickListener(view -> doAction(listenAction));
+//        talkButton.setOnClickListener(view -> doAction(talkAction));
+//
+//        attendButton.setOnClickListener(view -> doAction(attendAction));
+//        skipButton.setOnClickListener(view -> doAction(skipAction));
+    }
 
-        hibernateButton.setOnClickListener(view -> {
-            doAction(hibernateAction);
-            marathonButton.setVisibility(View.VISIBLE);
-            hibernateButton.setVisibility(View.INVISIBLE);
-        });
+    private void displayActions(ActionStates curState){ // FOR DEVS: Action values are in the google doc!
+        switch (curState){
+            case IN_CLASS_LOW:
+                marathonButton.setVisibility(View.INVISIBLE);
+                studyButton.setVisibility(View.INVISIBLE);
+                quickStudyButton.setVisibility(View.INVISIBLE);
+                hibernateButton.setVisibility(View.INVISIBLE);
+                sleepButton.setVisibility(View.INVISIBLE);
+                napButton.setVisibility(View.VISIBLE);
+                listenButton.setVisibility((View.INVISIBLE));
+                talkButton.setVisibility(View.INVISIBLE);
+                attendButton.setVisibility(View.INVISIBLE);
+                skipButton.setVisibility(View.INVISIBLE);
+                break;
 
-        studyAction = new Action("Study", -5, 5, 1);
-        Button studyButton = findViewById(R.id.studyButton);
-        studyButton.setOnClickListener(view -> doAction(studyAction));
+            case IN_CLASS_HIGH:
+                marathonButton.setVisibility(View.INVISIBLE);
+                studyButton.setVisibility(View.INVISIBLE);
+                quickStudyButton.setVisibility(View.VISIBLE);
+                hibernateButton.setVisibility(View.INVISIBLE);
+                sleepButton.setVisibility(View.INVISIBLE);
+                napButton.setVisibility(View.VISIBLE);
+                listenButton.setVisibility((View.VISIBLE));
+                talkButton.setVisibility(View.VISIBLE);
+                attendButton.setVisibility(View.INVISIBLE);
+                skipButton.setVisibility(View.INVISIBLE);
+                break;
 
-        quickStudyAction = new Action("Quick Study", -1, 1, 1);
-        Button quickStudyButton = findViewById(R.id.quickStudyButton);
-        quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
+            case LOW_ENERGY:
+                marathonButton.setVisibility(View.INVISIBLE);
+                studyButton.setVisibility(View.INVISIBLE);
+                quickStudyButton.setVisibility(View.INVISIBLE);
+                hibernateButton.setVisibility(View.VISIBLE);
+                sleepButton.setVisibility(View.VISIBLE);
+                napButton.setVisibility(View.VISIBLE);
+                listenButton.setVisibility((View.INVISIBLE));
+                talkButton.setVisibility(View.INVISIBLE);
+                attendButton.setVisibility(View.INVISIBLE);
+                skipButton.setVisibility(View.INVISIBLE);
+                break;
 
-        //=============== REST ACTIONS ==============
+            case FREE_TIME:
+                marathonButton.setVisibility(View.VISIBLE);
+                studyButton.setVisibility(View.VISIBLE);
+                quickStudyButton.setVisibility(View.VISIBLE);
+                hibernateButton.setVisibility(View.VISIBLE);
+                sleepButton.setVisibility(View.VISIBLE);
+                napButton.setVisibility(View.VISIBLE);
+                listenButton.setVisibility((View.INVISIBLE));
+                talkButton.setVisibility(View.INVISIBLE);
+                attendButton.setVisibility(View.INVISIBLE);
+                skipButton.setVisibility(View.INVISIBLE);
+                break;
 
-
-        sleepAction = new Action("Sleep", 5, 5, 1);
-        Button sleepButton = findViewById(R.id.sleepButton);
-        sleepButton.setOnClickListener(view -> doAction(sleepAction));
-
-        napAction = new Action("Nap", 1, 1, 1);
-        Button napButton = findViewById(R.id.napButton);
-        napButton.setOnClickListener(view -> doAction(napAction));
+            case HAS_CLASS:
+                marathonButton.setVisibility(View.VISIBLE);
+                studyButton.setVisibility(View.VISIBLE);
+                quickStudyButton.setVisibility(View.VISIBLE);
+                hibernateButton.setVisibility(View.VISIBLE);
+                sleepButton.setVisibility(View.VISIBLE);
+                napButton.setVisibility(View.VISIBLE);
+                listenButton.setVisibility((View.INVISIBLE));
+                talkButton.setVisibility(View.INVISIBLE);
+                attendButton.setVisibility(View.VISIBLE);
+                skipButton.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     private void doAction(Action action) {
