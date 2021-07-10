@@ -23,4 +23,8 @@ public class Main {
     public static void openDBAccess() {
         DatabaseServices.openDatabaseAccess(databaseName);
     }
+
+    public static boolean checkPreviousData() {
+        return DatabaseServices.checkPreviousData();
+    }
 }

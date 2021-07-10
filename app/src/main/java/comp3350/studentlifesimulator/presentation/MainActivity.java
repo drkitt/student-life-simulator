@@ -33,9 +33,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchActivity() {
-        Intent coursesActivity = new Intent(this, CoursesActivity.class);
+        Intent nextActivity;
 
-        startActivity(coursesActivity);
+        if (Main.checkPreviousData()) {
+            nextActivity = new Intent(this, ApartmentActivity.class);
+        }
+        else {
+            nextActivity = new Intent(this, CoursesActivity.class);
+        }
+
+        startActivity(nextActivity);
     }
 
     private void copyDatabaseToDevice() {
