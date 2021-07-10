@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
@@ -162,8 +164,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         return deleted;
     }
 
-    public ArrayList<Action> getActions(int key) {
-        ArrayList<Action> actions = new ArrayList<>();
+    public Dictionary<String, Action> getActions(int key) {
+        Dictionary<String, Action> actions = new Hashtable<>();
         String actionName;
         int energyUnit;
         int timeUnit;
@@ -178,7 +180,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 energyUnit = results.getInt("ENERGYUNIT");
                 timeUnit = results.getInt("TIMEUNIT");
                 score = results.getInt("SCORE");
-                actions.add(new Action(actionName, energyUnit, timeUnit, score));
+                actions.put(actionName, new Action(actionName, energyUnit, timeUnit, score));
             }
         }
         catch (Exception e) {

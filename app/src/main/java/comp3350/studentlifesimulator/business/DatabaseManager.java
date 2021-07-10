@@ -8,6 +8,7 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class DatabaseManager {
     private static DatabaseAccessInterface database;
@@ -40,7 +41,7 @@ public class DatabaseManager {
         return database.getSelectedCourses();
     }
 
-    public static ArrayList<Action> getActions(int key) {
+    public static Dictionary<String, Action> getActions(int key) {
         return database.getActions(key);
     }
 

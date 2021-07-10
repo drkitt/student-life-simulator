@@ -11,10 +11,9 @@ import android.widget.Toast;
 
 import com.example.studentlifesimulator.R;
 
-import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.Locale;
 
-import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
@@ -71,7 +70,7 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentEnergy();
     }
 
-    private void setActionButtons(ActionStates curState, ArrayList<Action> actionList){
+    private void setActionButtons(ActionStates curState, Dictionary<String, Action> actionList){
         Action marathonAction, studyAction, quickStudyAction;
         Action hibernateAction, sleepAction, napAction;
         Action listenAction, talkAction;
@@ -84,7 +83,7 @@ public class ApartmentActivity extends AppCompatActivity {
 //                for (int i=0; i<actionList.size(); i++){
 //                    System.out.println(actionList.get(i).getActionName());
 //                }
-                napAction = actionList.get(0);
+                napAction = actionList.get("Nap");
                 napButton.setOnClickListener(view -> doAction(napAction));
 
                 break;
@@ -93,10 +92,10 @@ public class ApartmentActivity extends AppCompatActivity {
 //                for (int i=0; i<actionList.size(); i++){
 //                    System.out.println(actionList.get(i).getActionName());
 //                }
-                listenAction = actionList.get(0);
-                napAction = actionList.get(1);
-                quickStudyAction = actionList.get(2);
-                talkAction = actionList.get(3);
+                listenAction = actionList.get("Listen to Instructor");
+                napAction = actionList.get("Nap");
+                quickStudyAction = actionList.get("Quick Study");
+                talkAction = actionList.get("Talk with Friends");
                 napButton.setOnClickListener(view -> doAction(napAction));
                 quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
                 listenButton.setOnClickListener(view -> doAction((listenAction)));
@@ -107,9 +106,9 @@ public class ApartmentActivity extends AppCompatActivity {
 //                for (int i=0; i<actionList.size(); i++){
 //                    System.out.println(actionList.get(i).getActionName());
 //                }
-                hibernateAction = actionList.get(0);
-                napAction = actionList.get(1);
-                sleepAction = actionList.get(2);
+                hibernateAction = actionList.get("Hibernate");
+                napAction = actionList.get("Nap");
+                sleepAction = actionList.get("Sleep");
                 hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
                 sleepButton.setOnClickListener(view -> doAction(sleepAction));
                 napButton.setOnClickListener(view -> doAction(napAction));
@@ -119,12 +118,12 @@ public class ApartmentActivity extends AppCompatActivity {
 //                for (int i=0; i<actionList.size(); i++){
 //                    System.out.println(actionList.get(i).getActionName());
 //                }
-                hibernateAction = actionList.get(0);
-                marathonAction = actionList.get(1);
-                napAction = actionList.get(2);
-                quickStudyAction = actionList.get(3);
-                sleepAction = actionList.get(4);
-                studyAction = actionList.get(5);
+                hibernateAction = actionList.get("Hibernate");
+                marathonAction = actionList.get("Marathon Study");
+                napAction = actionList.get("Nap");
+                quickStudyAction = actionList.get("Quick Study");
+                sleepAction = actionList.get("Sleep");
+                studyAction = actionList.get("Study");
 
                 marathonButton.setOnClickListener(view -> doAction(marathonAction));
                 studyButton.setOnClickListener((view -> doAction(studyAction)));
@@ -135,12 +134,12 @@ public class ApartmentActivity extends AppCompatActivity {
                 break;
 
             case HAS_CLASS:
-                hibernateAction = actionList.get(0);
-                marathonAction = actionList.get(1);
-                napAction = actionList.get(2);
-                quickStudyAction = actionList.get(3);
-                sleepAction = actionList.get(4);
-                studyAction = actionList.get(5);
+                hibernateAction = actionList.get("Hibernate");
+                marathonAction = actionList.get("Marathon Study");
+                napAction = actionList.get("Nap");
+                quickStudyAction = actionList.get("Quick Study");
+                sleepAction = actionList.get("Sleep");
+                studyAction = actionList.get("Study");
 
                 marathonButton.setOnClickListener(view -> doAction(marathonAction));
                 studyButton.setOnClickListener((view -> doAction(studyAction)));

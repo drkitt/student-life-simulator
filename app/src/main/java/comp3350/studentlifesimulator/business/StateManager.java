@@ -1,6 +1,7 @@
 package comp3350.studentlifesimulator.business;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.ActionStates;
@@ -15,15 +16,14 @@ public class StateManager {
     private static boolean inClass;
     private static ArrayList<Course> studentCourses;
     private static Student currentStudent;
-    private static ArrayList<Action> inClassLow;
-    private static ArrayList<Action> inClassHigh;
-    private static ArrayList<Action> lowEnergy;
-    private static ArrayList<Action> freeTime;
+    private static Dictionary<String, Action> inClassLow;
+    private static Dictionary<String, Action> inClassHigh;
+    private static Dictionary<String, Action> lowEnergy;
+    private static Dictionary<String, Action> freeTime;
 
     public static void initialize() {
         inClass = false;
         clock = DatabaseManager.getTime();
-        System.out.println("TIME: "+clock.getCurrentTime());
         studentCourses =  DatabaseManager.getSelectedCourses();
         currentStudent = DatabaseManager.getStudent();
         inClassLow = DatabaseManager.getActions(0);
@@ -64,8 +64,8 @@ public class StateManager {
         return state;
     }
 
-    public static ArrayList<Action> getCurrentPossibleActions(ActionStates currState){
-        ArrayList<Action> possibleEvent = null;
+    public static Dictionary<String, Action> getCurrentPossibleActions(ActionStates currState){
+        Dictionary<String, Action> possibleEvent = null;
 
         if (currState == ActionStates.IN_CLASS_LOW) {
             possibleEvent = inClassLow;
