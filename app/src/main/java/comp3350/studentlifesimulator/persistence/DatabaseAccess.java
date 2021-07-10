@@ -57,6 +57,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         Student student = null;
         String studentName;
         int currEnergy;
+        int score;
 
         try {
             command = "SELECT * FROM STUDENTS";
@@ -65,7 +66,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             if(results.next()) {
                 studentName = results.getString("STUDENTNAME");
                 currEnergy = results.getInt("CURRENTENERGY");
-                student = new Student(studentName, new EnergyBar(currEnergy));
+                score = results.getInt("STUDENTSCORE");
+                student = new Student(studentName, new EnergyBar(currEnergy), score);
             }
         }
         catch (Exception e) {
@@ -78,7 +80,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public void updateStudent(Student newStudent) {
         try {
             command = "UPDATE STUDENTS SET STUDENTNAME = '" + newStudent.getStudentName() +
-                    "', CURRENTENERGY = " + newStudent.getCurrentEnergy() + " WHERE STUDENTID = 0";
+                    "', CURRENTENERGY = " + newStudent.getCurrentEnergy() + ", STUDENTSCORE = " +
+                    newStudent.getScore() + " WHERE STUDENTID = 0";
             statement1.executeUpdate(command);
         }
         catch (Exception e) {

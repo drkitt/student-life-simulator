@@ -11,6 +11,7 @@ public class StudentPerformingActions {
         if (canDoAction) {
             student.doAction(action);
             time.addToTime(action.getTimeUnit());
+            student.addToScore(action.getPointsUnit());
         }
 
         return canDoAction;

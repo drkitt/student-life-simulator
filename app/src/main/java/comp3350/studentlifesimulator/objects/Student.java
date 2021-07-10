@@ -5,10 +5,10 @@ public class Student {
     private EnergyBar energyBar;
     private int score;
 
-    public Student(String newStudentName, EnergyBar energy) {
+    public Student(String newStudentName, EnergyBar energy, int currScore) {
         studentName = newStudentName;
         energyBar = energy;
-        score = 0;
+        score = currScore;
     }
 
     public static int getMaxEnergy() {
@@ -25,6 +25,10 @@ public class Student {
 
     public int getScore() {
         return score;
+    }
+
+    public void addToScore(int points) {
+        score += points;
     }
 
     public boolean canDoAction(Action toDo) {

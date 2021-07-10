@@ -29,7 +29,8 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public void updateStudent(Student newStudent) {
-        student = new Student(newStudent.getStudentName(), new EnergyBar(newStudent.getCurrentEnergy()));
+        student = new Student(newStudent.getStudentName(),
+                new EnergyBar(newStudent.getCurrentEnergy()), newStudent.getScore());
     }
 
     public void addSelectedCourse(Course course) {
@@ -59,7 +60,8 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public Student getStudent() {
-        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()));
+        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()),
+                student.getScore());
     }
 
     public ArrayList<Course> getCourses() {
@@ -72,11 +74,20 @@ public class StubDatabase implements DatabaseAccessInterface {
 
 
     public ArrayList<Action> getActions(int key) {
-        return actions[key];
+        ArrayList<Action> actionList = new ArrayList<>();
+
+        for (int i = 0; i < actions[key].size(); i++) {
+            actionList.add(new Action(actions[key].get(i).getActionName(),
+                    actions[key].get(i).getEnergyUnit(), actions[key].get(i).getTimeUnit(),
+                    actions[key].get(i).getPointsUnit()));
+        }
+
+        return actionList;
     }
 
     public Time getTime() {
-        return time;
+        return new Time(time.getCurrentTime() + (time.getTimePerDay() * time.getDays()),
+                time.getTimePerDay());
     }
 
     public void updateTime(Time newTime) {
@@ -99,7 +110,7 @@ public class StubDatabase implements DatabaseAccessInterface {
         Course course;
         Action action;
 
-        student = new Student("Anne Otherstudent", new EnergyBar(12));
+        student = new Student("Anne Otherstudent", new EnergyBar(12), 0);
 
         time = new Time(0, 96);
 

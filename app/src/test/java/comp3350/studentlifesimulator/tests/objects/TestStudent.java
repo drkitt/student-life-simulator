@@ -12,12 +12,12 @@ public class TestStudent extends TestCase {
     public TestStudent(String arg0) { super(arg0); }
 
     public void testStudentCredentials() {
-        Student player = new Student("John Smithson", new EnergyBar((Student.getMaxEnergy())));
+        Student player = new Student("John Smithson", new EnergyBar((Student.getMaxEnergy())), 0);
         assertEquals("John Smithson", player.getStudentName());
     }
 
     public void testDoAction() {
-        Student student = new Student("Son Johnsmith", new EnergyBar(Student.getMaxEnergy()));
+        Student student = new Student("Son Johnsmith", new EnergyBar(Student.getMaxEnergy()), 0);
       
         Action possibleAction = new Action("Action that takes less than the student's total energy", -5, 1, 0);
         student.doAction(possibleAction);
