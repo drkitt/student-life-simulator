@@ -64,7 +64,7 @@ public class ApartmentActivity extends AppCompatActivity {
         attendButton = findViewById(R.id.attendButton);
         skipButton = findViewById(R.id.skipClassButton);
 
-        setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
+        setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
         displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();
@@ -133,7 +133,7 @@ public class ApartmentActivity extends AppCompatActivity {
                 napButton.setOnClickListener(view -> doAction(napAction));
                 break;
 
-            case HAS_CLASS:
+            case HAS_CLASS:/*
                 hibernateAction = actionList.get("Hibernate");
                 marathonAction = actionList.get("Marathon Study");
                 napAction = actionList.get("Nap");
@@ -146,26 +146,28 @@ public class ApartmentActivity extends AppCompatActivity {
                 quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));
                 hibernateButton.setOnClickListener(view -> doAction(hibernateAction));
                 sleepButton.setOnClickListener(view -> doAction(sleepAction));
-                napButton.setOnClickListener(view -> doAction(napAction));
+                napButton.setOnClickListener(view -> doAction(napAction));*/
                 attendButton.setOnClickListener(view -> {
-                    StateManager.setInClass(true);
+                    StateManager.switchInClass();
                     //Expected result is IN_CLASS_HIGH
-                    System.out.println("RESULT:"+StateManager.getState());
-                    setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
+                    System.out.println("RESULT:" + StateManager.getState());
+                    setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
                     displayActions(StateManager.getState());
+                    System.out.println("RESULT:" + StateManager.getState());
                 });
                 skipButton.setOnClickListener(view -> {
-                    StateManager.setInClass(false);
+                    StateManager.switchSkipped();
                     //Expected result is FREE TIME
-                    System.out.println("RESULT:"+StateManager.getState());
-                    setActionButtons(StateManager.getState(),StateManager.getCurrentPossibleActions(StateManager.getState()));
+                    System.out.println("RESULT:" + StateManager.getState());
+                    setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
                     displayActions(StateManager.getState());
+                    System.out.println("RESULT:" + StateManager.getState());
                 });
                 break;
         }
     }
 
-    private void displayActions(ActionStates curState){
+    private void displayActions(ActionStates curState) {
         switch (curState){
             case IN_CLASS_LOW:
                 marathonButton.setVisibility(View.INVISIBLE);
@@ -220,12 +222,12 @@ public class ApartmentActivity extends AppCompatActivity {
                 break;
 
             case HAS_CLASS:
-                marathonButton.setVisibility(View.VISIBLE);
-                studyButton.setVisibility(View.VISIBLE);
-                quickStudyButton.setVisibility(View.VISIBLE);
-                hibernateButton.setVisibility(View.VISIBLE);
-                sleepButton.setVisibility(View.VISIBLE);
-                napButton.setVisibility(View.VISIBLE);
+                marathonButton.setVisibility(View.INVISIBLE);
+                studyButton.setVisibility(View.INVISIBLE);
+                quickStudyButton.setVisibility(View.INVISIBLE);
+                hibernateButton.setVisibility(View.INVISIBLE);
+                sleepButton.setVisibility(View.INVISIBLE);
+                napButton.setVisibility(View.INVISIBLE);
                 listenButton.setVisibility((View.INVISIBLE));
                 talkButton.setVisibility(View.INVISIBLE);
                 attendButton.setVisibility(View.VISIBLE);
@@ -241,8 +243,17 @@ public class ApartmentActivity extends AppCompatActivity {
             Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
         }
 
+        if (StateManager.getInClass()) {
+            StateManager.switchInClass();
+        }
+        else if (StateManager.getSkipped()) {
+            StateManager.switchSkipped();
+        }
+
         displayCurrentTime();
         displayCurrentEnergy();
+        setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
+        displayActions(StateManager.getState());
     }
 
     private void displayCurrentTime() {

@@ -14,6 +14,7 @@ public class StateManager {
 
     private static Time clock;
     private static boolean inClass;
+    private static boolean skipped;
     private static ArrayList<Course> studentCourses;
     private static Student currentStudent;
     private static Dictionary<String, Action> inClassLow;
@@ -23,6 +24,7 @@ public class StateManager {
 
     public static void initialize() {
         inClass = false;
+        skipped = false;
         clock = DatabaseManager.getTime();
         studentCourses =  DatabaseManager.getSelectedCourses();
         currentStudent = DatabaseManager.getStudent();
@@ -43,16 +45,24 @@ public class StateManager {
     public static ActionStates getState() {
         ActionStates state;
 
-        if (hasClass() && currentStudent.getCurrentEnergy() > calculatePercentage(10, EnergyBar.getMaxEnergy())) {
-            state = ActionStates.HAS_CLASS;
-        }
-        else if (inClass) {
+        if (inClass) {
             if (currentStudent.getCurrentEnergy() > calculatePercentage(5, EnergyBar.getMaxEnergy())) {
                 state = ActionStates.IN_CLASS_HIGH;
             }
-            else{
+            else {
                state = ActionStates.IN_CLASS_LOW;
             }
+        }
+        else if (skipped) {
+            if (currentStudent.getCurrentEnergy() <= calculatePercentage(15, EnergyBar.getMaxEnergy())) {
+                state = ActionStates.LOW_ENERGY;
+            }
+            else {
+                state = ActionStates.FREE_TIME;
+            }
+        }
+        else if (hasClass()) {
+            state = ActionStates.HAS_CLASS;
         }
         else if (currentStudent.getCurrentEnergy() <= calculatePercentage(15, EnergyBar.getMaxEnergy())) {
             state = ActionStates.LOW_ENERGY;
@@ -83,8 +93,20 @@ public class StateManager {
         return possibleEvent;
     }
 
-    public static void setInClass(boolean classTime) {
-        inClass = classTime;
+    public static boolean getInClass() {
+        return inClass;
+    }
+
+    public static void switchInClass() {
+        inClass = !inClass;
+    }
+
+    public static boolean getSkipped() {
+        return skipped;
+    }
+
+    public static void switchSkipped() {
+        skipped = !skipped;
     }
 
     private static boolean hasClass() {
