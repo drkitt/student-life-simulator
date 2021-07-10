@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.studentlifesimulator.R;
@@ -20,7 +21,7 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     }
 
     private void onTabClick() {
-        ConstraintLayout example = findViewById(R.id.daConstraintLayout);
-        example.setVisibility(ConstraintLayout.INVISIBLE);
+        Button example = findViewById(R.id.startButton);
+        example.setVisibility(Button.INVISIBLE);
     }
 }

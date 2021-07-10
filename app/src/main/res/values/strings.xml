@@ -6,7 +6,9 @@
     <string name="student_desc">The student</string>
     <string name="register_btn">REGISTER</string>
     <string name="new_game_btn">New Game</string>
+    <string name="start_game_btn">Start Game</string>
     <string name="menu_desc">Select courses to be enrolled in</string>
+    <string name="character_customization_desc">Customize your character</string>
 
     <string name="placeholder_btn_desc">Non-functional button for refining the layout</string>
 
