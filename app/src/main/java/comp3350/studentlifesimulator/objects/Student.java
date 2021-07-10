@@ -1,34 +1,21 @@
 package comp3350.studentlifesimulator.objects;
 
 public class Student {
-    private static final int MAX_ENERGY = 10;
-    private String studentID;
     private String studentName;
     private EnergyBar energyBar;
+    private int score;
 
-    public Student(String newStudentName) {
-        studentID = null;
+    public Student(String newStudentName, EnergyBar energy, int currScore) {
         studentName = newStudentName;
-        energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
-    }
-
-    public Student(String newStudentID,String newStudentName) {
-        studentID = newStudentID;
-        studentName = newStudentName;
-        energyBar = new EnergyBar(MAX_ENERGY, MAX_ENERGY);
+        energyBar = energy;
+        score = currScore;
     }
 
     public static int getMaxEnergy() {
-        return (MAX_ENERGY);
+        return (EnergyBar.getMaxEnergy());
     }
 
-    public String getStudentID()
-    {
-        return (studentID);
-    }
-
-    public String getStudentName()
-    {
+    public String getStudentName() {
         return (studentName);
     }
 
@@ -36,11 +23,20 @@ public class Student {
         return energyBar.getCurrentEnergy();
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void addToScore(int points) {
+        score += points;
+    }
+
     public boolean canDoAction(Action toDo) {
-        return energyBar.canAdjustEnergy(-toDo.getEnergyUnit());    // TODO: Read the other todo
+        return energyBar.canAdjustEnergy(toDo.getEnergyUnit());
     }
 
     public void doAction(Action toDo) {
-        energyBar.adjustEnergy(-toDo.getEnergyUnit());  // TODO: Remove the negation once actions with negative energy values are formally allowed
+        energyBar.adjustEnergy(toDo.getEnergyUnit());
+        score += toDo.getPointsUnit();
     }
 }

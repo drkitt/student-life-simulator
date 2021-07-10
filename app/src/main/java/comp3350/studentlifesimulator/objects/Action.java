@@ -4,27 +4,27 @@ public class Action {
     private String actionName;
     private int energyUnit;
     private int timeUnit;
+    private int pointsUnit;
 
-    // Units default to 1
     public Action(String newAction) {
         actionName = newAction;
         energyUnit = 1;
         timeUnit = 1;
+        pointsUnit = 1;
     }
 
-    // Values must stay within ENERGY-BAR and TIME limits
-    public Action(String newAction, int newEnergy, int newTime) {
+    public Action(String newAction, int newEnergy, int newTime, int newPoints) {
         if (newEnergy < -Student.getMaxEnergy() || newEnergy == 0 || newEnergy > Student.getMaxEnergy()) {
             throw new IllegalArgumentException("Actions must have an energy value within the energy bar limits.");
         }
-
-        if (newTime < 1) { // Every action must have a positive non-zero time value
+        if (newTime < 1) {
             throw new IllegalArgumentException("Actions must have a time value within the global time limits.");
         }
 
         actionName = newAction;
         energyUnit = newEnergy;
         timeUnit = newTime;
+        pointsUnit = newPoints;
     }
 
     public String getActionName() {
@@ -37,5 +37,9 @@ public class Action {
 
     public int getTimeUnit() {
         return timeUnit;
+    }
+
+    public int getPointsUnit() {
+        return pointsUnit;
     }
 }
