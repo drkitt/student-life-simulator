@@ -74,7 +74,7 @@ public class StateManager {
         return state;
     }
 
-    public static Dictionary<String, Action> getCurrentPossibleActions(ActionStates currState){
+    public static Dictionary<String, Action> getCurrentPossibleActions(ActionStates currState) {
         Dictionary<String, Action> possibleEvent = null;
 
         if (currState == ActionStates.IN_CLASS_LOW) {
