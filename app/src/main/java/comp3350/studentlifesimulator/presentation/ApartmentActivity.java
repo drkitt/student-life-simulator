@@ -202,7 +202,7 @@ public class ApartmentActivity extends AppCompatActivity {
     private void doAction(Action action) {
         boolean result = studentPerformingActions.makeStudentPerformAction(student, action, time);
 
-        StateManager.dataWriteback();
+        StateManager.dataWriteBack();
 
         if (!result) {
             Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
