@@ -45,4 +45,11 @@
     <string name="shirt_green_btn_text">Button to give your character a green shirt</string>
     <string name="shirt_blue_btn_text">Button to give your character a blue shirt</string>
     <string name="shirt_purple_btn_text">Button to give your character a purple shirt</string>
+
+    <string name="shirt_desc">Your character\'s shirt</string>
+    <string name="skin_desc">Your character\'s skin colour</string>
+    <string name="hair_desc">Your character\'s hairstyle</string>
+    <string name="mouth_desc">Your character\'s mouth</string>
+    <string name="body_desc">Your character</string>
+    <string name="eyes_desc">Your character\'s eyes</string>
 </resources>
