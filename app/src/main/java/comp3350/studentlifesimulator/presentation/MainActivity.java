@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchActivity() {
-        Intent coursesActivity = new Intent(this, CoursesActivity.class);
+        // Making the new game button go to the character customization activity temporarily, for testing purposes
+//        Intent coursesActivity = new Intent(this, CoursesActivity.class);
+        Intent coursesActivity = new Intent(this, CharacterCustomizationActivity.class);
 
         startActivity(coursesActivity);
     }
