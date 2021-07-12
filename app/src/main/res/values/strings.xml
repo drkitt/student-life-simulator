@@ -13,8 +13,8 @@
     <string name="new_game_btn">Start</string>
     <string name="menu_desc">Select courses to be enrolled in</string>
     <string name="attend_btn">Attend</string>
-    <string name="listen_btn">listen</string>
-    <string name="talk_btn">Talk to Friends</string>
-    <string name="skip_class_btn">skip class</string>
+    <string name="listen_btn">Listen</string>
+    <string name="talk_btn">Gossip</string>
+    <string name="skip_class_btn">Skip Class</string>
 
 </resources>
