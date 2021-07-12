@@ -84,13 +84,13 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public Time getTime() {
-        return new Time(time.getCurrentTime() + (time.getTimePerDay() * time.getDays()),
-                time.getTimePerDay());
+        return new Time(time.getCurrentTime() + (time.getTimePerDay() *
+                (time.getDays() - 1)), time.getTimePerDay());
     }
 
     public void updateTime(Time newTime) {
         time = new Time(newTime.getCurrentTime() +
-                (newTime.getDays() * newTime.getTimePerDay()), newTime.getTimePerDay());
+                (newTime.getTimePerDay() * (newTime.getDays() - 1)), newTime.getTimePerDay());
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {

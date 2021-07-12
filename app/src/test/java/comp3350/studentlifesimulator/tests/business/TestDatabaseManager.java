@@ -8,6 +8,7 @@ import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
+import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.tests.persistence.StubDatabase;
@@ -38,6 +39,8 @@ public class TestDatabaseManager extends TestCase {
             assertEquals(courses.get(i).getCourseID(),
                     DatabaseManager.getSelectedCourses().get(i).getCourseID());
         }
+
+        DatabaseServices.closeDatabaseAccess();
     }
 
     public void testStandardSavingRoutine() {
@@ -62,13 +65,21 @@ public class TestDatabaseManager extends TestCase {
         assertEquals(30, DatabaseManager.getTime().getCurrentTime());
         assertEquals(200, DatabaseManager.getStudent().getScore());
         assertEquals(7, DatabaseManager.getStudent().getCurrentEnergy());
+
+        DatabaseServices.closeDatabaseAccess();
     }
 
     public void testUnexpectedDatabaseRoutines() {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
 
-        assertFalse(DatabaseManager.removeCourse(null));
+        assertFalse(DatabaseManager.removeCourse(new Course("", "")));
         assertEquals(0, DatabaseManager.getSelectedCourses().size());
+
+        DatabaseManager.updateStudent(new Student("", new EnergyBar(10),
+                -100));
+        assertEquals(-100, DatabaseManager.getStudent().getScore());
+
+        DatabaseServices.closeDatabaseAccess();
     }
 
     public void testInvalidDatabaseInteractions() {
@@ -94,5 +105,12 @@ public class TestDatabaseManager extends TestCase {
                 NullPointerException.class,
                 ()->DatabaseManager.addCourse(null)
         );
+        DatabaseManager.addCourse(new Course("TEMP", "DATA"));
+        assertThrows(
+                NullPointerException.class,
+                ()->DatabaseManager.removeCourse(null)
+        );
+
+        DatabaseServices.closeDatabaseAccess();
     }
 }
