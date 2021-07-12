@@ -81,10 +81,10 @@ public class ApartmentActivity extends AppCompatActivity {
                 break;
 
             case IN_CLASS_HIGH:
-                listenAction = actionList.get("Listen to Instructor");
+                listenAction = actionList.get("Listen");
                 napAction = actionList.get("Nap");
                 quickStudyAction = actionList.get("Quick Study");
-                talkAction = actionList.get("Talk with Friends");
+                talkAction = actionList.get("Gossip");
                 listenButton.setOnClickListener(view -> doAction((listenAction)));
                 napButton.setOnClickListener(view -> doAction(napAction));
                 quickStudyButton.setOnClickListener(view -> doAction(quickStudyAction));

@@ -88,7 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="15dp"
-            android:text="@string/skip_class_btn" />
+            android:text="@string/skip_class_btn"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
@@ -117,7 +118,7 @@
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="15dp"
             android:text="@string/talk_btn"
-            android:visibility="invisible" />
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
