@@ -25,7 +25,6 @@ import comp3350.studentlifesimulator.objects.ActionStates;
 public class ApartmentActivity extends AppCompatActivity {
     private Time time;
     private Student student;
-    private StudentPerformingActions studentPerformingActions;
     private static final int MINUTES_PER_TIME_UNIT = 15;
 
     private Button marathonButton;
@@ -47,7 +46,6 @@ public class ApartmentActivity extends AppCompatActivity {
         StateManager.initialize();
         time = StateManager.getTime();
         student = StateManager.getCurrentStudent();
-        studentPerformingActions = new StudentPerformingActions();
 
         ProgressBar energyBar = findViewById(R.id.energyBar);
         energyBar.setMax(Student.getMaxEnergy());
@@ -200,7 +198,7 @@ public class ApartmentActivity extends AppCompatActivity {
     }
 
     private void doAction(Action action) {
-        boolean result = studentPerformingActions.makeStudentPerformAction(student, action, time);
+        boolean result = StudentPerformingActions.makeStudentPerformAction(student, action, time);
 
         if (!result) {
             Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
