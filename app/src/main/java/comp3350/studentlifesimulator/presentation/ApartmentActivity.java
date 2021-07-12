@@ -14,6 +14,8 @@ import com.example.studentlifesimulator.R;
 import java.util.Dictionary;
 import java.util.Locale;
 
+import comp3350.studentlifesimulator.application.DatabaseServices;
+import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
@@ -67,6 +69,21 @@ public class ApartmentActivity extends AppCompatActivity {
         displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        StateManager.dataWriteBack();
+        Main.closeDBAccess();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Main.openDBAccess();
     }
 
     private void setActionButtons(ActionStates curState, Dictionary<String, Action> actionList) {
@@ -201,8 +218,6 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private void doAction(Action action) {
         boolean result = studentPerformingActions.makeStudentPerformAction(student, action, time);
-
-        StateManager.dataWriteBack();
 
         if (!result) {
             Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
