@@ -69,6 +69,7 @@ public class ApartmentActivity extends AppCompatActivity {
         displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();
+        displayCurrentScore();
     }
 
     @Override
@@ -232,6 +233,7 @@ public class ApartmentActivity extends AppCompatActivity {
 
         displayCurrentTime();
         displayCurrentEnergy();
+        displayCurrentScore();
         setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
         displayActions(StateManager.getState());
     }
@@ -258,6 +260,16 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private void displayCurrentEnergy() {
         ProgressBar energyBar = findViewById(R.id.energyBar);
+
         energyBar.setProgress(student.getCurrentEnergy());
+    }
+
+    private void displayCurrentScore() {
+        TextView scoreView = findViewById(R.id.scoreDisplay);
+        int score = student.getScore();
+        String displayedScore = String.format(Locale.getDefault(),
+                "Score: %d", score);
+
+        scoreView.setText(displayedScore);
     }
 }
