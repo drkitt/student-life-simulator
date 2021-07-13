@@ -118,9 +118,7 @@ public class StateManager {
         boolean classTime = false;
 
         for (int i = 0; i < studentCourses.size() && !classTime; i++) {
-            if (clock.getCurrentTime() == 32 + (i * 4)) {
-                classTime = true;
-            }
+            classTime = clock.getCurrentTime() == 32 + (i * 4);
         }
 
         return classTime;
