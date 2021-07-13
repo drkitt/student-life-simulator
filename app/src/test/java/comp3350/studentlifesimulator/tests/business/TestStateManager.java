@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.business.StateManager;
+import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.ActionStates;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
@@ -79,12 +80,52 @@ public class TestStateManager  extends TestCase{
         DatabaseServices.closeDatabaseAccess();
     }
 
-    public void testEdgeCase(){
+    public void testEdgeCase() {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
         DatabaseManager.updateTime(new Time(32 , 96));
         StateManager.initialize();
         assertEquals(ActionStates.FREE_TIME , StateManager.getState());
         DatabaseServices.closeDatabaseAccess();
+    }
+
+    public void testStateChange() {
+        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseManager.updateStudent(new Student("Test Student" , new EnergyBar(EnergyBar.getMaxEnergy()) , 1));
+        DatabaseManager.updateTime(new Time(28 , 96));
+        DatabaseManager.addCourse(new Course("COMP3350" , "Software Engineering"));
+        DatabaseManager.addCourse(new Course("COMP1010" , "Introduction to Programming 1"));
+        DatabaseManager.addCourse(new Course("COMP1020" , "Introduction to Programming 2"));
+        StateManager.initialize();
+        assertEquals(ActionStates.FREE_TIME , StateManager.getState());
+        StateManager.getTime().addToTime(4);
+        assertEquals(ActionStates.HAS_CLASS , StateManager.getState());
+        StateManager.switchSkipped();
+        assertEquals(ActionStates.FREE_TIME , StateManager.getState());
+        StateManager.getCurrentStudent().doAction(
+                StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Marathon Study")
+        );
+        StateManager.getCurrentStudent().doAction(
+                StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Study")
+        );
+        StateManager.getCurrentStudent().doAction(
+                StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Quick Study")
+        );
+        StateManager.getCurrentStudent().doAction(
+                StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_HIGH).get("Listen to Instructor")
+        );
+        assertEquals(ActionStates.LOW_ENERGY , StateManager.getState());
+        StateManager.getCurrentStudent().doAction(
+                StateManager.getCurrentPossibleActions(ActionStates.LOW_ENERGY).get("Hibernate")
+        );
+        StateManager.switchSkipped();
+
+        StateManager.getTime().addToTime(4);
+        assertEquals(ActionStates.HAS_CLASS , StateManager.getState());
+        StateManager.switchInClass();
+        assertEquals(ActionStates.IN_CLASS_HIGH , StateManager.getState());
+        StateManager.switchInClass();
+        StateManager.getTime().addToTime(1);
+        assertEquals(ActionStates.FREE_TIME , StateManager.getState());
     }
 
 }
