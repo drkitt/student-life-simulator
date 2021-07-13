@@ -141,13 +141,13 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         actions[1] = new Hashtable<>();
 
-        action = new Action("Nap", 1, 4, 2);
+        action = new Action("Nap", 1, 4, -2);
         actions[1].put(action.getActionName(), action);
-        action = new Action("Quick Study", -1, 4, 5);
+        action = new Action("Quick Study", -1, 4, 0);
         actions[1].put(action.getActionName(), action);
         action = new Action("Listen to Instructor", -2, 4, 6);
         actions[1].put(action.getActionName(), action);
-        action = new Action("Talk with Friends", -1, 4, 3);
+        action = new Action("Talk with Friends", -1, 4, -3);
         actions[1].put(action.getActionName(), action);
 
         actions[2] = new Hashtable<>();

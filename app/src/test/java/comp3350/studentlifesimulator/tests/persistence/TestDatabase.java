@@ -91,7 +91,7 @@ public class TestDatabase extends TestCase {
         assertEquals("Quick Study", db.getActions(1).get("Quick Study").getActionName());
         assertEquals(-1, db.getActions(1).get("Quick Study").getEnergyUnit());
         assertEquals(4, db.getActions(1).get("Quick Study").getTimeUnit());
-        assertEquals(5, db.getActions(1).get("Quick Study").getPointsUnit());
+        assertEquals(0, db.getActions(1).get("Quick Study").getPointsUnit());
 
         assertEquals(3, db.getActions(2).size());
         assertEquals("Hibernate", db.getActions(2).get("Hibernate").getActionName());
