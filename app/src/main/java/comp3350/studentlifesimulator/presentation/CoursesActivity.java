@@ -45,11 +45,17 @@ public class CoursesActivity extends AppCompatActivity {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
         int numOfCoursesSelected = 0;
 
-
         for (int index = 0; index < courseArray.size(); index++) {
             if (courseList.isItemChecked(index)) {
                 numOfCoursesSelected++;
-                DatabaseManager.addCourse(courseArray.get(index));
+            }
+        }
+
+        if (numOfCoursesSelected <= 4) {
+            for (int index = 0; index < courseArray.size(); index++) {
+                if (courseList.isItemChecked(index)) {
+                    DatabaseManager.addCourse(courseArray.get(index));
+                }
             }
         }
 
