@@ -8,13 +8,15 @@ import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class StubDatabase implements DatabaseAccessInterface {
     private Student student;
     private Time time;
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
-    private ArrayList<Action>[] actions;
+    private Dictionary<String, Action>[] actions;
 
     public void openDB(String databasePath) {
         initializeData();
@@ -29,7 +31,8 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public void updateStudent(Student newStudent) {
-        student = new Student(newStudent.getStudentName(), new EnergyBar(newStudent.getCurrentEnergy()));
+        student = new Student(newStudent.getStudentName(),
+                new EnergyBar(newStudent.getCurrentEnergy()), newStudent.getScore());
     }
 
     public void addSelectedCourse(Course course) {
@@ -41,25 +44,26 @@ public class StubDatabase implements DatabaseAccessInterface {
         int count = 0;
         boolean removed = false;
 
-        while (count < courses.size()) {
-            if (courses.get(count).equals(course)) {
+        while (count < selected.size()) {
+            if (selected.get(count).equals(course)) {
                 index = count;
                 removed = true;
-                count = courses.size();
+                count = selected.size();
             }
 
             count++;
         }
 
         if (removed) {
-            courses.remove(index);
+            selected.remove(index);
         }
 
         return removed;
     }
 
     public Student getStudent() {
-        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()));
+        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()),
+                student.getScore());
     }
 
     public ArrayList<Course> getCourses() {
@@ -71,17 +75,22 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
 
-    public ArrayList<Action> getActions(int key) {
-        return actions[key];
+    public Dictionary<String, Action> getActions(int key) {
+        Dictionary<String, Action> actionList = actions[key];
+
+        initializeActions();
+
+        return actionList;
     }
 
     public Time getTime() {
-        return time;
+        return new Time(time.getCurrentTime() + (time.getTimePerDay() *
+                (time.getDays() - 1)), time.getTimePerDay());
     }
 
     public void updateTime(Time newTime) {
         time = new Time(newTime.getCurrentTime() +
-                (newTime.getDays() * newTime.getTimePerDay()), newTime.getTimePerDay());
+                (newTime.getTimePerDay() * (newTime.getDays() - 1)), newTime.getTimePerDay());
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
@@ -97,11 +106,10 @@ public class StubDatabase implements DatabaseAccessInterface {
 
     private void initializeData() {
         Course course;
-        Action action;
 
-        student = new Student("Anne Otherstudent", new EnergyBar(10/*12*/));
+        student = new Student("Anne Otherstudent", new EnergyBar(12), 0);
 
-        time = new Time(0, 96);
+        time = new Time(24, 96);
 
         courses = new ArrayList<>();
 
@@ -118,46 +126,52 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         selected = new ArrayList<>();
 
-        actions = new ArrayList[4];
+        initializeActions();
+    }
 
-        actions[0] = new ArrayList<>();
+    private void initializeActions() {
+        Action action;
 
-        action = new Action("Nap", 1, 4);
-        actions[0].add(action);
+        actions = new Hashtable[4];
 
-        actions[1] = new ArrayList<>();
+        actions[0] = new Hashtable<>();
 
-        action = new Action("Nap", 1, 4);
-        actions[1].add(action);
-        action = new Action("Quick Study", -1, 4);
-        actions[1].add(action);
-        action = new Action("Listen to Instructor", -2, 4);
-        actions[1].add(action);
-        action = new Action("Talk with Friends", -1, 4);
-        actions[1].add(action);
+        action = new Action("Nap", 1, 4, 2);
+        actions[0].put(action.getActionName(), action);
 
-        actions[2] = new ArrayList<>();
+        actions[1] = new Hashtable<>();
 
-        action = new Action("Hibernate", 10/*12*/, 48);
-        actions[2].add(action);
-        action = new Action("Sleep", 5, 16);
-        actions[2].add(action);
-        action = new Action("Nap", 1, 4);
-        actions[2].add(action);
+        action = new Action("Nap", 1, 4, 2);
+        actions[1].put(action.getActionName(), action);
+        action = new Action("Quick Study", -1, 4, 5);
+        actions[1].put(action.getActionName(), action);
+        action = new Action("Listen to Instructor", -2, 4, 6);
+        actions[1].put(action.getActionName(), action);
+        action = new Action("Talk with Friends", -1, 4, 3);
+        actions[1].put(action.getActionName(), action);
 
-        actions[3] = new ArrayList<>();
+        actions[2] = new Hashtable<>();
 
-        action = new Action("Marathon Study", -6, 32);
-        actions[3].add(action);
-        action = new Action("Study", -3, 16);
-        actions[3].add(action);
-        action = new Action("Quick Study", -1, 4);
-        actions[3].add(action);
-        action = new Action("Hibernate", 10/*12*/, 48);
-        actions[3].add(action);
-        action = new Action("Sleep", 5, 16);
-        actions[3].add(action);
-        action = new Action("Nap", 1, 4);
-        actions[3].add(action);
+        action = new Action("Hibernate", 12, 48, 12);
+        actions[2].put(action.getActionName(), action);
+        action = new Action("Sleep", 5, 16, 6);
+        actions[2].put(action.getActionName(), action);
+        action = new Action("Nap", 1, 4, 2);
+        actions[2].put(action.getActionName(), action);
+
+        actions[3] = new Hashtable<>();
+
+        action = new Action("Marathon Study", -6, 32, 24);
+        actions[3].put(action.getActionName(), action);
+        action = new Action("Study", -3, 16, 18);
+        actions[3].put(action.getActionName(), action);
+        action = new Action("Quick Study", -1, 4, 5);
+        actions[3].put(action.getActionName(), action);
+        action = new Action("Hibernate", 12, 48, 12);
+        actions[3].put(action.getActionName(), action);
+        action = new Action("Sleep", 5, 16, 6);
+        actions[3].put(action.getActionName(), action);
+        action = new Action("Nap", 1, 4, 2);
+        actions[3].put(action.getActionName(), action);
     }
 }

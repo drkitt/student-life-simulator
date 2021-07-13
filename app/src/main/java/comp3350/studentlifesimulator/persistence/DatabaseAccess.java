@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
@@ -57,6 +59,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         Student student = null;
         String studentName;
         int currEnergy;
+        int score;
 
         try {
             command = "SELECT * FROM STUDENTS";
@@ -65,7 +68,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             if(results.next()) {
                 studentName = results.getString("STUDENTNAME");
                 currEnergy = results.getInt("CURRENTENERGY");
-                student = new Student(studentName, new EnergyBar(currEnergy));
+                score = results.getInt("STUDENTSCORE");
+                student = new Student(studentName, new EnergyBar(currEnergy), score);
             }
         }
         catch (Exception e) {
@@ -78,7 +82,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public void updateStudent(Student newStudent) {
         try {
             command = "UPDATE STUDENTS SET STUDENTNAME = '" + newStudent.getStudentName() +
-                    "', CURRENTENERGY = " + newStudent.getCurrentEnergy() + " WHERE STUDENTID = 0";
+                    "', CURRENTENERGY = " + newStudent.getCurrentEnergy() + ", STUDENTSCORE = " +
+                    newStudent.getScore() + " WHERE STUDENTID = 0";
             statement1.executeUpdate(command);
         }
         catch (Exception e) {
@@ -115,7 +120,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         String courseName;
 
         try {
-            command = "SELECT * FROM SELECEDCOURSES";
+            command = "SELECT * FROM SELECTEDCOURSES";
             results = statement3.executeQuery(command);
 
             courses = new ArrayList<>();
@@ -159,11 +164,12 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         return deleted;
     }
 
-    public ArrayList<Action> getActions(int key) {
-        ArrayList<Action> actions = new ArrayList<>();
+    public Dictionary<String, Action> getActions(int key) {
+        Dictionary<String, Action> actions = new Hashtable<>();
         String actionName;
         int energyUnit;
         int timeUnit;
+        int score;
 
         try {
             command = "SELECT * FROM ACTIONS WHERE VIEWID = " + key;
@@ -173,7 +179,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 actionName = results.getString("ACTIONNAME");
                 energyUnit = results.getInt("ENERGYUNIT");
                 timeUnit = results.getInt("TIMEUNIT");
-                actions.add(new Action(actionName, energyUnit, timeUnit ,0));
+                score = results.getInt("SCORE");
+                actions.put(actionName, new Action(actionName, energyUnit, timeUnit, score));
             }
         }
         catch (Exception e) {
@@ -197,7 +204,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 currentTime = results.getInt("CURRENTTIME");
                 timeInDay = results.getInt("TIMEINDAY");
                 days = results.getInt("DAYS");
-                time = new Time(currentTime + (timeInDay * days), timeInDay);
+                time = new Time(currentTime + (timeInDay * (days - 1)), timeInDay);
             }
         }
         catch (Exception e) {

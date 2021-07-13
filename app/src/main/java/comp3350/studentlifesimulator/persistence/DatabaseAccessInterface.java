@@ -1,6 +1,7 @@
 package comp3350.studentlifesimulator.persistence;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
@@ -24,7 +25,7 @@ public interface DatabaseAccessInterface {
 
     boolean removeSelectedCourse(Course course);
 
-    ArrayList<Action> getActions(int key);
+    Dictionary<String, Action> getActions(int key);
 
     Time getTime();
 

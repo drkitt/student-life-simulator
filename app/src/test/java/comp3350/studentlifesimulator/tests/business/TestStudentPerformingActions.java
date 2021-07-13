@@ -14,7 +14,7 @@ public class TestStudentPerformingActions extends TestCase {
     public void testPerformingAction() {
         StudentPerformingActions spa = new StudentPerformingActions();
         EnergyBar energyBar = new EnergyBar(Student.getMaxEnergy());
-        Student student = new Student("Son Johnsmith's near-identical twin", energyBar);
+        Student student = new Student("Son Johnsmith's near-identical twin", energyBar, 0);
         Time time = new Time(10);
 
         Action possibleAction = new Action("Action that takes less than the student's total energy", -5, 1, 0);

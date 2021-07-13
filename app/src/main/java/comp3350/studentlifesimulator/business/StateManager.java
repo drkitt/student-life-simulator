@@ -1,8 +1,10 @@
 package comp3350.studentlifesimulator.business;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 import comp3350.studentlifesimulator.objects.Action;
+import comp3350.studentlifesimulator.objects.ActionStates;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
@@ -12,15 +14,17 @@ public class StateManager {
 
     private static Time clock;
     private static boolean inClass;
+    private static boolean skipped;
     private static ArrayList<Course> studentCourses;
     private static Student currentStudent;
-    private static ArrayList<Action> inClassLow;
-    private static ArrayList<Action> inClassHigh;
-    private static ArrayList<Action> lowEnergy;
-    private static ArrayList<Action> freeTime;
+    private static Dictionary<String, Action> inClassLow;
+    private static Dictionary<String, Action> inClassHigh;
+    private static Dictionary<String, Action> lowEnergy;
+    private static Dictionary<String, Action> freeTime;
 
     public static void initialize() {
         inClass = false;
+        skipped = false;
         clock = DatabaseManager.getTime();
         studentCourses =  DatabaseManager.getSelectedCourses();
         currentStudent = DatabaseManager.getStudent();
@@ -38,52 +42,76 @@ public class StateManager {
         return clock;
     }
 
-    public static int getState() {
-        int state;
+    public static ActionStates getState() {
+        ActionStates state;
 
-        if (hasClass() && currentStudent.getCurrentEnergy() > calculatePercentage(10, EnergyBar.getMaxEnergy())) {
-            state = 4;
-        }
-        else if (inClass) {
-
+        if (inClass) {
             if (currentStudent.getCurrentEnergy() > calculatePercentage(5, EnergyBar.getMaxEnergy())) {
-                state = 1;
+                state = ActionStates.IN_CLASS_HIGH;
             }
-            else{
-               state = 0;
+            else {
+               state = ActionStates.IN_CLASS_LOW;
             }
-
+        }
+        else if (skipped) {
+            if (currentStudent.getCurrentEnergy() <= calculatePercentage(15, EnergyBar.getMaxEnergy())) {
+                state = ActionStates.LOW_ENERGY;
+            }
+            else {
+                state = ActionStates.FREE_TIME;
+            }
+        }
+        else if (hasClass()) {
+            state = ActionStates.HAS_CLASS;
         }
         else if (currentStudent.getCurrentEnergy() <= calculatePercentage(15, EnergyBar.getMaxEnergy())) {
-            state = 2;
+            state = ActionStates.LOW_ENERGY;
         }
         else {
-            state = 3;
+            state = ActionStates.FREE_TIME;
         }
 
         return state;
     }
 
-    public static ArrayList<Action> getCurrentPossibleActions(int currState){
-        ArrayList<Action> possibleEvent = null;
-        if(currState == 0){
+    public static Dictionary<String, Action> getCurrentPossibleActions(ActionStates currState) {
+        Dictionary<String, Action> possibleEvent = null;
+
+        if (currState == ActionStates.IN_CLASS_LOW) {
             possibleEvent = inClassLow;
         }
-        else if(currState == 1){
+        else if (currState == ActionStates.IN_CLASS_HIGH) {
             possibleEvent = inClassHigh;
         }
-        else if(currState == 2){
+        else if (currState == ActionStates.LOW_ENERGY) {
             possibleEvent = lowEnergy;
         }
-        else if(currState == 3) {
+        else if (currState == ActionStates.FREE_TIME) {
             possibleEvent = freeTime;
         }
 
         return possibleEvent;
     }
 
-    public static void setInClass(boolean classTime) {
-        inClass = classTime;
+    public static boolean getInClass() {
+        return inClass;
+    }
+
+    public static void switchInClass() {
+        inClass = !inClass;
+    }
+
+    public static boolean getSkipped() {
+        return skipped;
+    }
+
+    public static void switchSkipped() {
+        skipped = !skipped;
+    }
+
+    public static void dataWriteBack() {
+        DatabaseManager.updateStudent(currentStudent);
+        DatabaseManager.updateTime(clock);
     }
 
     private static boolean hasClass() {
@@ -99,6 +127,6 @@ public class StateManager {
     }
 
     private static int calculatePercentage(int value, int total) {
-        return (value / total) * 100;
+        return (value / 100) * total;
     }
 }

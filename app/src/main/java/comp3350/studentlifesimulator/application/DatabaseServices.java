@@ -47,4 +47,8 @@ public class DatabaseServices {
     public static DatabaseAccessInterface getDatabaseAccess() {
         return database;
     }
+
+    public static boolean checkPreviousData() {
+        return DatabaseManager.getSelectedCourses().size() != 0;
+    }
 }
