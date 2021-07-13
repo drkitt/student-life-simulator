@@ -9,17 +9,18 @@ import comp3350.studentlifesimulator.objects.Student;
 import static org.junit.Assert.*;
 
 public class TestAction extends TestCase {
-    public TestAction(String arg0) { super(arg0); }
+    public TestAction(String arg0) {
+        super(arg0);
+    }
 
-    public void testValidActionValues() {
-        Student student = DatabaseManager.getStudent();
+    public void testGenericActionValueIsOne() {
+        assertEquals("Study", (new Action("Study")).getActionName());
+        assertEquals(1, (new Action("Study")).getEnergyUnit());
+        assertEquals(1, (new Action("Study")).getPointsUnit());
+        assertEquals(1, (new Action("Study")).getTimeUnit());
+    }
 
-        Action study = new Action("Study");
-        assertEquals("Study", study.getActionName());
-        assertEquals(1, study.getTimeUnit());
-        assertEquals(1, study.getEnergyUnit());
-        assertEquals(1, study.getPointsUnit());
-
+    public void testReplenishingActionValues() {
         Action eat = new Action("Eat", 2, 3, 3);
         assertEquals("Eat", eat.getActionName());
         assertEquals(2, eat.getEnergyUnit());
@@ -31,7 +32,9 @@ public class TestAction extends TestCase {
         assertEquals(Student.getMaxEnergy(), sleep.getEnergyUnit());
         assertEquals(3, sleep.getTimeUnit());
         assertEquals(6, sleep.getPointsUnit());
+    }
 
+    public void testDepletingActionValues() {
         Action jog = new Action("Jog", -5, 3, 4);
         assertEquals("Jog", jog.getActionName());
         assertEquals(-5, jog.getEnergyUnit());
@@ -45,7 +48,7 @@ public class TestAction extends TestCase {
         assertEquals(5, run.getPointsUnit());
     }
 
-    public void testInvalidActionValues() {
+    public void testEmptyActionValues() {
         assertThrows(
                 IllegalArgumentException.class,
                 ()->new Action("InvalidAction", 0, 0, 0)
@@ -58,9 +61,11 @@ public class TestAction extends TestCase {
 
         assertThrows(
                 IllegalArgumentException.class,
-                ()->new Action("InvalidAction", 4, 0, 0)
+                ()->new Action("InvalidAction", 0, 4, 0)
         );
+    }
 
+    public void testLimitExceedingActionValues() {
         assertThrows(
                 IllegalArgumentException.class,
                 ()->new Action("InvalidAction", -Student.getMaxEnergy() - 1, 3, 0)

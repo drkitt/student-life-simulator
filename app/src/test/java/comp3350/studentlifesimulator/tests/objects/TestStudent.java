@@ -9,54 +9,123 @@ import comp3350.studentlifesimulator.objects.Action;
 import static org.junit.Assert.*;
 
 public class TestStudent extends TestCase {
-    public TestStudent(String arg0) { super(arg0); }
+    private Student student;
 
-    public void testStudentCredentials() {
-        Student player = new Student("John Smithson", new EnergyBar((Student.getMaxEnergy())));
-        assertEquals("John Smithson", player.getStudentName());
+    public TestStudent(String arg0) {
+        super(arg0);
+
+        student = new Student("Son Johnsmith", new EnergyBar(10), 10);
     }
 
-    public void testDoAction() {
-        Student student = new Student("Son Johnsmith", new EnergyBar(Student.getMaxEnergy()));
-      
-        Action possibleAction = new Action("Action that takes less than the student's total energy", -5, 1, 0);
-        student.doAction(possibleAction);
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit(), student.getCurrentEnergy());
-        assertEquals(0, student.getScore());
+    public void testStudentCredentials() {
+        assertEquals("Son Johnsmith", student.getStudentName());
+        assertEquals(12, Student.getMaxEnergy());
+        student.addToScore(3);
+        assertEquals(13, student.getScore());
+        assertEquals(10, student.getCurrentEnergy());
 
-        Action anotherPossibleAction = new Action("Action that adds to the student's total energy", 1, 1, 0);
-        student.doAction(anotherPossibleAction);
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit(), student.getCurrentEnergy());
-        assertEquals(0, student.getScore());
+        assertTrue(student.canDoAction(new Action("Possible action", -5, 1, 1)));
+        assertFalse(student.canDoAction(new Action("Impossible action", -12, 1, 0)));
+    }
 
-        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", -10, 1, 0);
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> student.doAction(impossibleAction)
-        );
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit(), student.getCurrentEnergy());
+    public void testAddToEnergy() {
+        Action energizingAction = new Action("Energizing action", 1, 1, 0);
+        assertTrue(student.canDoAction(energizingAction));
+        student.doAction(energizingAction);
+        assertEquals(11, student.getCurrentEnergy());
+    }
 
-        Action anotherImpossibleAction = new Action("Action that adds too much to the student's remaining energy", 10, 1, 0);
+    public void testAddPastMaxEnergy() {
+        Action veryEnergizingAction = new Action("Very energizing action", 12, 1, 0);
+        assertTrue(student.canDoAction(veryEnergizingAction));
+        student.doAction(veryEnergizingAction);
+        assertEquals(12, student.getCurrentEnergy());
+    }
+
+    public void testSubtractFromEnergy() {
+        Action drainingAction = new Action("Draining action", -5, 1, 0);
+        assertTrue(student.canDoAction(drainingAction));
+        student.doAction(drainingAction);
+        assertEquals(5, student.getCurrentEnergy());
+    }
+
+    public void testInadequateEnergy() {
+        Action veryDrainingAction = new Action("Very draining action", -12, 1, 0);
+        assertFalse(student.canDoAction(veryDrainingAction));
         assertThrows(
                 IllegalArgumentException.class,
-                () -> student.doAction(anotherImpossibleAction)
+                () -> student.doAction(veryDrainingAction)
         );
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit(), student.getCurrentEnergy());
+        assertEquals(10, student.getCurrentEnergy());
+    }
 
-        Action rewardingAction = new Action("Action that adds to the student's score", -1, 1, 1);
+    public void testIncreaseScore() {
+        Action rewardingAction = new Action("Rewarding action", -1, 1, 1);
+        assertTrue(student.canDoAction(rewardingAction));
         student.doAction(rewardingAction);
-        assertEquals(
-                Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit() + rewardingAction.getEnergyUnit(),
-                student.getCurrentEnergy()
-        );
-        assertEquals(rewardingAction.getPointsUnit(), student.getScore());
+        assertEquals(9, student.getCurrentEnergy());
+        assertEquals(11, student.getScore());
+    }
 
-        Action penalizingAction = new Action("Action takes away from the student's score", -1, 1, -2);
+    public void testDecreaseScore() {
+        Action penalizingAction = new Action("Penalizing action", -1, 1, -1);
+        assertTrue(student.canDoAction(penalizingAction));
         student.doAction(penalizingAction);
-        assertEquals(
-                Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit() + rewardingAction.getEnergyUnit() + penalizingAction.getEnergyUnit(),
-                student.getCurrentEnergy()
+        assertEquals(9, student.getCurrentEnergy());
+        assertEquals(9, student.getScore());
+    }
+
+    public void testNegativeScore() {
+        Action veryPenalizingAction = new Action("Very penalizing action", -1, 1, -11);
+        assertTrue(student.canDoAction(veryPenalizingAction));
+        student.doAction(veryPenalizingAction);
+        assertEquals(9, student.getCurrentEnergy());
+        assertEquals(-1, student.getScore());
+    }
+
+    public void testConsecutiveActionsEnoughEnergy() {
+        Action action1 = new Action("First action in sequence", -5, 1, 0);
+        Action action2 = new Action("Second action in sequence", -4, 1, 0);
+
+        assertTrue(student.canDoAction(action1));
+        assertTrue(student.canDoAction(action2));
+
+        student.doAction(action1);
+        student.doAction(action2);
+        assertEquals(1, student.getCurrentEnergy());
+    }
+
+    public void testConsecutiveActionsInadequateEnergy() {
+        Action action1 = new Action("First action in sequence", -5, 1, 0);
+        Action action2 = new Action("Second action in sequence", 3, 1, 0);
+        Action action3 = new Action("Third action in sequence", -12, 1, 0);
+
+        assertTrue(student.canDoAction(action1));
+        assertTrue(student.canDoAction(action2));
+        assertFalse(student.canDoAction(action3));
+
+        student.doAction(action1);
+        student.doAction(action2);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> student.doAction(action3)
         );
-        assertEquals(rewardingAction.getPointsUnit() + penalizingAction.getPointsUnit(), student.getScore());
+        assertEquals(8, student.getCurrentEnergy());
+    }
+
+    public void testConsecutiveActionsScore() {
+        Action action1 = new Action("First action in sequence", -1, 1, 2);
+        Action action2 = new Action("Second action in sequence", -1, 1, -1);
+        Action action3 = new Action("Third action in sequence", -1, 1, 0);
+
+        assertTrue(student.canDoAction(action1));
+        assertTrue(student.canDoAction(action2));
+        assertTrue(student.canDoAction(action3));
+
+        student.doAction(action1);
+        student.doAction(action2);
+        student.doAction(action3);
+        assertEquals(7, student.getCurrentEnergy());
+        assertEquals(11, student.getScore());
     }
 }

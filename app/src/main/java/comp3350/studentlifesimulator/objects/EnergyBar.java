@@ -2,7 +2,7 @@ package comp3350.studentlifesimulator.objects;
 
 public class EnergyBar {
     private int currentEnergy;
-    private static final int MAX_ENERGY = 10;
+    private static final int MAX_ENERGY = 12;
 
     public EnergyBar(int initialEnergy) {
         if (initialEnergy < 0) {
@@ -35,10 +35,15 @@ public class EnergyBar {
     }
 
     public void adjustEnergy(int delta) {
-        setCurrentEnergy(currentEnergy + delta);
+        if (currentEnergy + delta > MAX_ENERGY){
+            setCurrentEnergy(MAX_ENERGY);
+        }
+        else {
+            setCurrentEnergy(currentEnergy + delta);
+        }
     }
 
     public boolean canAdjustEnergy(int delta) {
-        return 0 <= currentEnergy + delta && currentEnergy + delta <= MAX_ENERGY;
+        return 0 <= currentEnergy + delta;
     }
 }

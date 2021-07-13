@@ -9,46 +9,141 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 public class TestStudentPerformingActions extends TestCase {
-    public TestStudentPerformingActions(String arg0) { super(arg0); }
+    private Time time;
+    private Student student;
 
-    public void testPerformingAction() {
-        StudentPerformingActions spa = new StudentPerformingActions();
-        EnergyBar energyBar = new EnergyBar(Student.getMaxEnergy());
-        Student student = new Student("Son Johnsmith's near-identical twin", energyBar);
-        Time time = new Time(10);
+    public TestStudentPerformingActions(String arg0) {
+        super(arg0);
 
-        Action possibleAction = new Action("Action that takes less than the student's total energy", -5, 1, 0);
-        boolean result = spa.makeStudentPerformAction(student, possibleAction, time);
-        assertTrue(result);
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit(), student.getCurrentEnergy());
+        student = new Student("John Smithson", new EnergyBar(10), 10);
+        time = new Time(10);
+    }
 
-        Action anotherPossibleAction = new Action("Action that adds to the student's total energy", 1, 1, 0);
-        result = spa.makeStudentPerformAction(student, anotherPossibleAction, time);
-        assertTrue(result);
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit(), student.getCurrentEnergy());
+    public void testSPAAddToEnergy() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Energizing action", 1, 1, 0),
+                time
+        ));
+        assertEquals(11, student.getCurrentEnergy());
+        assertEquals(1, time.getCurrentTime());
+    }
 
-        Action impossibleAction = new Action("Action that takes more than the student's remaining energy", -10, 1, 0);
-        assertFalse(spa.makeStudentPerformAction(student, impossibleAction, time));
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit(), student.getCurrentEnergy());
+    public void testSPAAddPastMaxEnergy() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Very energizing action", 12, 1, 0),
+                time
+        ));
+        assertEquals(EnergyBar.getMaxEnergy(), student.getCurrentEnergy());
+        assertEquals(1, time.getCurrentTime());
+    }
 
-        Action anotherImpossibleAction = new Action("Action that adds too much to the student's remaining energy", 10, 1, 0);
-        assertFalse(spa.makeStudentPerformAction(student, anotherImpossibleAction, time));
-        assertEquals(Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit(), student.getCurrentEnergy());
+    public void testSPASubtractFromEnergy() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Draining action", -5, 1, 0),
+                time
+        ));
+        assertEquals(5, student.getCurrentEnergy());
+        assertEquals(1, time.getCurrentTime());
+    }
 
-        Action rewardingAction = new Action("Action that adds to the student's score", -1, 1, 1);
-        assertTrue(spa.makeStudentPerformAction(student, rewardingAction, time));
-        assertEquals(
-                Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit() + rewardingAction.getEnergyUnit(),
-                student.getCurrentEnergy()
-        );
-        assertEquals(rewardingAction.getPointsUnit(), student.getScore());
+    public void testSPAInadequateEnergy() {
+        assertFalse(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Very draining action", -12, 1, 0),
+                time
+        ));
+        assertEquals(10, student.getCurrentEnergy());
+        assertEquals(0, time.getCurrentTime());
+    }
 
-        Action penalizingAction = new Action("Action takes away from the student's score", -1, 1, -2);
-        assertTrue(spa.makeStudentPerformAction(student, penalizingAction, time));
-        assertEquals(
-                Student.getMaxEnergy() + possibleAction.getEnergyUnit() + anotherPossibleAction.getEnergyUnit() + rewardingAction.getEnergyUnit() + penalizingAction.getEnergyUnit(),
-                student.getCurrentEnergy()
-        );
-        assertEquals(rewardingAction.getPointsUnit() + penalizingAction.getPointsUnit(), student.getScore());
+    public void testSPAIncreaseScore() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Rewarding action", -1, 1, 1),
+                time
+        ));
+        assertEquals(9, student.getCurrentEnergy());
+        assertEquals(1, time.getCurrentTime());
+        assertEquals(11, student.getScore());
+    }
+
+    public void testSPADecreaseScore() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Penalizing action", -1, 1, -1),
+                time
+        ));
+        assertEquals(9, student.getCurrentEnergy());
+        assertEquals(1, time.getCurrentTime());
+        assertEquals(9, student.getScore());
+    }
+
+    public void testSPANegativeScore() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Very penalizing action", -1, 1, -11),
+                time
+        ));
+        assertEquals(9, student.getCurrentEnergy());
+        assertEquals(1, time.getCurrentTime());
+        assertEquals(-1, student.getScore());
+    }
+
+    public void testSPAConsecutiveActionsEnoughEnergy() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("First action in sequence", -5, 1, 0),
+                time
+        ));
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student, new Action("Second action in sequence", -4, 1, 0),
+                time
+        ));
+        assertEquals(1, student.getCurrentEnergy());
+        assertEquals(2, time.getCurrentTime());
+    }
+
+    public void testSPAConsecutiveActionsInadequateEnergy() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("First action in sequence", -5, 1, 0),
+                time
+        ));
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Second action in sequence", 3, 1, 0),
+                time
+        ));
+        assertFalse(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Third action in sequence", -12, 1, 0),
+                time
+        ));
+        assertEquals(8, student.getCurrentEnergy());
+        assertEquals(2, time.getCurrentTime());
+    }
+
+    public void testSPAConsecutiveActionsScore() {
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("First action in sequence", -1, 1, 2),
+                time
+        ));
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Second action in sequence", -1, 1, -1),
+                time
+        ));
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(
+                student,
+                new Action("Third action in sequence", -1, 1, 0),
+                time
+        ));
+        assertEquals(7, student.getCurrentEnergy());
+        assertEquals(3, time.getCurrentTime());
+        assertEquals(11, student.getScore());
     }
 }

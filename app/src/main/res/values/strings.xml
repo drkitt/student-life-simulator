@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">StudentLifeSimulator</string>
+    <string name="marathon_study_btn">Marathon Study</string>
     <string name="study_btn">Study</string>
+    <string name="quick_study_btn">Quick Study</string>
+    <string name="hibernate_btn">Hibernate</string>
+    <string name="sleep_btn">Sleep</string>
+    <string name="nap_btn">Nap</string>
     <string name="energy_lbl">Energy</string>
     <string name="background_desc">The student\'s surroundings</string>
     <string name="student_desc">The student</string>
     <string name="register_btn">REGISTER</string>
-    <string name="new_game_btn">New Game</string>
+    <string name="new_game_btn">Start</string>
     <string name="menu_desc">Select courses to be enrolled in</string>
+    <string name="attend_btn">Attend</string>
+    <string name="listen_btn">Listen</string>
+    <string name="talk_btn">Gossip</string>
+    <string name="skip_class_btn">Skip Class</string>
+
 </resources>
