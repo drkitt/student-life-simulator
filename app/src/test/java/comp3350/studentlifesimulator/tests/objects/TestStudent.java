@@ -25,11 +25,10 @@ public class TestStudent extends TestCase {
         assertEquals(10, student.getCurrentEnergy());
 
         assertTrue(student.canDoAction(new Action("Possible action", -5, 1, 1)));
-
         assertFalse(student.canDoAction(new Action("Impossible action", -12, 1, 0)));
     }
 
-    public void testAddToEnergy(){
+    public void testAddToEnergy() {
         Action energizingAction = new Action("Energizing action", 1, 1, 0);
         assertTrue(student.canDoAction(energizingAction));
         student.doAction(energizingAction);
@@ -50,7 +49,7 @@ public class TestStudent extends TestCase {
         assertEquals(5, student.getCurrentEnergy());
     }
 
-    public void testInadequateEnergy(){
+    public void testInadequateEnergy() {
         Action veryDrainingAction = new Action("Very draining action", -12, 1, 0);
         assertFalse(student.canDoAction(veryDrainingAction));
         assertThrows(
@@ -84,7 +83,7 @@ public class TestStudent extends TestCase {
         assertEquals(-1, student.getScore());
     }
 
-    public void testConsecutiveActionsEnoughEnergy(){
+    public void testConsecutiveActionsEnoughEnergy() {
         Action action1 = new Action("First action in sequence", -5, 1, 0);
         Action action2 = new Action("Second action in sequence", -4, 1, 0);
 
@@ -96,7 +95,7 @@ public class TestStudent extends TestCase {
         assertEquals(1, student.getCurrentEnergy());
     }
 
-    public void testConsecutiveActionsInadequateEnergy(){
+    public void testConsecutiveActionsInadequateEnergy() {
         Action action1 = new Action("First action in sequence", -5, 1, 0);
         Action action2 = new Action("Second action in sequence", 3, 1, 0);
         Action action3 = new Action("Third action in sequence", -12, 1, 0);
@@ -129,5 +128,4 @@ public class TestStudent extends TestCase {
         assertEquals(7, student.getCurrentEnergy());
         assertEquals(11, student.getScore());
     }
-
 }

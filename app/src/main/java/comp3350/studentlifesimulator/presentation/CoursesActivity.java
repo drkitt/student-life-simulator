@@ -31,7 +31,11 @@ public class CoursesActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.register_button);
 
         courseArray = DatabaseManager.getAvailableCourses();
-        courseList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, courseArray));
+        courseList.setAdapter(new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_multiple_choice,
+                courseArray)
+        );
 
         registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(view -> completeRegistration());

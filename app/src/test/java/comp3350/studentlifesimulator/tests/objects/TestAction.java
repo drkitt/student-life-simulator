@@ -9,7 +9,9 @@ import comp3350.studentlifesimulator.objects.Student;
 import static org.junit.Assert.*;
 
 public class TestAction extends TestCase {
-    public TestAction(String arg0) { super(arg0); }
+    public TestAction(String arg0) {
+        super(arg0);
+    }
 
     public void testGenericActionValueIsOne() {
         assertEquals("Study", (new Action("Study")).getActionName());
@@ -18,7 +20,7 @@ public class TestAction extends TestCase {
         assertEquals(1, (new Action("Study")).getTimeUnit());
     }
 
-    public void testReplenishingActionValues(){
+    public void testReplenishingActionValues() {
         Action eat = new Action("Eat", 2, 3, 3);
         assertEquals("Eat", eat.getActionName());
         assertEquals(2, eat.getEnergyUnit());

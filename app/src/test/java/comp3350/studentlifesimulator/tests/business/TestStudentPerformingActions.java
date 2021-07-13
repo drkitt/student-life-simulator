@@ -19,7 +19,7 @@ public class TestStudentPerformingActions extends TestCase {
         time = new Time(10);
     }
 
-    public void testAddToEnergy() {
+    public void testSPAAddToEnergy() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Energizing action", 1, 1, 0),
@@ -29,7 +29,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(1, time.getCurrentTime());
     }
 
-    public void testAddPastMaxEnergy() {
+    public void testSPAAddPastMaxEnergy() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Very energizing action", 12, 1, 0),
@@ -39,7 +39,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(1, time.getCurrentTime());
     }
 
-    public void testSubtractFromEnergy() {
+    public void testSPASubtractFromEnergy() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Draining action", -5, 1, 0),
@@ -49,7 +49,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(1, time.getCurrentTime());
     }
 
-    public void testInadequateEnergy() {
+    public void testSPAInadequateEnergy() {
         assertFalse(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Very draining action", -12, 1, 0),
@@ -59,7 +59,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(0, time.getCurrentTime());
     }
 
-    public void testIncreaseScore() {
+    public void testSPAIncreaseScore() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Rewarding action", -1, 1, 1),
@@ -70,7 +70,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(11, student.getScore());
     }
 
-    public void testDecreaseScore() {
+    public void testSPADecreaseScore() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Penalizing action", -1, 1, -1),
@@ -81,7 +81,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(9, student.getScore());
     }
 
-    public void testNegativeScore() {
+    public void testSPANegativeScore() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("Very penalizing action", -1, 1, -11),
@@ -92,7 +92,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(-1, student.getScore());
     }
 
-    public void testConsecutiveActionsEnoughEnergy() {
+    public void testSPAConsecutiveActionsEnoughEnergy() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("First action in sequence", -5, 1, 0),
@@ -106,7 +106,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(2, time.getCurrentTime());
     }
 
-    public void testConsecutiveActionsInadequateEnergy() {
+    public void testSPAConsecutiveActionsInadequateEnergy() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("First action in sequence", -5, 1, 0),
@@ -126,7 +126,7 @@ public class TestStudentPerformingActions extends TestCase {
         assertEquals(2, time.getCurrentTime());
     }
 
-    public void testConsecutiveActionsScore() {
+    public void testSPAConsecutiveActionsScore() {
         assertTrue(StudentPerformingActions.makeStudentPerformAction(
                 student,
                 new Action("First action in sequence", -1, 1, 2),

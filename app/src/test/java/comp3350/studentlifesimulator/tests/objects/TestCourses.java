@@ -7,7 +7,9 @@ import comp3350.studentlifesimulator.objects.Course;
 import static org.junit.Assert.*;
 
 public class TestCourses extends TestCase {
-    public TestCourses(String arg0) { super(arg0); }
+    public TestCourses(String arg0) {
+        super(arg0);
+    }
 
     public void testTypicalCases() {
         Course newCourse = new Course("COMP3350", "Software Engineering");
@@ -20,19 +22,19 @@ public class TestCourses extends TestCase {
     public void testNull() {
         assertThrows(
                 NullPointerException.class,
-                () -> new Course(null , null)
+                () -> new Course(null, null)
         );
         assertThrows(
                 NullPointerException.class,
-                () -> new Course("COMP4550" , "Unknown Course").equals(null)
+                () -> new Course("COMP4550", "Unknown Course").equals(null)
         );
     }
 
     public void testEdgeCases() {
-        Course invalidCourse = new Course("" , "");
-        assertEquals("" , invalidCourse.getCourseName());
-        assertEquals("" , invalidCourse.getCourseName());
-        assertTrue(invalidCourse.equals(new Course("  " , "")));
-        assertTrue(invalidCourse.equals(new Course("" , "")));
+        Course invalidCourse = new Course("", "");
+        assertEquals("", invalidCourse.getCourseName());
+        assertEquals("", invalidCourse.getCourseName());
+        assertTrue(invalidCourse.equals(new Course("  ", "")));
+        assertTrue(invalidCourse.equals(new Course("", "")));
     }
 }

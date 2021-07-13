@@ -63,7 +63,10 @@ public class ApartmentActivity extends AppCompatActivity {
         attendButton = findViewById(R.id.attendButton);
         skipButton = findViewById(R.id.skipClassButton);
 
-        setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
+        setActionButtons(
+                StateManager.getState(),
+                StateManager.getCurrentPossibleActions(StateManager.getState())
+        );
         displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();
@@ -134,12 +137,18 @@ public class ApartmentActivity extends AppCompatActivity {
             case HAS_CLASS:
                 attendButton.setOnClickListener(view -> {
                     StateManager.switchInClass();
-                    setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
+                    setActionButtons(
+                            StateManager.getState(),
+                            StateManager.getCurrentPossibleActions(StateManager.getState())
+                    );
                     displayActions(StateManager.getState());
                 });
                 skipButton.setOnClickListener(view -> {
                     StateManager.switchSkipped();
-                    setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
+                    setActionButtons(
+                            StateManager.getState(),
+                            StateManager.getCurrentPossibleActions(StateManager.getState())
+                    );
                     displayActions(StateManager.getState());
                 });
                 break;
@@ -232,7 +241,10 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentTime();
         displayCurrentEnergy();
         displayCurrentScore();
-        setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
+        setActionButtons(
+                StateManager.getState(),
+                StateManager.getCurrentPossibleActions(StateManager.getState())
+        );
         displayActions(StateManager.getState());
     }
 
@@ -250,8 +262,14 @@ public class ApartmentActivity extends AppCompatActivity {
             suffix = "PM";
         }
         int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
-        String displayedTime = String.format(Locale.getDefault(),
-                "%d:%02d %s\nDay %d", hour, minute, suffix, time.getDays());
+        String displayedTime = String.format(
+                Locale.getDefault(),
+                "%d:%02d %s\nDay %d",
+                hour,
+                minute,
+                suffix,
+                time.getDays()
+        );
 
         timeView.setText(displayedTime);
     }
@@ -265,8 +283,7 @@ public class ApartmentActivity extends AppCompatActivity {
     private void displayCurrentScore() {
         TextView scoreView = findViewById(R.id.scoreDisplay);
         int score = student.getScore();
-        String displayedScore = String.format(Locale.getDefault(),
-                "Score: %d", score);
+        String displayedScore = String.format(Locale.getDefault(), "Score: %d", score);
 
         scoreView.setText(displayedScore);
     }

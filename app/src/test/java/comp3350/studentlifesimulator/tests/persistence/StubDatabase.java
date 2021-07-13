@@ -62,8 +62,11 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public Student getStudent() {
-        return new Student(student.getStudentName(), new EnergyBar(student.getCurrentEnergy()),
-                student.getScore());
+        return new Student(
+                student.getStudentName(),
+                new EnergyBar(student.getCurrentEnergy()),
+                student.getScore()
+        );
     }
 
     public ArrayList<Course> getCourses() {
@@ -84,21 +87,24 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public Time getTime() {
-        return new Time(time.getCurrentTime() + (time.getTimePerDay() *
-                (time.getDays() - 1)), time.getTimePerDay());
+        return new Time(
+                time.getCurrentTime() + (time.getTimePerDay() * (time.getDays() - 1)),
+                time.getTimePerDay()
+        );
     }
 
     public void updateTime(Time newTime) {
-        time = new Time(newTime.getCurrentTime() +
-                (newTime.getTimePerDay() * (newTime.getDays() - 1)), newTime.getTimePerDay());
+        time = new Time(
+                newTime.getCurrentTime() + (newTime.getTimePerDay() * (newTime.getDays() - 1)),
+                newTime.getTimePerDay()
+        );
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
         ArrayList<Course> tempCourses = new ArrayList<>();
 
         for (int i = 0; i < courseList.size(); i++) {
-            tempCourses.add(new Course(courseList.get(i).getCourseID(),
-                    courseList.get(i).getCourseName()));
+            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName()));
         }
 
         return tempCourses;

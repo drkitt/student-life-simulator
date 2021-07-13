@@ -18,7 +18,7 @@ public class TestTime extends TestCase {
 
         clock = new Time(12, 10);
         assertEquals(10, clock.getTimePerDay());
-        assertEquals(2 , clock.getDays());
+        assertEquals(2, clock.getDays());
         assertEquals(2, clock.getCurrentTime());
         assertEquals(2, clock.getStartTime());
     }

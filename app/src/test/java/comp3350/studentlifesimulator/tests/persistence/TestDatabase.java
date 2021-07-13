@@ -9,7 +9,9 @@ import comp3350.studentlifesimulator.objects.Time;
 import static org.junit.Assert.*;
 
 public class TestDatabase extends TestCase {
-    public TestDatabase(String arg0) { super(arg0); }
+    public TestDatabase(String arg0) {
+        super(arg0);
+    }
 
     public void testStudent() {
         StubDatabase db = new StubDatabase();
@@ -32,32 +34,46 @@ public class TestDatabase extends TestCase {
 
         assertEquals(5, db.getCourses().size());
         assertEquals("COMP1010", db.getCourses().get(0).getCourseID());
-        assertEquals("Introductory Computer Science 1",
-                db.getCourses().get(0).getCourseName());
+        assertEquals(
+                "Introductory Computer Science 1",
+                db.getCourses().get(0).getCourseName()
+        );
         assertEquals("COMP1020", db.getCourses().get(1).getCourseID());
-        assertEquals("Introductory Computer Science 2",
-                db.getCourses().get(1).getCourseName());
+        assertEquals(
+                "Introductory Computer Science 2",
+                db.getCourses().get(1).getCourseName()
+        );
         assertEquals("COMP2140", db.getCourses().get(2).getCourseID());
-        assertEquals("Data Structures and Algorithms",
-                db.getCourses().get(2).getCourseName());
+        assertEquals(
+                "Data Structures and Algorithms",
+                db.getCourses().get(2).getCourseName()
+        );
         assertEquals("COMP2150", db.getCourses().get(3).getCourseID());
-        assertEquals("Object Orientation",
-                db.getCourses().get(3).getCourseName());
+        assertEquals(
+                "Object Orientation",
+                db.getCourses().get(3).getCourseName()
+        );
         assertEquals("COMP2160", db.getCourses().get(4).getCourseID());
-        assertEquals("Programming Practices",
-                db.getCourses().get(4).getCourseName());
+        assertEquals(
+                "Programming Practices",
+                db.getCourses().get(4).getCourseName()
+        );
 
         assertEquals(0, db.getSelectedCourses().size());
         db.addSelectedCourse(db.getCourses().get(4));
         assertEquals("COMP2160", db.getSelectedCourses().get(0).getCourseID());
-        assertEquals("Programming Practices",
-                db.getSelectedCourses().get(0).getCourseName());
+        assertEquals(
+                "Programming Practices",
+                db.getSelectedCourses().get(0).getCourseName()
+        );
 
         db.addSelectedCourse(db.getCourses().get(0));
         assertTrue(db.removeSelectedCourse(db.getCourses().get(4)));
         assertEquals("COMP1010", db.getSelectedCourses().get(0).getCourseID());
-        assertEquals("Introductory Computer Science 1",
-                db.getSelectedCourses().get(0).getCourseName());
+        assertEquals(
+                "Introductory Computer Science 1",
+                db.getSelectedCourses().get(0).getCourseName()
+        );
         assertFalse(db.removeSelectedCourse(db.getCourses().get(4)));
     }
 

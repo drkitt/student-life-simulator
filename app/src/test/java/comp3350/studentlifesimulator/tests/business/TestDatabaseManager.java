@@ -16,7 +16,9 @@ import comp3350.studentlifesimulator.tests.persistence.StubDatabase;
 import static org.junit.Assert.*;
 
 public class TestDatabaseManager extends TestCase {
-    public TestDatabaseManager(String arg0) { super(arg0); }
+    public TestDatabaseManager(String arg0) {
+        super(arg0);
+    }
 
     public void testStandardCourseSelection() {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
@@ -35,10 +37,23 @@ public class TestDatabaseManager extends TestCase {
         DatabaseManager.addCourse(courses.get(1));
         DatabaseManager.addCourse(courses.get(2));
         DatabaseManager.addCourse(courses.get(3));
-        for (int i = 0; i < 4; i++) {
-            assertEquals(courses.get(i).getCourseID(),
-                    DatabaseManager.getSelectedCourses().get(i).getCourseID());
-        }
+
+        assertEquals(
+                courses.get(0).getCourseID(),
+                DatabaseManager.getSelectedCourses().get(0).getCourseID()
+        );
+        assertEquals(
+                courses.get(1).getCourseID(),
+                DatabaseManager.getSelectedCourses().get(1).getCourseID()
+        );
+        assertEquals(
+                courses.get(2).getCourseID(),
+                DatabaseManager.getSelectedCourses().get(2).getCourseID()
+        );
+        assertEquals(
+                courses.get(3).getCourseID(),
+                DatabaseManager.getSelectedCourses().get(3).getCourseID()
+        );
 
         DatabaseServices.closeDatabaseAccess();
     }
@@ -49,9 +64,12 @@ public class TestDatabaseManager extends TestCase {
         assertEquals(24, DatabaseManager.getTime().getCurrentTime());
         assertEquals(0, DatabaseManager.getStudent().getScore());
         assertEquals(12, DatabaseManager.getStudent().getCurrentEnergy());
-        for (int i = 0; i < 4; i++) {
-            assertTrue(DatabaseManager.getActions(i).size() > 0);
-        }
+
+        assertEquals(1, DatabaseManager.getActions(0).size());
+        assertEquals(4,DatabaseManager.getActions(1).size());
+        assertEquals(3,DatabaseManager.getActions(2).size());
+        assertEquals(6,DatabaseManager.getActions(3).size());
+
         assertEquals("Nap", DatabaseManager.getActions(0).get("Nap").getActionName());
 
         Student student = DatabaseManager.getStudent();
@@ -75,8 +93,9 @@ public class TestDatabaseManager extends TestCase {
         assertFalse(DatabaseManager.removeCourse(new Course("", "")));
         assertEquals(0, DatabaseManager.getSelectedCourses().size());
 
-        DatabaseManager.updateStudent(new Student("", new EnergyBar(10),
-                -100));
+        DatabaseManager.updateStudent(
+                new Student("", new EnergyBar(10), -100)
+        );
         assertEquals(-100, DatabaseManager.getStudent().getScore());
 
         DatabaseServices.closeDatabaseAccess();
