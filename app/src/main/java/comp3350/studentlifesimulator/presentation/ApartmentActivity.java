@@ -14,6 +14,8 @@ import com.example.studentlifesimulator.R;
 import java.util.Dictionary;
 import java.util.Locale;
 
+import comp3350.studentlifesimulator.application.DatabaseServices;
+import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
 import comp3350.studentlifesimulator.objects.Action;
@@ -25,7 +27,6 @@ import comp3350.studentlifesimulator.objects.ActionStates;
 public class ApartmentActivity extends AppCompatActivity {
     private Time time;
     private Student student;
-    private StudentPerformingActions studentPerformingActions;
     private static final int MINUTES_PER_TIME_UNIT = 15;
 
     private Button marathonButton;
@@ -47,7 +48,6 @@ public class ApartmentActivity extends AppCompatActivity {
         StateManager.initialize();
         time = StateManager.getTime();
         student = StateManager.getCurrentStudent();
-        studentPerformingActions = new StudentPerformingActions();
 
         ProgressBar energyBar = findViewById(R.id.energyBar);
         energyBar.setMax(Student.getMaxEnergy());
@@ -67,6 +67,22 @@ public class ApartmentActivity extends AppCompatActivity {
         displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();
+        displayCurrentScore();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        StateManager.dataWriteBack();
+        Main.closeDBAccess();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Main.openDBAccess();
     }
 
     private void setActionButtons(ActionStates curState, Dictionary<String, Action> actionList) {
@@ -200,9 +216,7 @@ public class ApartmentActivity extends AppCompatActivity {
     }
 
     private void doAction(Action action) {
-        boolean result = studentPerformingActions.makeStudentPerformAction(student, action, time);
-
-        StateManager.dataWriteBack();
+        boolean result = StudentPerformingActions.makeStudentPerformAction(student, action, time);
 
         if (!result) {
             Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
@@ -217,6 +231,7 @@ public class ApartmentActivity extends AppCompatActivity {
 
         displayCurrentTime();
         displayCurrentEnergy();
+        displayCurrentScore();
         setActionButtons(StateManager.getState(), StateManager.getCurrentPossibleActions(StateManager.getState()));
         displayActions(StateManager.getState());
     }
@@ -243,6 +258,16 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private void displayCurrentEnergy() {
         ProgressBar energyBar = findViewById(R.id.energyBar);
+
         energyBar.setProgress(student.getCurrentEnergy());
+    }
+
+    private void displayCurrentScore() {
+        TextView scoreView = findViewById(R.id.scoreDisplay);
+        int score = student.getScore();
+        String displayedScore = String.format(Locale.getDefault(),
+                "Score: %d", score);
+
+        scoreView.setText(displayedScore);
     }
 }

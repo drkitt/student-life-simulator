@@ -10,6 +10,7 @@ public class Time {
        this.unitsPerDay = unitsPerDay;
        this.day = 1;
        this.currentUnit = 0;
+       System.out.println("Start Time: " + startTime);
        addToTime(startTime);
        this.startTime = currentUnit;
     }
@@ -46,6 +47,8 @@ public class Time {
 
     public void addToTime(int timeStep) {
         int newTime = currentUnit + timeStep;
+
+        System.out.println("Time Step: " + timeStep);
 
         if (timeStep < 0) {
             throw new IllegalArgumentException("Time step must be non-negative");
