@@ -44,18 +44,18 @@ public class StubDatabase implements DatabaseAccessInterface {
         int count = 0;
         boolean removed = false;
 
-        while (count < courses.size()) {
-            if (courses.get(count).equals(course)) {
+        while (count < selected.size()) {
+            if (selected.get(count).equals(course)) {
                 index = count;
                 removed = true;
-                count = courses.size();
+                count = selected.size();
             }
 
             count++;
         }
 
         if (removed) {
-            courses.remove(index);
+            selected.remove(index);
         }
 
         return removed;
@@ -76,26 +76,21 @@ public class StubDatabase implements DatabaseAccessInterface {
 
 
     public Dictionary<String, Action> getActions(int key) {
-        Dictionary<String, Action> actionList = new Hashtable<>();
+        Dictionary<String, Action> actionList = actions[key];
 
-        for (int i = 0; i < actions[key].size(); i++) {
-            actionList.put(actions[key].get(i).getActionName(),
-                    new Action(actions[key].get(i).getActionName(),
-                    actions[key].get(i).getEnergyUnit(), actions[key].get(i).getTimeUnit(),
-                    actions[key].get(i).getPointsUnit()));
-        }
+        initializeActions();
 
         return actionList;
     }
 
     public Time getTime() {
-        return new Time(time.getCurrentTime() + (time.getTimePerDay() * time.getDays()),
-                time.getTimePerDay());
+        return new Time(time.getCurrentTime() + (time.getTimePerDay() *
+                (time.getDays() - 1)), time.getTimePerDay());
     }
 
     public void updateTime(Time newTime) {
         time = new Time(newTime.getCurrentTime() +
-                (newTime.getDays() * newTime.getTimePerDay()), newTime.getTimePerDay());
+                (newTime.getTimePerDay() * (newTime.getDays() - 1)), newTime.getTimePerDay());
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
@@ -111,11 +106,10 @@ public class StubDatabase implements DatabaseAccessInterface {
 
     private void initializeData() {
         Course course;
-        Action action;
 
         student = new Student("Anne Otherstudent", new EnergyBar(12), 0);
 
-        time = new Time(0, 96);
+        time = new Time(24, 96);
 
         courses = new ArrayList<>();
 
@@ -131,6 +125,12 @@ public class StubDatabase implements DatabaseAccessInterface {
         courses.add(course);
 
         selected = new ArrayList<>();
+
+        initializeActions();
+    }
+
+    private void initializeActions() {
+        Action action;
 
         actions = new Hashtable[4];
 

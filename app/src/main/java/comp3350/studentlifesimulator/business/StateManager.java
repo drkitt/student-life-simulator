@@ -109,6 +109,11 @@ public class StateManager {
         skipped = !skipped;
     }
 
+    public static void dataWriteBack() {
+        DatabaseManager.updateStudent(currentStudent);
+        DatabaseManager.updateTime(clock);
+    }
+
     private static boolean hasClass() {
         boolean classTime = false;
 
