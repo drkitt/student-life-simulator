@@ -126,5 +126,6 @@ public class TestStateManager  extends TestCase{
         StateManager.switchInClass();
         StateManager.getTime().addToTime(1);
         assertEquals(ActionStates.FREE_TIME , StateManager.getState());
+        DatabaseServices.closeDatabaseAccess();
     }
 }
