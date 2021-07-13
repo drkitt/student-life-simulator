@@ -28,14 +28,14 @@ public class TestStudentPerformingActions extends TestCase {
     }
 
     public void testAddPastMaxEnergy() {
-        Action energizingAction = new Action("Action that adds to the student's total energy, going beyond their max energy", 12, 1, 0);
+        Action veryEnergizingAction = new Action("Action that adds to the student's total energy, going beyond their max energy", 12, 1, 0);
 
-        assertTrue(StudentPerformingActions.makeStudentPerformAction(student, energizingAction, time));
+        assertTrue(StudentPerformingActions.makeStudentPerformAction(student, veryEnergizingAction, time));
         assertEquals(EnergyBar.getMaxEnergy(), student.getCurrentEnergy());
         assertEquals(1, time.getCurrentTime());
     }
 
-    public void testEnoughEnergy() {
+    public void testSubtractFromEnergy() {
         Action drainingAction = new Action("Action that takes less than the student's total energy", -5, 1, 0);
 
         assertTrue(StudentPerformingActions.makeStudentPerformAction(student, drainingAction, time));
@@ -44,9 +44,9 @@ public class TestStudentPerformingActions extends TestCase {
     }
 
     public void testInadequateEnergy() {
-        Action drainingAction = new Action("Action that takes more than the student's current energy", -12, 1, 0);
+        Action veryDrainingAction = new Action("Action that takes more than the student's current energy", -12, 1, 0);
 
-        assertFalse(StudentPerformingActions.makeStudentPerformAction(student, drainingAction, time));
+        assertFalse(StudentPerformingActions.makeStudentPerformAction(student, veryDrainingAction, time));
         assertEquals(10, student.getCurrentEnergy());
         assertEquals(0, time.getCurrentTime());
     }
@@ -61,11 +61,7 @@ public class TestStudentPerformingActions extends TestCase {
     }
 
     public void testDecreaseScore() {
-        System.out.println("yo where my grain silo goin");
-        System.out.println(student.getScore());
         Action penalizingAction = new Action("Action that takes away from the student's score", -1, 1, -1);
-        System.out.println(student.getScore());
-
 
         assertTrue(StudentPerformingActions.makeStudentPerformAction(student, penalizingAction, time));
         assertEquals(9, student.getCurrentEnergy());
