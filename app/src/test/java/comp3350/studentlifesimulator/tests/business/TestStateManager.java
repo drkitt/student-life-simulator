@@ -127,5 +127,4 @@ public class TestStateManager  extends TestCase{
         StateManager.getTime().addToTime(1);
         assertEquals(ActionStates.FREE_TIME , StateManager.getState());
     }
-
 }
