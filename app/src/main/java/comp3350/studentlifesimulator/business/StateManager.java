@@ -118,7 +118,13 @@ public class StateManager {
         boolean classTime = false;
 
         for (int i = 0; i < studentCourses.size() && !classTime; i++) {
-            classTime = clock.getCurrentTime() == 32 + (i * 4);
+            if (32 + (4 * i)/*studentCourses.getTime()*/ == clock.getCurrentTime()) {
+                for (int j = 0; j < 1/*studentCourses.get(i).getSchedule().size()*/ && !classTime; j++) {
+                    if (1 + i/*studentCourses.getSchedule().get(j)*/ == clock.getDays() % 7) {
+                        classTime = true;
+                    }
+                }
+            }
         }
 
         return classTime;
