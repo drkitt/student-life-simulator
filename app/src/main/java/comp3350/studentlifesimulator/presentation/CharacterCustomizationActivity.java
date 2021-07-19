@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.studentlifesimulator.R;
 
@@ -23,23 +24,13 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
         button.setOnClickListener(view -> onTabClick());
     }
 
-    public void setAttribute(View view) {
-        System.out.println(Arrays.toString(view.getTag().toString().split("/")));
+    public void setEyes(View view) {
         System.out.println(view.getTag());
 
-        System.out.println(getAttributeGroup(view.getTag().toString()));
-        System.out.println(getAttributeValue(view.getTag().toString()));
+        // TODO: Business logic for saving attribute choice (use the tag?)
 
-        Button example = findViewById(R.id.startButton);
-        example.setVisibility(Button.INVISIBLE);
-    }
-
-    private String getAttributeGroup(String attributeTag) {
-        return attributeTag.split("/")[0];
-    }
-
-    private String getAttributeValue(String attributeTag) {
-        return attributeTag.split("/")[1];
+        ImageView eyesImage = findViewById(R.id.eyesImage);
+        eyesImage.setImageResource(R.drawable.eyes_blue);
     }
 
     private void onTabClick() {

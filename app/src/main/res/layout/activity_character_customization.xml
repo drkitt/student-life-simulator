@@ -57,9 +57,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:contentDescription="@string/eyes_blue_btn_desc"
-                            android:onClick="setAttribute"
+                            android:onClick="setEyes"
                             android:scaleType="fitCenter"
-                            android:tag="eyes/blue"
+                            android:tag="blue"
                             app:srcCompat="@drawable/eyes_blue" />
 
                         <ImageButton
