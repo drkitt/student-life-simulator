@@ -23,6 +23,7 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 import comp3350.studentlifesimulator.objects.ActionStates;
+import comp3350.studentlifesimulator.objects.Weekday;
 
 public class ApartmentActivity extends AppCompatActivity {
     private Time time;
@@ -251,7 +252,9 @@ public class ApartmentActivity extends AppCompatActivity {
     private void displayCurrentTime() {
         TextView timeView = findViewById(R.id.currentTime);
         int hour = time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
-        String suffix;
+        String suffix, dayInWeek;
+        int dayIndex, weekCount;
+
         if (hour < 12) {
             suffix = "AM";
         }
@@ -261,14 +264,53 @@ public class ApartmentActivity extends AppCompatActivity {
             }
             suffix = "PM";
         }
+
         int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
+        dayIndex = time.getDays() % 7;
+        weekCount = (time.getDays() - 1) / 7;
+        weekCount ++;
+
+        switch (dayIndex){
+            case 1:
+                dayInWeek = Weekday.Monday.name();
+                break;
+                
+            case 2:
+                dayInWeek = Weekday.Tuesday.name();
+                break;
+                
+            case 3:
+                dayInWeek = Weekday.Wednesday.name();
+                break;
+                
+            case 4:
+                dayInWeek = Weekday.Thursday.name();
+                break;
+                
+            case 5:
+                dayInWeek = Weekday.Friday.name();
+                break;
+                
+            case 6:
+                dayInWeek = Weekday.Saturday.name();
+                break;
+                
+            case 0:
+                dayInWeek = Weekday.Sunday.name();
+                break;
+
+            default:
+                throw new IllegalStateException("Unexpected value: " + dayIndex);
+        }
+
         String displayedTime = String.format(
                 Locale.getDefault(),
-                "%d:%02d %s\nDay %d",
+                "%d:%02d %s\n%s\nWeek %d",
                 hour,
                 minute,
                 suffix,
-                time.getDays()
+                dayInWeek,
+                weekCount
         );
 
         timeView.setText(displayedTime);
