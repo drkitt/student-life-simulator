@@ -372,7 +372,7 @@
                             android:contentDescription="@string/shirt_purple_btn_text"
                             android:scaleType="fitCenter"
                             android:visibility="visible"
-                            app:srcCompat="@drawable/shirt_purple"
+                            app:srcCompat="@drawable/shirt_purple_featuring_whee"
                             tools:visibility="visible" />
                     </LinearLayout>
 
@@ -403,7 +403,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.975"
-                    app:srcCompat="@drawable/shirt_purple" />
+                    app:srcCompat="@drawable/shirt_purple_featuring_whee" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
