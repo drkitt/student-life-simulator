@@ -33,15 +33,18 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     public void setHair(View view) {
         System.out.println(view.getTag());
 
+        ImageView hairImage = findViewById(R.id.hairImage);
     }
 
     public void setSkinColour(View view) {
         System.out.println(view.getTag());
 
+        ImageView skinColourImage = findViewById(R.id.skinColourImage);
     }
 
     public void setShirt(View view) {
         System.out.println(view.getTag());
 
+        ImageView shirtImage = findViewById(R.id.shirtImage);
     }
 }
