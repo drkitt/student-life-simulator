@@ -19,22 +19,29 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_customization);
-
-        ImageButton button = findViewById(R.id.hair4DarkButton);
-        button.setOnClickListener(view -> onTabClick());
     }
 
     public void setEyes(View view) {
         System.out.println(view.getTag());
 
         // TODO: Business logic for saving attribute choice (use the tag?)
-
+        // Also TODO: Actually set the correct image :) The details of how to do this will probably become clearer when we have the functionality for loading attribute choices
         ImageView eyesImage = findViewById(R.id.eyesImage);
         eyesImage.setImageResource(R.drawable.eyes_blue);
     }
 
-    private void onTabClick() {
-        Button example = findViewById(R.id.startButton);
-        example.setVisibility(Button.INVISIBLE);
+    public void setHair(View view) {
+        System.out.println(view.getTag());
+
+    }
+
+    public void setSkinColour(View view) {
+        System.out.println(view.getTag());
+
+    }
+
+    public void setShirt(View view) {
+        System.out.println(view.getTag());
+
     }
 }
