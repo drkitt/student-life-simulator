@@ -1,35 +1,55 @@
 package comp3350.studentlifesimulator.business;
 
-import comp3350.studentlifesimulator.persistence.Database;
+import comp3350.studentlifesimulator.application.DatabaseServices;
+import comp3350.studentlifesimulator.objects.Action;
+import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 public class DatabaseManager {
-    private final static Database DATABASE = new Database();
+    private static DatabaseAccessInterface database;
+
+    public static void setDatabase() {
+        database = DatabaseServices.getDatabaseAccess();
+    }
 
     public static void updateStudent(Student student) {
-        DATABASE.updateStudentState(student);
+        database.updateStudent(student);
     }
 
     public static void addCourse(Course course) {
-        DATABASE.addSelectedCourse(course);
+        database.addSelectedCourse(course);
     }
 
     public static boolean removeCourse(Course course) {
-        return DATABASE.removeSelectedCourse(course);
+        return database.removeSelectedCourse(course);
     }
 
     public static Student getStudent() {
-        return DATABASE.getStudent();
+        return database.getStudent();
     }
 
     public static ArrayList<Course> getAvailableCourses() {
-        return DATABASE.getCourses();
+        return database.getCourses();
     }
 
     public static ArrayList<Course> getSelectedCourses() {
-        return DATABASE.getSelectedCourses();
+        return database.getSelectedCourses();
+    }
+
+    public static Dictionary<String, Action> getActions(int key) {
+        return database.getActions(key);
+    }
+
+    public static Time getTime() {
+        return database.getTime();
+    }
+
+    public static void updateTime(Time time) {
+        database.updateTime(time);
     }
 }

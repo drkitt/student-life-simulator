@@ -31,7 +31,11 @@ public class CoursesActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.register_button);
 
         courseArray = DatabaseManager.getAvailableCourses();
-        courseList.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, courseArray));
+        courseList.setAdapter(new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_multiple_choice,
+                courseArray)
+        );
 
         registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(view -> completeRegistration());
@@ -39,17 +43,27 @@ public class CoursesActivity extends AppCompatActivity {
 
     private void completeRegistration() {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
-        boolean coursesAreSelected = false;
+        int numOfCoursesSelected = 0;
 
         for (int index = 0; index < courseArray.size(); index++) {
             if (courseList.isItemChecked(index)) {
-                coursesAreSelected = true;
-                DatabaseManager.addCourse(courseArray.get(index));
+                numOfCoursesSelected++;
             }
         }
 
-        if (!coursesAreSelected) {
+        if (numOfCoursesSelected <= 4) {
+            for (int index = 0; index < courseArray.size(); index++) {
+                if (courseList.isItemChecked(index)) {
+                    DatabaseManager.addCourse(courseArray.get(index));
+                }
+            }
+        }
+
+        if (numOfCoursesSelected == 0) {
             Toast.makeText(this, "Pick a course!", Toast.LENGTH_SHORT).show();
+        }
+        else if(numOfCoursesSelected > 4){
+            Toast.makeText(this, "You can only select a maximum of 4 courses!", Toast.LENGTH_SHORT).show();
         }
         else {
             startActivity(apartmentActivity);
