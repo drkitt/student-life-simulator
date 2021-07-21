@@ -5,14 +5,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.TreeSet;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.objects.Weekday;
 
 public class DatabaseAccess implements DatabaseAccessInterface {
     private final String database;
@@ -95,6 +98,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         ArrayList<Course> courses = null;
         String courseID;
         String courseName;
+        ArrayList<Weekday> classDays = new ArrayList<>(Collections.singletonList(Weekday.Friday));
+        ArrayList<Time> classTime = new ArrayList<>(Collections.singletonList(new Time(96)));
 
         try {
             command = "SELECT * FROM COURSES";
@@ -104,7 +109,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             while (results.next()) {
                 courseID = results.getString("COURSEID");
                 courseName = results.getString("COURSENAME");
-                courses.add(new Course(courseID, courseName));
+                //TODO Update classDays and classTime in the database
+                courses.add(new Course(courseID, courseName , classDays , classTime));
             }
         }
         catch (Exception e) {
@@ -118,6 +124,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         ArrayList<Course> courses = null;
         String courseID;
         String courseName;
+        ArrayList<Weekday> classDays = new ArrayList<>(Collections.singletonList(Weekday.Friday));
+        ArrayList<Time> classTime = new ArrayList<>(Collections.singletonList(new Time(96)));
 
         try {
             command = "SELECT * FROM SELECTEDCOURSES";
@@ -127,7 +135,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             while (results.next()) {
                 courseID = results.getString("COURSEID");
                 courseName = results.getString("COURSENAME");
-                courses.add(new Course(courseID, courseName));
+                //TODO Update classDays and classTime in the database
+                courses.add(new Course(courseID, courseName , classDays , classTime));
             }
         }
         catch (Exception e) {

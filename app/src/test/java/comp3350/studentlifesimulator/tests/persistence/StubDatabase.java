@@ -5,9 +5,11 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.objects.Weekday;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -36,7 +38,7 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public void addSelectedCourse(Course course) {
-        selected.add(new Course(course.getCourseID(), course.getCourseName()));
+        selected.add(new Course(course.getCourseID(), course.getCourseName() , course.getClassDays() , course.getClassTime()));
     }
 
     public boolean removeSelectedCourse(Course course) {
@@ -104,7 +106,8 @@ public class StubDatabase implements DatabaseAccessInterface {
         ArrayList<Course> tempCourses = new ArrayList<>();
 
         for (int i = 0; i < courseList.size(); i++) {
-            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName()));
+            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName(),
+                            courseList.get(i).getClassDays() , courseList.get(i).getClassTime()));
         }
 
         return tempCourses;
@@ -119,15 +122,25 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         courses = new ArrayList<>();
 
-        course = new Course("COMP1010", "Introductory Computer Science 1");
+        course = new Course("COMP1010", "Introductory Computer Science 1" ,
+                new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday)),
+                new ArrayList<>(Arrays.asList(new Time(32 , 96) , new Time(34 , 96))));
         courses.add(course);
-        course = new Course("COMP1020", "Introductory Computer Science 2");
+        course = new Course("COMP1020", "Introductory Computer Science 2" ,
+                new ArrayList<>(Arrays.asList(Weekday.Thursday , Weekday.Friday)),
+                new ArrayList<>(Arrays.asList(new Time(72 , 96) , new Time(60 , 96))));
         courses.add(course);
-        course = new Course("COMP2140", "Data Structures and Algorithms");
+        course = new Course("COMP2140", "Data Structures and Algorithms" ,
+                new ArrayList<>(Arrays.asList(Weekday.Tuesday , Weekday.Thursday)),
+                new ArrayList<>(Arrays.asList(new Time(40 , 96) , new Time(60 , 96))));
         courses.add(course);
-        course = new Course("COMP2150", "Object Orientation");
+        course = new Course("COMP2150", "Object Orientation" ,
+                new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday)),
+                new ArrayList<>(Arrays.asList(new Time(40 , 96) , new Time(44 , 96))));
         courses.add(course);
-        course = new Course("COMP2160", "Programming Practices");
+        course = new Course("COMP2160", "Programming Practices" ,
+                new ArrayList<>(Arrays.asList(Weekday.Wednesday , Weekday.Friday)),
+                new ArrayList<>(Arrays.asList(new Time(60 , 96) , new Time(72 , 96))));
         courses.add(course);
 
         selected = new ArrayList<>();
