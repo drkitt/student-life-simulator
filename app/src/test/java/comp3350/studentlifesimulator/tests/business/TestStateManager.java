@@ -103,11 +103,11 @@ public class TestStateManager extends TestCase {
                                   new ArrayList<>(Collections.singletonList(new Time(32, 96)))));
 
         DatabaseManager.addCourse(new Course("COMP1010", "Introduction to Programming 1" ,
-                                    new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                    new ArrayList<>(Collections.singletonList(new Time(36, 96)))));
+                                    new ArrayList<>(Collections.singletonList(Weekday.Tuesday)),
+                                    new ArrayList<>(Collections.singletonList(new Time(44, 96)))));
         DatabaseManager.addCourse(new Course("COMP1020", "Introduction to Programming 2" ,
-                                    new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                    new ArrayList<>(Collections.singletonList(new Time(40, 96)))));
+                                    new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
+                                    new ArrayList<>(Collections.singletonList(new Time(60, 96)))));
         StateManager.initialize();
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
         StateManager.getTime().addToTime(4);
@@ -132,7 +132,7 @@ public class TestStateManager extends TestCase {
         );
         StateManager.switchSkipped();
 
-        StateManager.getTime().addToTime(4);
+        StateManager.getTime().addToTime(108);
         assertEquals(ActionStates.HAS_CLASS, StateManager.getState());
         StateManager.switchInClass();
         assertEquals(ActionStates.IN_CLASS_HIGH, StateManager.getState());

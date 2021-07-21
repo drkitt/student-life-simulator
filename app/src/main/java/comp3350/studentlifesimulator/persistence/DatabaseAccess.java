@@ -99,7 +99,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         String courseID;
         String courseName;
         ArrayList<Weekday> classDays = new ArrayList<>(Collections.singletonList(Weekday.Friday));
-        ArrayList<Time> classTime = new ArrayList<>(Collections.singletonList(new Time(96)));
+        ArrayList<Time> classTime = new ArrayList<>(Collections.singletonList(new Time(32,96)));
 
         try {
             command = "SELECT * FROM COURSES";
@@ -125,7 +125,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         String courseID;
         String courseName;
         ArrayList<Weekday> classDays = new ArrayList<>(Collections.singletonList(Weekday.Friday));
-        ArrayList<Time> classTime = new ArrayList<>(Collections.singletonList(new Time(96)));
+        ArrayList<Time> classTime = new ArrayList<>(Collections.singletonList(new Time(32 , 96)));
 
         try {
             command = "SELECT * FROM SELECTEDCOURSES";

@@ -27,6 +27,7 @@ public class Course {
         courseName = name.trim();
         classDays = courseDays;
         classTime = courseTime;
+        moveToDay(classDays , classTime);
     }
 
     private boolean isWithinTimeFrame(ArrayList<Weekday> courseDays , ArrayList<Time> courseTime) {
@@ -43,6 +44,21 @@ public class Course {
         }
 
         return value;
+    }
+
+    private void moveToDay(ArrayList<Weekday> courseDays , ArrayList<Time> courseTime) {
+        int dayIndex;
+        Time currClassTime;
+
+        for(int index =0; index < courseTime.size(); index++) {
+
+            dayIndex = Weekday.valueOf(courseDays.get(index).name()).ordinal();
+            currClassTime = courseTime.get(index);
+
+            if(dayIndex != (currClassTime.getDays() - 1) % 7 ) {
+                currClassTime.addToTime(currClassTime.getTimePerDay() * dayIndex);
+            }
+        }
     }
 
     public String getCourseID() {
