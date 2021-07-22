@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import comp3350.studentlifesimulator.business.TimeFormatter;
+
 import com.example.studentlifesimulator.R;
 
 import java.util.Dictionary;
@@ -18,6 +20,7 @@ import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
+import comp3350.studentlifesimulator.business.TimeFormatter;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
@@ -251,57 +254,16 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private void displayCurrentTime() {
         TextView timeView = findViewById(R.id.currentTime);
-        int hour = time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
+        int hour, minute, weekCount;
         String suffix, dayInWeek;
-        int dayIndex, weekCount;
 
-        if (hour < 12) {
-            suffix = "AM";
-        }
-        else {
-            if (hour > 12) {
-                hour -= 12;
-            }
-            suffix = "PM";
-        }
+        TimeFormatter timeFormatter = new TimeFormatter();
 
-        int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
-        dayIndex = time.getDays() % 7;
-        weekCount = (time.getDays() - 1) / 7;
-        weekCount ++;
-
-        switch (dayIndex){
-            case 1:
-                dayInWeek = Weekday.Monday.name();
-                break;
-                
-            case 2:
-                dayInWeek = Weekday.Tuesday.name();
-                break;
-                
-            case 3:
-                dayInWeek = Weekday.Wednesday.name();
-                break;
-                
-            case 4:
-                dayInWeek = Weekday.Thursday.name();
-                break;
-                
-            case 5:
-                dayInWeek = Weekday.Friday.name();
-                break;
-                
-            case 6:
-                dayInWeek = Weekday.Saturday.name();
-                break;
-                
-            case 0:
-                dayInWeek = Weekday.Sunday.name();
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + dayIndex);
-        }
+        hour = timeFormatter.getHour();
+        minute = timeFormatter.getMinute();
+        weekCount = timeFormatter.getWeekCount();
+        suffix = timeFormatter.getSuffix();
+        dayInWeek = timeFormatter.getDayInWeek();
 
         String displayedTime = String.format(
                 Locale.getDefault(),
