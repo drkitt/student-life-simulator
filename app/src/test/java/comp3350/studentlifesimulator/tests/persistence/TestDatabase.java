@@ -5,18 +5,25 @@ import junit.framework.TestCase;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import static org.junit.Assert.*;
 
 public class TestDatabase extends TestCase {
+    private static DatabaseAccessInterface db;
+
     public TestDatabase(String arg0) {
         super(arg0);
+
+        setDb(new StubDatabase());
+        db.openDB(null);
+    }
+
+    public static void setDb(DatabaseAccessInterface database) {
+        db = database;
     }
 
     public void testStudent() {
-        StubDatabase db = new StubDatabase();
-        db.openDB(null);
-
         assertEquals("Anne Otherstudent", db.getStudent().getStudentName());
         assertEquals(12, db.getStudent().getCurrentEnergy());
         assertEquals(0, db.getStudent().getScore());
@@ -29,9 +36,6 @@ public class TestDatabase extends TestCase {
     }
 
     public void testCourses() {
-        StubDatabase db = new StubDatabase();
-        db.openDB(null);
-
         assertEquals(5, db.getCourses().size());
         assertEquals("COMP1010", db.getCourses().get(0).getCourseID());
         assertEquals(
@@ -78,9 +82,6 @@ public class TestDatabase extends TestCase {
     }
 
     public void testTime() {
-        StubDatabase db = new StubDatabase();
-        db.openDB(null);
-
         assertEquals(24, db.getTime().getCurrentTime());
         assertEquals(1, db.getTime().getDays());
         assertEquals(96, db.getTime().getTimePerDay());
@@ -94,9 +95,6 @@ public class TestDatabase extends TestCase {
     }
 
     public void testActions() {
-        StubDatabase db = new StubDatabase();
-        db.openDB(null);
-
         assertEquals(1, db.getActions(0).size());
         assertEquals("Nap", db.getActions(0).get("Nap").getActionName());
         assertEquals(1, db.getActions(0).get("Nap").getEnergyUnit());

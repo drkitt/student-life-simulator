@@ -55,6 +55,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public Student getStudent() {
         Student student = null;
         String studentName;
