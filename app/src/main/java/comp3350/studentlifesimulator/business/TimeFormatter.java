@@ -15,23 +15,27 @@ public class TimeFormatter {
     }
 
     public int getHour() {
-        int hour = time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
+        int hour = twentyFourHour();
+
+        if (hour > 12) {
+            hour -= 12;
+        }
+
         return hour;
     }
 
     public int getMinute() {
-        int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
-        return minute;
+        return time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
     }
 
     public String getSuffix() {
         String suffix;
 
-        if (this.getHour()< 12) {
+        if (twentyFourHour() < 12) {
             suffix = "AM";
         }
         else {
-            if (this.getHour() > 12) {
+            if (twentyFourHour() > 12) {
                 decreaseHour();
             }
             suffix = "PM";
@@ -43,38 +47,7 @@ public class TimeFormatter {
         int dayIndex = time.getDays() % 7;
         String dayInWeek;
 
-        switch (dayIndex){
-            case 1:
-                dayInWeek = Weekday.Monday.name();
-                break;
-
-            case 2:
-                dayInWeek = Weekday.Tuesday.name();
-                break;
-
-            case 3:
-                dayInWeek = Weekday.Wednesday.name();
-                break;
-
-            case 4:
-                dayInWeek = Weekday.Thursday.name();
-                break;
-
-            case 5:
-                dayInWeek = Weekday.Friday.name();
-                break;
-
-            case 6:
-                dayInWeek = Weekday.Saturday.name();
-                break;
-
-            case 0:
-                dayInWeek = Weekday.Sunday.name();
-                break;
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + dayIndex);
-        }
+        dayInWeek = Weekday.values()[dayIndex].name();
 
         return dayInWeek;
     }
@@ -88,5 +61,9 @@ public class TimeFormatter {
 
     public int  decreaseHour(){
         return  this.getHour() - 12;
+    }
+
+    private int twentyFourHour() {
+        return time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
     }
 }

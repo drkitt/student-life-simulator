@@ -112,7 +112,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 courseName = results1.getString("COURSENAME");
                 classTime = results1.getInt("COURSETIME");
 
-                command = "SELECT * FROM COURSEDATES WHERE COURSEID = " + courseID;
+                command = "SELECT * FROM COURSEDATES WHERE COURSEID = '" + courseID + "'";
                 results2 = statement6.executeQuery(command);
                 while (results2.next()) {
                     classDays.add(Weekday.values()[results2.getInt("DAY")]);
@@ -132,7 +132,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         ArrayList<Course> courses = null;
         String courseID;
         String courseName;
-        ArrayList<Weekday> classDays = new ArrayList<>();
+        ArrayList<Weekday> classDays;
         int classTime;
 
         try {
@@ -141,11 +141,12 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
             courses = new ArrayList<>();
             while (results1.next()) {
+                classDays = new ArrayList<>();
                 courseID = results1.getString("COURSEID");
                 courseName = results1.getString("COURSENAME");
                 classTime = results1.getInt("COURSETIME");
 
-                command = "SELECT * FROM COURSEDATES WHERE COURSEID = " + courseID;
+                command = "SELECT * FROM COURSEDATES WHERE COURSEID = '" + courseID + "'";
                 results2 = statement6.executeQuery(command);
                 while (results2.next()) {
                     classDays.add(Weekday.values()[results2.getInt("DAY")]);
@@ -164,7 +165,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public void addSelectedCourse(Course course) {
         try {
             command = "INSERT INTO SELECTEDCOURSES VALUES ('" + course.getCourseID() +
-                    "', '" + course.getCourseName() + "')";
+                    "', '" + course.getCourseName() + "', '" + course.getClassTime() + "')";
             statement3.executeUpdate(command);
         }
         catch (Exception e) {
@@ -176,7 +177,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         boolean deleted = false;
 
         try {
-            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = " + course.getCourseID();
+            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = '" + course.getCourseID() + "'";
             statement3.executeUpdate(command);
 
             deleted = true;
