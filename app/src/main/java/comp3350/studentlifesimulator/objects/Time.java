@@ -58,18 +58,4 @@ public class Time {
 
         currentUnit = newTime;
     }
-
-    public boolean equals(Time other){
-        return currentUnit == other.currentUnit && day == other.day && unitsPerDay == other.unitsPerDay;
-    }
-
-    @Override
-    public String toString() {
-        return "Time{" +
-                "unitsPerDay=" + unitsPerDay +
-                ", day=" + day +
-                ", currentUnit=" + currentUnit +
-                ", startTime=" + startTime +
-                '}';
-    }
 }

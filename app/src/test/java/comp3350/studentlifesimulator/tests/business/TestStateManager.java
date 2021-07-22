@@ -25,9 +25,12 @@ public class TestStateManager extends TestCase {
     public void testHasClassState() {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
         DatabaseManager.updateTime(new Time(32, 96));
-        DatabaseManager.addCourse(new Course("COMP3350", "Software Engineering",
-                                  new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                  new ArrayList<>(Collections.singletonList(new Time(32, 96)))));
+        DatabaseManager.addCourse(new Course(
+                "COMP3350",
+                "Software Engineering",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        ));
         StateManager.initialize();
         assertEquals(ActionStates.HAS_CLASS, StateManager.getState());
         assertNull(StateManager.getCurrentPossibleActions(ActionStates.HAS_CLASS));
@@ -98,16 +101,24 @@ public class TestStateManager extends TestCase {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
         DatabaseManager.updateStudent(new Student("Test Student", new EnergyBar(EnergyBar.getMaxEnergy()), 1));
         DatabaseManager.updateTime(new Time(28, 96));
-        DatabaseManager.addCourse(new Course("COMP3350", "Software Engineering",
-                                  new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                  new ArrayList<>(Collections.singletonList(new Time(32, 96)))));
+        DatabaseManager.addCourse(new Course(
+                "COMP3350",
+                "Software Engineering",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        ));
 
-        DatabaseManager.addCourse(new Course("COMP1010", "Introduction to Programming 1" ,
-                                    new ArrayList<>(Collections.singletonList(Weekday.Tuesday)),
-                                    new ArrayList<>(Collections.singletonList(new Time(44, 96)))));
-        DatabaseManager.addCourse(new Course("COMP1020", "Introduction to Programming 2" ,
-                                    new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
-                                    new ArrayList<>(Collections.singletonList(new Time(60, 96)))));
+        DatabaseManager.addCourse(new Course(
+                "COMP1010",
+                "Introduction to Programming 1",
+                new ArrayList<>(Collections.singletonList(Weekday.Tuesday)),
+                44));
+        DatabaseManager.addCourse(new Course(
+                "COMP1020",
+                "Introduction to Programming 2",
+                new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
+                60
+        ));
         StateManager.initialize();
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
         StateManager.getTime().addToTime(4);

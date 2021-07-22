@@ -117,12 +117,11 @@ public class StateManager {
 
     private static boolean hasClass() {
         boolean classTime = false;
-        Weekday currentDay = Weekday.values()[(clock.getDays()-1) % 7];//TODO: either sunday is the first day of the week or this
-        int dayIndex;
+        Weekday currentDay = Weekday.values()[clock.getDays() % 7];
 
         for (int i = 0; i < studentCourses.size() && !classTime; i++) {
-             dayIndex = studentCourses.get(i).getClassDays().indexOf(currentDay);
-             classTime = dayIndex != -1 && studentCourses.get(i).getClassTime().get(dayIndex).equals(clock);
+            classTime = studentCourses.get(i).getClassTime() == clock.getCurrentTime() &&
+                    studentCourses.get(i).getClassDays().contains(currentDay);
         }
 
         return classTime;

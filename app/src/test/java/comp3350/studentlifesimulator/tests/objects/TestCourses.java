@@ -23,42 +23,54 @@ public class TestCourses extends TestCase {
     public void testTypicalCases() {
         Course newCourse = new Course("COMP3350", "Software Engineering",
                            new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                           new ArrayList<>(Collections.singletonList(new Time(32, 96))));
+                           32);
         assertEquals("COMP3350", newCourse.getCourseID());
         assertEquals("Software Engineering", newCourse.getCourseName());
-        assertFalse(newCourse.equals(new Course("COMP3250", "Software Development" ,
-                                     new ArrayList<>(Collections.singletonList(Weekday.Tuesday)),
-                                     new ArrayList<>(Collections.singletonList(new Time(40, 96))))));
-        assertTrue(newCourse.equals(new Course("COMP3350", "Software Engineering" ,
-                                    new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
-                                    new ArrayList<>(Collections.singletonList(new Time(44, 96))))));
+        assertFalse(newCourse.equals(new Course(
+                "COMP3250",
+                "Software Development",
+                new ArrayList<>(Collections.singletonList(Weekday.Tuesday)),
+                40
+        )));
+        assertTrue(newCourse.equals(new Course(
+                "COMP3350",
+                "Software Engineering",
+                new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
+                44
+        )));
     }
 
     public void testNull() {
         assertThrows(
                 NullPointerException.class,
                 () -> new Course("3310", "Test",
-                        new ArrayList<>() , new ArrayList<>())
+                        new ArrayList<>() , 0)
         );
         assertThrows(
                 NullPointerException.class,
                 () -> new Course("COMP4550", "Unknown Course" ,
                         new ArrayList<>(Collections.singletonList(Weekday.Thursday)),
-                        new ArrayList<>(Collections.singletonList(new Time(44, 96)))).equals(null)
+                        32).equals(null)
         );
     }
 
     public void testEdgeCases() {
-        Course invalidCourse = new Course("", "" ,
+        Course invalidCourse = new Course(
+                "",
+                "" ,
                 new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                new ArrayList<>(Collections.singletonList(new Time(32, 96))));
+                32
+        );
         assertEquals("", invalidCourse.getCourseName());
         assertEquals("", invalidCourse.getCourseName());
         assertTrue(invalidCourse.equals(new Course("  ", "" ,
                                         new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                        new ArrayList<>(Collections.singletonList(new Time(32, 96))))));
-        assertTrue(invalidCourse.equals(new Course("", "",
-                                        new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                        new ArrayList<>(Collections.singletonList(new Time(32, 96))))));
+                                        32)));
+        assertTrue(invalidCourse.equals(new Course(
+                "",
+                "",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        )));
     }
 }

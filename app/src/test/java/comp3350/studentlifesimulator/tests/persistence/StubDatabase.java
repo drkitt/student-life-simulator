@@ -122,25 +122,40 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         courses = new ArrayList<>();
 
-        course = new Course("COMP1010", "Introductory Computer Science 1" ,
+        course = new Course(
+                "COMP1010",
+                "Introductory Computer Science 1",
                 new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday)),
-                new ArrayList<>(Arrays.asList(new Time(32 , 96) , new Time(34 , 96))));
+                32
+        );
         courses.add(course);
-        course = new Course("COMP1020", "Introductory Computer Science 2" ,
+        course = new Course(
+                "COMP1020",
+                "Introductory Computer Science 2",
                 new ArrayList<>(Arrays.asList(Weekday.Thursday , Weekday.Friday)),
-                new ArrayList<>(Arrays.asList(new Time(72 , 96) , new Time(60 , 96))));
+                72
+        );
         courses.add(course);
-        course = new Course("COMP2140", "Data Structures and Algorithms" ,
-                new ArrayList<>(Arrays.asList(Weekday.Tuesday , Weekday.Thursday)),
-                new ArrayList<>(Arrays.asList(new Time(40 , 96) , new Time(60 , 96))));
+        course = new Course(
+                "COMP2140",
+                "Data Structures and Algorithms",
+                new ArrayList<>(Arrays.asList(Weekday.Tuesday, Weekday.Thursday)),
+                40
+        );
         courses.add(course);
-        course = new Course("COMP2150", "Object Orientation" ,
-                new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday)),
-                new ArrayList<>(Arrays.asList(new Time(40 , 96) , new Time(44 , 96))));
+        course = new Course(
+                "COMP2150",
+                "Object Orientation",
+                new ArrayList<>(Arrays.asList(Weekday.Monday, Weekday.Wednesday)),
+                44
+        );
         courses.add(course);
-        course = new Course("COMP2160", "Programming Practices" ,
-                new ArrayList<>(Arrays.asList(Weekday.Wednesday , Weekday.Friday)),
-                new ArrayList<>(Arrays.asList(new Time(60 , 96) , new Time(72 , 96))));
+        course = new Course(
+                "COMP2160",
+                "Programming Practices",
+                new ArrayList<>(Arrays.asList(Weekday.Wednesday, Weekday.Friday)),
+                60
+        );
         courses.add(course);
 
         selected = new ArrayList<>();

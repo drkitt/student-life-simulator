@@ -6,20 +6,15 @@ public class Course {
     private final String courseID;
     private final String courseName;
     private final ArrayList<Weekday> classDays;
-    private final ArrayList<Time> classTime;
+    private final int classTime;
 
-    public Course(String ID, String name , ArrayList<Weekday> courseDays , ArrayList<Time> courseTime ) {
-
-        if (ID == null || name == null || (courseDays != null && courseDays.size() <= 0) ||
-            (courseTime != null && courseTime.size() <= 0)) {
+    public Course(String ID, String name , ArrayList<Weekday> courseDays , int courseTime) {
+        if ((ID == null || name == null) || (courseDays == null || courseDays.size() <= 0)) {
             throw new NullPointerException("Invalid course argument passed in");
         }
 
-        if(courseDays.size() != courseTime.size()) {
-            throw new NullPointerException("Course days and course time must have the same size");
-        }
-
-        if(!isWithinTimeFrame(courseDays , courseTime)) {
+        if (courseTime >= 32 && courseTime <= 72 &&
+                (courseDays.contains(Weekday.Saturday) && courseDays.contains(Weekday.Sunday))) {
             throw new NullPointerException("Course time must be between 8am to 6pm and Course days cannot be Saturday or Sunday");
         }
 
@@ -27,38 +22,6 @@ public class Course {
         courseName = name.trim();
         classDays = courseDays;
         classTime = courseTime;
-        moveToDay(classDays , classTime);
-    }
-
-    private boolean isWithinTimeFrame(ArrayList<Weekday> courseDays , ArrayList<Time> courseTime) {
-        boolean value = true;
-        Time currTime;
-        Weekday currDay;
-
-        for (int index = 0; index < courseTime.size() && value; index++) {
-            currTime = courseTime.get(index);
-            currDay = courseDays.get(index);
-
-            value = (currTime.getCurrentTime() >= 32 && currTime.getCurrentTime() <= 72) &&
-                    (currDay != Weekday.Saturday && currDay != Weekday.Sunday);
-        }
-
-        return value;
-    }
-
-    private void moveToDay(ArrayList<Weekday> courseDays , ArrayList<Time> courseTime) {
-        int dayIndex;
-        Time currClassTime;
-
-        for(int index =0; index < courseTime.size(); index++) {
-
-            dayIndex = Weekday.valueOf(courseDays.get(index).name()).ordinal();
-            currClassTime = courseTime.get(index);
-
-            if(dayIndex != (currClassTime.getDays() - 1) % 7 ) {
-                currClassTime.addToTime(currClassTime.getTimePerDay() * dayIndex);
-            }
-        }
     }
 
     public String getCourseID() {
@@ -69,7 +32,7 @@ public class Course {
         return courseName;
     }
 
-    public ArrayList<Time> getClassTime() {
+    public int getClassTime() {
         return classTime;
     }
 

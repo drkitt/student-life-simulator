@@ -92,9 +92,12 @@ public class TestDatabaseManager extends TestCase {
     public void testUnexpectedDatabaseRoutines() {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
 
-        assertFalse(DatabaseManager.removeCourse(new Course("", "" ,
-                                                 new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                                 new ArrayList<>(Collections.singletonList(new Time(96))))));
+        assertFalse(DatabaseManager.removeCourse(new Course(
+                "",
+                "",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        )));
         assertEquals(0, DatabaseManager.getSelectedCourses().size());
 
         DatabaseManager.updateStudent(
@@ -128,9 +131,12 @@ public class TestDatabaseManager extends TestCase {
                 NullPointerException.class,
                 ()->DatabaseManager.addCourse(null)
         );
-        DatabaseManager.addCourse(new Course("TEMP", "DATA" ,
-                                    new ArrayList<>(Collections.singletonList(Weekday.Monday)),
-                                    new ArrayList<>(Collections.singletonList(new Time(96)))));
+        DatabaseManager.addCourse(new Course(
+                "TEMP",
+                "DATA",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        ));
         assertThrows(
                 NullPointerException.class,
                 ()->DatabaseManager.removeCourse(null)
