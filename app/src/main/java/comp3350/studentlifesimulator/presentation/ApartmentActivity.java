@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import comp3350.studentlifesimulator.business.TimeFormatter;
+
 import com.example.studentlifesimulator.R;
 
 import java.util.Dictionary;
@@ -18,11 +20,13 @@ import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
+import comp3350.studentlifesimulator.business.TimeFormatter;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 import comp3350.studentlifesimulator.objects.ActionStates;
+import comp3350.studentlifesimulator.objects.Weekday;
 
 public class ApartmentActivity extends AppCompatActivity {
     private Time time;
@@ -250,25 +254,25 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private void displayCurrentTime() {
         TextView timeView = findViewById(R.id.currentTime);
-        int hour = time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
-        String suffix;
-        if (hour < 12) {
-            suffix = "AM";
-        }
-        else {
-            if (hour > 12) {
-                hour -= 12;
-            }
-            suffix = "PM";
-        }
-        int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
+        int hour, minute, weekCount;
+        String suffix, dayInWeek;
+
+        TimeFormatter timeFormatter = new TimeFormatter();
+
+        hour = timeFormatter.getHour();
+        minute = timeFormatter.getMinute();
+        weekCount = timeFormatter.getWeekCount();
+        suffix = timeFormatter.getSuffix();
+        dayInWeek = timeFormatter.getDayInWeek();
+
         String displayedTime = String.format(
                 Locale.getDefault(),
-                "%d:%02d %s\nDay %d",
+                "%d:%02d %s\n%s\nWeek %d",
                 hour,
                 minute,
                 suffix,
-                time.getDays()
+                dayInWeek,
+                weekCount
         );
 
         timeView.setText(displayedTime);
