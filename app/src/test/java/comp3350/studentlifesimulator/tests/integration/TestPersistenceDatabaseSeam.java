@@ -18,16 +18,13 @@ import comp3350.studentlifesimulator.tests.persistence.TestDatabase;
 
 public class TestPersistenceDatabaseSeam extends TestCase {
     private Statement statement;
+    private TestDatabase testDb;
+    private DatabaseAccess db;
 
     public TestPersistenceDatabaseSeam(String arg0) {
         super(arg0);
-    }
 
-    public void testStudentPersistence() {
-        TestDatabase testDb = new TestDatabase(null);
-        DatabaseAccess db;
-        ResultSet results;
-        Student initialStudent;
+        testDb = new TestDatabase(null);
 
         DatabaseServices.openDatabaseAccess(Main.getDBName());
         db = (DatabaseAccess)DatabaseServices.getDatabaseAccess();
@@ -38,7 +35,11 @@ public class TestPersistenceDatabaseSeam extends TestCase {
             e.printStackTrace();
         }
         TestDatabase.setDb(db);
-        initialStudent = db.getStudent();
+    }
+
+    public void testStudentPersistence() {
+        ResultSet results;
+        Student initialStudent = db.getStudent();
 
         testDb.testStudent();
         try {
@@ -59,8 +60,6 @@ public class TestPersistenceDatabaseSeam extends TestCase {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
-        DatabaseServices.closeDatabaseAccess();
     }
 
     public void testCoursePersistence() {
