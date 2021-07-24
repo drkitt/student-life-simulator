@@ -11,17 +11,26 @@ import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 import comp3350.studentlifesimulator.tests.persistence.StubDatabase;
 
 import static org.junit.Assert.*;
 
 public class TestDatabaseManager extends TestCase {
+    DatabaseAccessInterface db;
+
     public TestDatabaseManager(String arg0) {
         super(arg0);
+
+        db = new StubDatabase();
+    }
+
+    public void setDB(DatabaseAccessInterface database) {
+        db = database;
     }
 
     public void testStandardCourseSelection() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
         ArrayList<Course> courses = DatabaseManager.getAvailableCourses();
 
         assertEquals("COMP1010", courses.get(0).getCourseID());
@@ -59,7 +68,7 @@ public class TestDatabaseManager extends TestCase {
     }
 
     public void testStandardSavingRoutine() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
 
         assertEquals(24, DatabaseManager.getTime().getCurrentTime());
         assertEquals(0, DatabaseManager.getStudent().getScore());
@@ -88,7 +97,7 @@ public class TestDatabaseManager extends TestCase {
     }
 
     public void testUnexpectedDatabaseRoutines() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
 
         assertFalse(DatabaseManager.removeCourse(new Course("", "")));
         assertEquals(0, DatabaseManager.getSelectedCourses().size());
@@ -102,7 +111,7 @@ public class TestDatabaseManager extends TestCase {
     }
 
     public void testInvalidDatabaseInteractions() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
 
         assertThrows(
                 NullPointerException.class,

@@ -15,11 +15,11 @@ public class TestDatabase extends TestCase {
     public TestDatabase(String arg0) {
         super(arg0);
 
-        setDb(new StubDatabase());
+        setDB(new StubDatabase());
         db.openDB(null);
     }
 
-    public static void setDb(DatabaseAccessInterface database) {
+    public static void setDB(DatabaseAccessInterface database) {
         db = database;
     }
 

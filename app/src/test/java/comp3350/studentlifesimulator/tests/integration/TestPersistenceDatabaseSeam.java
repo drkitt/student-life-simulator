@@ -257,6 +257,6 @@ public class TestPersistenceDatabaseSeam extends TestCase {
         catch (SQLException e) {
             e.printStackTrace();
         }
-        TestDatabase.setDb(db);
+        TestDatabase.setDB(db);
     }
 }
