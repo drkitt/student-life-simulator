@@ -15,8 +15,8 @@ public class Course {
             throw new NullPointerException("Invalid course argument passed in");
         }
 
-        if (courseTime >= 32 && courseTime <= 72 &&
-                (courseDays.contains(Weekday.Saturday) && courseDays.contains(Weekday.Sunday))) {
+        if ((courseTime < 32 || courseTime > 72) ||
+                (courseDays.contains(Weekday.Saturday) || courseDays.contains(Weekday.Sunday))) {
             throw new NullPointerException("Course time must be between 8am to 6pm and Course days cannot be Saturday or Sunday");
         }
 

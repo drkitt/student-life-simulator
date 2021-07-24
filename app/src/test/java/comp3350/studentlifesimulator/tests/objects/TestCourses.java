@@ -38,6 +38,21 @@ public class TestCourses extends TestCase {
                 new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
                 44
         )));
+
+        Course validCourse = new Course(
+                "1234" ,
+                "Valid Test" ,
+                new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday , Weekday.Friday)),
+                40
+        );
+
+        assertEquals(
+                new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday , Weekday.Friday)) ,
+                validCourse.getClassDays()
+        );
+
+        assertEquals(3 , validCourse.getClassDays().size());
+        assertEquals(40 , validCourse.getClassTime());
     }
 
     public void testNull() {
@@ -51,6 +66,14 @@ public class TestCourses extends TestCase {
                 () -> new Course("COMP4550", "Unknown Course" ,
                         new ArrayList<>(Collections.singletonList(Weekday.Thursday)),
                         32).equals(null)
+        );
+
+        assertThrows(
+                NullPointerException.class,
+                () -> new Course("1234",
+                        "Invalid Test",
+                        new ArrayList<>(Collections.singletonList(Weekday.Saturday)) ,
+                        96)
         );
     }
 
@@ -73,4 +96,5 @@ public class TestCourses extends TestCase {
                 32
         )));
     }
+
 }
