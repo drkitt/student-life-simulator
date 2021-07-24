@@ -99,7 +99,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         ArrayList<Course> courses = null;
         String courseID;
         String courseName;
-        ArrayList<Weekday> classDays = new ArrayList<>();
+        ArrayList<Weekday> classDays;
         int classTime;
 
         try {
@@ -108,6 +108,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
             courses = new ArrayList<>();
             while (results1.next()) {
+                classDays = new ArrayList<>();
                 courseID = results1.getString("COURSEID");
                 courseName = results1.getString("COURSENAME");
                 classTime = results1.getInt("COURSETIME");

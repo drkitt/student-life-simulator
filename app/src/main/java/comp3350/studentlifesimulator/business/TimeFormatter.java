@@ -14,6 +14,10 @@ public class TimeFormatter {
         this.time = StateManager.getTime();
     }
 
+    public TimeFormatter(int newTime){
+        time = new Time(newTime , 96);
+    }
+
     public int getHour() {
         int hour = twentyFourHour();
 

@@ -2,6 +2,8 @@ package comp3350.studentlifesimulator.objects;
 
 import java.util.ArrayList;
 
+import comp3350.studentlifesimulator.business.TimeFormatter;
+
 public class Course {
     private final String courseID;
     private final String courseName;
@@ -41,7 +43,33 @@ public class Course {
     }
 
     public String toString() {
-        return courseID + " - "+ courseName;
+        String courseTime = "";
+        TimeFormatter timeForClass = new TimeFormatter(classTime);
+        String minute;
+
+        if(timeForClass.getMinute() <= 9) {
+            minute = "0" + timeForClass.getMinute();
+        }
+        else {
+            minute = timeForClass.getMinute() + "";
+        }
+
+        for(int index = 0; index < classDays.size(); index++) {
+
+            if(classDays.get(index) == Weekday.Thursday) {
+                courseTime += "TR";
+            }
+            else {
+                courseTime += classDays.get(index).name().charAt(0) ;
+            }
+
+            if(index != classDays.size() - 1) {
+                courseTime += ", ";
+            }
+        }
+        return courseID + " - "+ courseName + "\n"
+                + courseTime + " - "+ timeForClass.getHour() + ":"+ minute + " "
+                + timeForClass.getSuffix() ;
     }
 
     public boolean equals(Course other) {
