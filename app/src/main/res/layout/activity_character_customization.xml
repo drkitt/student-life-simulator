@@ -59,7 +59,7 @@
                             android:contentDescription="@string/eyes_blue_btn_desc"
                             android:onClick="setEyes"
                             android:scaleType="fitCenter"
-                            android:tag="blue"
+                            android:tag="eyes_blue"
                             app:srcCompat="@drawable/eyes_blue" />
 
                         <ImageButton
@@ -70,7 +70,7 @@
                             android:contentDescription="@string/eyes_brown_btn_desc"
                             android:onClick="setEyes"
                             android:scaleType="fitCenter"
-                            android:tag="brown"
+                            android:tag="eyes_brown"
                             app:srcCompat="@drawable/eyes_brown" />
 
                         <ImageButton
@@ -81,7 +81,7 @@
                             android:contentDescription="@string/eyes_green_btn_desc"
                             android:onClick="setEyes"
                             android:scaleType="fitCenter"
-                            android:tag="green"
+                            android:tag="eyes_green"
                             app:srcCompat="@drawable/eyes_green" />
 
                         <ImageButton
@@ -92,7 +92,7 @@
                             android:contentDescription="@string/eyes_glasses_btn_desc"
                             android:onClick="setEyes"
                             android:scaleType="fitCenter"
-                            android:tag="glasses"
+                            android:tag="eyes_glasses"
                             app:srcCompat="@drawable/eyes_glasses" />
 
                         <ImageButton
@@ -121,7 +121,7 @@
                             android:contentDescription="@string/hair4_dark_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="dark_4"
+                            android:tag="hair4_dark"
                             app:srcCompat="@drawable/hair4_dark" />
 
                         <ImageButton
@@ -132,7 +132,7 @@
                             android:contentDescription="@string/hair1_dark_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="dark_1"
+                            android:tag="hair1_dark"
                             app:srcCompat="@drawable/hair1_dark" />
 
                         <ImageButton
@@ -143,7 +143,7 @@
                             android:contentDescription="@string/hair2_dark_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="dark_2"
+                            android:tag="hair2_dark"
                             app:srcCompat="@drawable/hair2_dark" />
 
                         <ImageButton
@@ -154,7 +154,7 @@
                             android:contentDescription="@string/hair3_dark_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="dark_3"
+                            android:tag="hair3_dark"
                             app:srcCompat="@drawable/hair3_dark" />
 
                         <ImageButton
@@ -165,7 +165,7 @@
                             android:contentDescription="@string/hair5_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="bald"
+                            android:tag="hair5"
                             app:srcCompat="@drawable/hair5" />
                     </LinearLayout>
 
@@ -184,7 +184,7 @@
                             android:contentDescription="@string/hair4_medium_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="medium_4"
+                            android:tag="hair4_medium"
                             app:srcCompat="@drawable/hair4_medium" />
 
                         <ImageButton
@@ -195,7 +195,7 @@
                             android:contentDescription="@string/hair1_medium_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="medium_1"
+                            android:tag="hair1_medium"
                             app:srcCompat="@drawable/hair1_medium" />
 
                         <ImageButton
@@ -206,7 +206,7 @@
                             android:contentDescription="@string/hair2_medium_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="medium_2"
+                            android:tag="hair2_medium"
                             app:srcCompat="@drawable/hair2_medium" />
 
                         <ImageButton
@@ -217,7 +217,7 @@
                             android:contentDescription="@string/hair3_medium_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="medium_3"
+                            android:tag="hair3_medium"
                             app:srcCompat="@drawable/hair3_medium" />
 
                         <ImageButton
@@ -228,7 +228,7 @@
                             android:contentDescription="@string/hair6_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="hat"
+                            android:tag="hair6"
                             app:srcCompat="@drawable/hair6" />
                     </LinearLayout>
 
@@ -247,7 +247,7 @@
                             android:contentDescription="@string/hair4_light_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="light_4"
+                            android:tag="hair4_light"
                             app:srcCompat="@drawable/hair4_light" />
 
                         <ImageButton
@@ -258,7 +258,7 @@
                             android:contentDescription="@string/hair1_light_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="light_1"
+                            android:tag="hair1_light"
                             app:srcCompat="@drawable/hair1_light" />
 
                         <ImageButton
@@ -269,7 +269,7 @@
                             android:contentDescription="@string/hair2_light_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="light_2"
+                            android:tag="hair2_light"
                             app:srcCompat="@drawable/hair2_light" />
 
                         <ImageButton
@@ -280,7 +280,7 @@
                             android:contentDescription="@string/hair3_light_btn_desc"
                             android:onClick="setHair"
                             android:scaleType="centerCrop"
-                            android:tag="light_3"
+                            android:tag="hair3_light"
                             app:srcCompat="@drawable/hair3_light" />
 
                         <ImageButton
@@ -310,7 +310,7 @@
                             android:contentDescription="@string/skin_dark_btn_desc"
                             android:onClick="setSkinColour"
                             android:scaleType="fitCenter"
-                            android:tag="dark"
+                            android:tag="skin_dark"
                             app:srcCompat="@drawable/skin_dark" />
 
                         <ImageButton
@@ -321,7 +321,7 @@
                             android:contentDescription="@string/skin_tan_btn_desc"
                             android:onClick="setSkinColour"
                             android:scaleType="fitCenter"
-                            android:tag="tan"
+                            android:tag="skin_tan"
                             app:srcCompat="@drawable/skin_tan" />
 
                         <ImageButton
@@ -332,7 +332,7 @@
                             android:contentDescription="@string/skin_fair_btn_desc"
                             android:onClick="setSkinColour"
                             android:scaleType="fitCenter"
-                            android:tag="fair"
+                            android:tag="skin_fair"
                             app:srcCompat="@drawable/skin_fair" />
 
                         <ImageButton
@@ -343,7 +343,7 @@
                             android:contentDescription="@string/skin_pink_btn_desc"
                             android:onClick="setSkinColour"
                             android:scaleType="fitCenter"
-                            android:tag="pink"
+                            android:tag="skin_pink"
                             app:srcCompat="@drawable/skin_pink" />
 
                         <ImageButton
@@ -354,7 +354,7 @@
                             android:contentDescription="@string/skin_pale_btn_desc"
                             android:onClick="setSkinColour"
                             android:scaleType="fitCenter"
-                            android:tag="pale"
+                            android:tag="skin_pale"
                             app:srcCompat="@drawable/skin_pale" />
 
                     </LinearLayout>
@@ -374,7 +374,7 @@
                             android:contentDescription="@string/shirt_red_btn_text"
                             android:onClick="setShirt"
                             android:scaleType="fitCenter"
-                            android:tag="red"
+                            android:tag="shirt_red"
                             app:srcCompat="@drawable/shirt_red" />
 
                         <ImageButton
@@ -385,7 +385,7 @@
                             android:contentDescription="@string/shirt_orange_btn_text"
                             android:onClick="setShirt"
                             android:scaleType="fitCenter"
-                            android:tag="orange"
+                            android:tag="shirt_orange"
                             app:srcCompat="@drawable/shirt_orange" />
 
                         <ImageButton
@@ -396,7 +396,7 @@
                             android:contentDescription="@string/eyes_green_btn_desc"
                             android:onClick="setShirt"
                             android:scaleType="fitCenter"
-                            android:tag="green"
+                            android:tag="shirt_green"
                             app:srcCompat="@drawable/shirt_green" />
 
                         <ImageButton
@@ -407,7 +407,7 @@
                             android:contentDescription="@string/eyes_blue_btn_desc"
                             android:onClick="setShirt"
                             android:scaleType="centerCrop"
-                            android:tag="blue"
+                            android:tag="shirt_blue"
                             app:srcCompat="@drawable/shirt_blue" />
 
                         <ImageButton
@@ -418,7 +418,7 @@
                             android:contentDescription="@string/shirt_purple_btn_text"
                             android:onClick="setShirt"
                             android:scaleType="fitCenter"
-                            android:tag="purple"
+                            android:tag="shirt_purple_featuring_whee"
                             app:srcCompat="@drawable/shirt_purple_featuring_whee" />
                     </LinearLayout>
 
