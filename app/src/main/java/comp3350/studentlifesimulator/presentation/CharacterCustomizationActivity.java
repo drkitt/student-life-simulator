@@ -3,6 +3,7 @@ package comp3350.studentlifesimulator.presentation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,11 +17,19 @@ import com.example.studentlifesimulator.R;
 import java.util.Arrays;
 import java.util.Dictionary;
 
+import comp3350.studentlifesimulator.application.Main;
+import comp3350.studentlifesimulator.business.DatabaseManager;
+
 public class CharacterCustomizationActivity extends AppCompatActivity {
+    String selectedEyes, selectedHair, selectedSkinColour, selectedShirt;
+    boolean fromMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_customization);
+        fromMenu = getIntent().getBooleanExtra("fromMenu", false);
+        loadCharacter();
     }
 
     public void setEyes(View view) {
@@ -30,7 +39,10 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
 //        eyesImage.setImageDrawable(((ImageView) view).getDrawable());
         // TODO: Change all butttons' tags to their file names, uncomment the above to restore the correct behaviour, and use the below as a base to save the resource name and load the image based on it later
 
-        int resID = getResources().getIdentifier(view.getTag().toString(), "drawable", getPackageName());
+        String filename = view.getTag().toString();
+        int resID = getResources().getIdentifier(filename, "drawable", getPackageName());
+
+        selectedEyes = filename;
 
         System.out.println(resID);
 
@@ -41,6 +53,9 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
         System.out.println(view.getTag());
 
         ImageView hairImage = findViewById(R.id.hairImage);
+        String filename = view.getTag().toString();
+
+        selectedHair = filename;
         hairImage.setImageDrawable(((ImageView) view).getDrawable());
     }
 
@@ -48,6 +63,9 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
         System.out.println(view.getTag());
 
         ImageView skinColourImage = findViewById(R.id.skinColourImage);
+        String filename = view.getTag().toString();
+
+        selectedSkinColour = filename;
         skinColourImage.setImageDrawable(((ImageView) view).getDrawable());
     }
 
@@ -55,6 +73,30 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
         System.out.println(view.getTag());
 
         ImageView shirtImage = findViewById(R.id.shirtImage);
+        String filename = view.getTag().toString();
+
+        selectedShirt = filename;
         shirtImage.setImageDrawable(((ImageView) view).getDrawable());
+    }
+
+    public void onSaveClick() {
+        // TODO: Save each selected variable to database
+
+        Intent nextActivity;
+
+        if (fromMenu) {
+            nextActivity = new Intent(this, MainActivity.class);
+        }
+        else {
+            nextActivity = new Intent(this, CoursesActivity.class);
+        }
+
+        startActivity(nextActivity);
+    }
+
+    private void loadCharacter() {
+        ImageView eyesImage = findViewById(R.id.eyesImage);
+        int resID = getResources().getIdentifier(DatabaseManager.getEyes(), "drawable", getPackageName());
+        eyesImage.setImageResource(resID);
     }
 }

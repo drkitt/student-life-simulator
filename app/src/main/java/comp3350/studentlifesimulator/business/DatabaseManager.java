@@ -11,6 +11,13 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 
 public class DatabaseManager {
+    private enum CharacterAssetTypes {
+        EYES,
+        HAIR,
+        SKIN_COLOUR,
+        SHIRT
+    }
+
     private static DatabaseAccessInterface database;
 
     public static void setDatabase() {
@@ -51,5 +58,25 @@ public class DatabaseManager {
 
     public static void updateTime(Time time) {
         database.updateTime(time);
+    }
+
+    public static String getEyes() {
+        return database.getCharacterAsset(CharacterAssetTypes.EYES.ordinal());
+    }
+
+    public static String getHair() {
+        return database.getCharacterAsset(CharacterAssetTypes.HAIR.ordinal());
+    }
+
+    public static String getSkinColour() {
+        return database.getCharacterAsset(CharacterAssetTypes.SKIN_COLOUR.ordinal());
+    }
+
+    public static String getShirt() {
+        return database.getCharacterAsset(CharacterAssetTypes.SHIRT.ordinal());
+    }
+
+    public static void updateEyes(String eyesTag) {
+        database.updateCharacterAsset(CharacterAssetTypes.EYES.ordinal(), eyesTag);
     }
 }

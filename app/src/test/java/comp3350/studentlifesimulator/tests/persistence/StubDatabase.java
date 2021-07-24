@@ -100,6 +100,14 @@ public class StubDatabase implements DatabaseAccessInterface {
         );
     }
 
+    public String getCharacterAsset(int type) {
+        return null;
+    }
+
+    public void updateCharacterAsset(int type, String newAsset) {
+        // TODO: Caleb test this lol
+    }
+
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
         ArrayList<Course> tempCourses = new ArrayList<>();
 
