@@ -72,6 +72,9 @@ public class TestDatabase extends TestCase {
         );
 
         db.addSelectedCourse(db.getCourses().get(0));
+        db.addSelectedCourse(db.getCourses().get(1));
+        db.addSelectedCourse(db.getCourses().get(2));
+        db.addSelectedCourse(db.getCourses().get(3));
         assertTrue(db.removeSelectedCourse(db.getCourses().get(4)));
         assertEquals("COMP1010", db.getSelectedCourses().get(0).getCourseID());
         assertEquals(
@@ -79,6 +82,7 @@ public class TestDatabase extends TestCase {
                 db.getSelectedCourses().get(0).getCourseName()
         );
         assertFalse(db.removeSelectedCourse(db.getCourses().get(4)));
+        db.addSelectedCourse(db.getCourses().get(4));
     }
 
     public void testTime() {
@@ -118,14 +122,5 @@ public class TestDatabase extends TestCase {
         assertEquals(5, db.getActions(3).get("Sleep").getEnergyUnit());
         assertEquals(16, db.getActions(3).get("Sleep").getTimeUnit());
         assertEquals(6, db.getActions(3).get("Sleep").getPointsUnit());
-
-        assertThrows(
-                ArrayIndexOutOfBoundsException.class,
-                ()->db.getActions(-1)
-        );
-        assertThrows(
-                ArrayIndexOutOfBoundsException.class,
-                ()->db.getActions(4)
-        );
     }
 }

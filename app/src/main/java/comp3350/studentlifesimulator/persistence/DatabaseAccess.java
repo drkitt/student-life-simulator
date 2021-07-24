@@ -156,10 +156,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         boolean deleted = false;
 
         try {
-            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = " + course.getCourseID();
-            statement3.executeUpdate(command);
-
-            deleted = true;
+            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = '" + course.getCourseID() + "'";
+            deleted = statement3.executeUpdate(command) != 0;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -208,7 +206,6 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 currentTime = results.getInt("CURRENTTIME");
                 timeInDay = results.getInt("TIMEINDAY");
                 days = results.getInt("DAYS");
-                System.out.println("Current Time: " + currentTime);
                 time = new Time(currentTime + (timeInDay * (days - 1)), timeInDay);
             }
         }
