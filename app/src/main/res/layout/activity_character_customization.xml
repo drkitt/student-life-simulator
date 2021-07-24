@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,28 +12,39 @@
         android:id="@+id/instructionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:letterSpacing="0.1"
         android:text="@string/character_customization_desc"
         android:textAllCaps="true"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/characterCustomization"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/characterCustomization"
-        android:layout_width="match_parent"
-        android:layout_height="694dp">
+        android:layout_width="606dp"
+        android:layout_height="661dp"
+        app:layout_constraintBottom_toTopOf="@+id/startButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructionText">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/options"
-            android:layout_width="match_parent"
-            android:layout_height="307dp">
+            android:layout_width="599dp"
+            android:layout_height="321dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ScrollView
                 android:id="@+id/scrollView"
-                android:layout_width="598dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fadeScrollbars="false"
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarSize="12dp"
@@ -428,11 +440,16 @@
 
         <FrameLayout
             android:id="@+id/character"
-            android:layout_width="match_parent"
-            android:layout_height="417dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleX="0.75"
             android:scaleY="0.75"
-            android:translationY="300dp">
+            android:translationY="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.53"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/options">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shirt"
@@ -466,7 +483,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.39"
+                    app:layout_constraintVertical_bias="0.46"
                     app:srcCompat="@drawable/skin_fair" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -479,11 +496,11 @@
                     android:id="@+id/hairImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="-128dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/hair_desc"
                     android:cropToPadding="true"
                     android:scaleType="centerCrop"
-                    android:translationY="-30dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.495"
@@ -508,7 +525,7 @@
                     app:layout_constraintHorizontal_bias="0.52"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.48000002"
+                    app:layout_constraintVertical_bias="0.57"
                     app:srcCompat="@drawable/smile" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -521,13 +538,14 @@
                     android:id="@+id/bodyImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="256dp"
                     android:contentDescription="@string/body_desc"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
+                    app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/common_cropped" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -543,21 +561,26 @@
                     android:contentDescription="@string/eyes_desc"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.54"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.32999998"
+                    app:layout_constraintVertical_bias="0.42000002"
                     app:srcCompat="@drawable/eyes_glasses" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </FrameLayout>
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/new_game_btn" />
+        android:layout_marginTop="20dp"
+        android:text="@string/new_game_btn"
+        android:translationY="-0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/characterCustomization" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
