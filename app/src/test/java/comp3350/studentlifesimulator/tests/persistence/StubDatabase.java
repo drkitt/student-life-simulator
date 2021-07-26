@@ -107,7 +107,7 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         for (int i = 0; i < courseList.size(); i++) {
             tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName(),
-                            courseList.get(i).getClassDays() , courseList.get(i).getClassTime()));
+                            courseList.get(i).getClassDays(), courseList.get(i).getClassTime()));
         }
 
         return tempCourses;

@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.objects.Weekday;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import static org.junit.Assert.*;
@@ -42,26 +43,41 @@ public class TestDatabase extends TestCase {
                 "Introductory Computer Science 1",
                 db.getCourses().get(0).getCourseName()
         );
+        assertEquals(32, db.getCourses().get(0).getClassTime());
+        assertTrue(db.getCourses().get(0).getClassDays().contains(Weekday.Monday));
+        assertTrue(db.getCourses().get(0).getClassDays().contains(Weekday.Wednesday));
         assertEquals("COMP1020", db.getCourses().get(1).getCourseID());
         assertEquals(
                 "Introductory Computer Science 2",
                 db.getCourses().get(1).getCourseName()
         );
+        assertEquals(72, db.getCourses().get(1).getClassTime());
+        assertTrue(db.getCourses().get(1).getClassDays().contains(Weekday.Thursday));
+        assertTrue(db.getCourses().get(1).getClassDays().contains(Weekday.Friday));
         assertEquals("COMP2140", db.getCourses().get(2).getCourseID());
         assertEquals(
                 "Data Structures and Algorithms",
                 db.getCourses().get(2).getCourseName()
         );
+        assertEquals(40, db.getCourses().get(2).getClassTime());
+        assertTrue(db.getCourses().get(2).getClassDays().contains(Weekday.Tuesday));
+        assertTrue(db.getCourses().get(2).getClassDays().contains(Weekday.Thursday));
         assertEquals("COMP2150", db.getCourses().get(3).getCourseID());
         assertEquals(
                 "Object Orientation",
                 db.getCourses().get(3).getCourseName()
         );
+        assertEquals(44, db.getCourses().get(3).getClassTime());
+        assertTrue(db.getCourses().get(3).getClassDays().contains(Weekday.Monday));
+        assertTrue(db.getCourses().get(3).getClassDays().contains(Weekday.Wednesday));
         assertEquals("COMP2160", db.getCourses().get(4).getCourseID());
         assertEquals(
                 "Programming Practices",
                 db.getCourses().get(4).getCourseName()
         );
+        assertEquals(60, db.getCourses().get(4).getClassTime());
+        assertTrue(db.getCourses().get(4).getClassDays().contains(Weekday.Wednesday));
+        assertTrue(db.getCourses().get(4).getClassDays().contains(Weekday.Friday));
 
         assertEquals(0, db.getSelectedCourses().size());
         db.addSelectedCourse(db.getCourses().get(4));
@@ -70,6 +86,9 @@ public class TestDatabase extends TestCase {
                 "Programming Practices",
                 db.getSelectedCourses().get(0).getCourseName()
         );
+        assertEquals(60, db.getSelectedCourses().get(0).getClassTime());
+        assertTrue(db.getSelectedCourses().get(0).getClassDays().contains(Weekday.Wednesday));
+        assertTrue(db.getSelectedCourses().get(0).getClassDays().contains(Weekday.Friday));
 
         db.addSelectedCourse(db.getCourses().get(0));
         db.addSelectedCourse(db.getCourses().get(1));
@@ -81,6 +100,9 @@ public class TestDatabase extends TestCase {
                 "Introductory Computer Science 1",
                 db.getSelectedCourses().get(0).getCourseName()
         );
+        assertEquals(32, db.getSelectedCourses().get(0).getClassTime());
+        assertTrue(db.getSelectedCourses().get(0).getClassDays().contains(Weekday.Monday));
+        assertTrue(db.getSelectedCourses().get(0).getClassDays().contains(Weekday.Wednesday));
         assertFalse(db.removeSelectedCourse(db.getCourses().get(4)));
         db.addSelectedCourse(db.getCourses().get(4));
     }
