@@ -3,6 +3,7 @@ package comp3350.studentlifesimulator.tests.business;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.business.DatabaseManager;
@@ -12,6 +13,7 @@ import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
+import comp3350.studentlifesimulator.objects.Weekday;
 import comp3350.studentlifesimulator.tests.persistence.StubDatabase;
 
 import static org.junit.Assert.*;
@@ -99,7 +101,12 @@ public class TestDatabaseManager extends TestCase {
     public void testUnexpectedDatabaseRoutines() {
         DatabaseServices.openDatabaseAccess(db);
 
-        assertFalse(DatabaseManager.removeCourse(new Course("", "")));
+        assertFalse(DatabaseManager.removeCourse(new Course(
+                "",
+                "",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        )));
         assertEquals(0, DatabaseManager.getSelectedCourses().size());
 
         DatabaseManager.updateStudent(
@@ -133,7 +140,12 @@ public class TestDatabaseManager extends TestCase {
                 NullPointerException.class,
                 ()->DatabaseManager.addCourse(null)
         );
-        DatabaseManager.addCourse(new Course("TEMP", "DATA"));
+        DatabaseManager.addCourse(new Course(
+                "TEMP",
+                "DATA",
+                new ArrayList<>(Collections.singletonList(Weekday.Monday)),
+                32
+        ));
         assertThrows(
                 NullPointerException.class,
                 ()->DatabaseManager.removeCourse(null)
