@@ -9,8 +9,8 @@ public class IntegrationTests {
     public static Test suite() {
         integrationSuite = new TestSuite("Integration Tests");
 
-        integrationSuite.addTestSuite(TestBusinessPersistenceSeam.class);
         integrationSuite.addTestSuite(TestPersistenceDatabaseSeam.class);
+        integrationSuite.addTestSuite(TestBusinessPersistenceSeam.class);
 
         return integrationSuite;
     }

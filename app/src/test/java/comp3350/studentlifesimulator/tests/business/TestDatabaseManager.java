@@ -48,19 +48,19 @@ public class TestDatabaseManager extends TestCase {
         DatabaseManager.addCourse(courses.get(3));
 
         assertEquals(
-                courses.get(0).getCourseID(),
+                "COMP1010",
                 DatabaseManager.getSelectedCourses().get(0).getCourseID()
         );
         assertEquals(
-                courses.get(1).getCourseID(),
+                "COMP1020",
                 DatabaseManager.getSelectedCourses().get(1).getCourseID()
         );
         assertEquals(
-                courses.get(2).getCourseID(),
+                "COMP2140",
                 DatabaseManager.getSelectedCourses().get(2).getCourseID()
         );
         assertEquals(
-                courses.get(3).getCourseID(),
+                "COMP2150",
                 DatabaseManager.getSelectedCourses().get(3).getCourseID()
         );
 
