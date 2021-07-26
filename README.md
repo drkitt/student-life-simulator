@@ -87,3 +87,7 @@ The StateManager was created to maintain the state-switching and restricting the
 For the database implementation, the files: DatabaseAccess, DatabaseAccessInterface, DatabaseServices and DatabaseManager have been created/updated to maintain the persistence of all necessary objects, actions, and state creation.
 Another focus for this iteration was refactoring some tests based on Iteration 1 feedback as well as accounting for testing the persistence and new business objects.
 Alex Kitt worked ahead on game assets for the Character Customization user story, to be included in Iteration 3.
+
+## FAQ / Troubleshooting
+If errors arise around front-end, try uninstalling and re-running the app.
+(This shouldn't happen as all errors encountered during final testing were fixed.)

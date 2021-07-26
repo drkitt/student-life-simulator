@@ -9,6 +9,7 @@ import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.objects.Weekday;
 
 public class StateManager {
 
@@ -116,9 +117,11 @@ public class StateManager {
 
     private static boolean hasClass() {
         boolean classTime = false;
+        Weekday currentDay = Weekday.values()[clock.getDays() % 7];
 
         for (int i = 0; i < studentCourses.size() && !classTime; i++) {
-            classTime = clock.getCurrentTime() == 32 + (i * 4);
+            classTime = studentCourses.get(i).getClassTime() == clock.getCurrentTime() &&
+                    studentCourses.get(i).getClassDays().contains(currentDay);
         }
 
         return classTime;
