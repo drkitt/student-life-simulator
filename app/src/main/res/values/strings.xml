@@ -17,4 +17,48 @@
     <string name="talk_btn">Gossip</string>
     <string name="skip_class_btn">Skip Class</string>
 
+    <string name="character_customization_desc">Customize your character</string>
+
+    <string name="placeholder_btn_desc">Non-functional button for refining the layout</string>
+
+    <string name="eyes_blue_btn_desc">Button to give your character blue eyes</string>
+    <string name="eyes_brown_btn_desc">Button to give your character brown eyes</string>
+    <string name="eyes_green_btn_desc">Button to give your character green eyes</string>
+    <string name="eyes_glasses_btn_desc">Button to give your character glasses</string>
+
+    <string name="hair4_dark_btn_desc">Button to give your character medium-length dark hair</string>
+    <string name="hair1_dark_btn_desc">Button to give your character long dark hair</string>
+    <string name="hair2_dark_btn_desc">Button to give your character a dark afro</string>
+    <string name="hair3_dark_btn_desc">Button to give your character short dark hair</string>
+    <string name="hair5_btn_desc">Button to make your character bald</string>
+
+    <string name="hair4_medium_btn_desc">Button to give your character medium-length brown hair</string>
+    <string name="hair1_medium_btn_desc">Button to give your character long brown hair</string>
+    <string name="hair2_medium_btn_desc">Button to give your character a brown afro</string>
+    <string name="hair3_medium_btn_desc">Button to give your character short brown hair</string>
+    <string name="hair6_btn_desc">Button to give your character a cool hat</string>
+
+    <string name="hair4_light_btn_desc">Button to give your character medium-length blonde hair</string>
+    <string name="hair1_light_btn_desc">Button to give your character long blonde hair</string>
+    <string name="hair2_light_btn_desc">Button to give your character a blonde afro</string>
+    <string name="hair3_light_btn_desc">Button to give your character short blonde hair</string>
+
+    <string name="skin_dark_btn_desc">Button to give your character dark skin</string>
+    <string name="skin_tan_btn_desc">Button to give your character tan skin</string>
+    <string name="skin_fair_btn_desc">Button to give your character dark skin</string>
+    <string name="skin_pink_btn_desc">Button to give your character fair skin</string>
+    <string name="skin_pale_btn_desc">Button to give your character pale skin</string>
+
+    <string name="shirt_red_btn_text">Button to give your character a red shirt</string>
+    <string name="shirt_orange_btn_text">Button to give your character an orange shirt</string>
+    <string name="shirt_green_btn_text">Button to give your character a green shirt</string>
+    <string name="shirt_blue_btn_text">Button to give your character a blue shirt</string>
+    <string name="shirt_purple_btn_text">Button to give your character a purple shirt</string>
+
+    <string name="shirt_desc">Your character\'s shirt</string>
+    <string name="skin_desc">Your character\'s skin colour</string>
+    <string name="hair_desc">Your character\'s hairstyle</string>
+    <string name="mouth_desc">Your character\'s mouth</string>
+    <string name="body_desc">Your character</string>
+    <string name="eyes_desc">Your character\'s eyes</string>
 </resources>
