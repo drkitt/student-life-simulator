@@ -64,6 +64,11 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
         DatabaseManager.updateSkinColour(selectedSkinColour);
         DatabaseManager.updateShirt(selectedShirt);
 
+        System.out.println(selectedEyes);
+        System.out.println(selectedHair);
+        System.out.println(selectedSkinColour);
+        System.out.println(selectedShirt);
+
         Intent nextActivity;
         if (fromNewGame) {
             nextActivity = new Intent(this, CoursesActivity.class);
@@ -75,16 +80,25 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     }
 
     private void loadCharacter() {
+        System.out.println(DatabaseManager.getEyes());
+        System.out.println(DatabaseManager.getHair());
+        System.out.println(DatabaseManager.getSkinColour());
+        System.out.println(DatabaseManager.getShirt());
+
+        selectedEyes = DatabaseManager.getEyes();
         ImageView eyesImage = findViewById(R.id.eyesImage);
-        eyesImage.setImageResource(getResources().getIdentifier(DatabaseManager.getEyes(), "drawable", getPackageName()));
+        eyesImage.setImageResource(getResources().getIdentifier(selectedEyes, "drawable", getPackageName()));
 
+        selectedHair = DatabaseManager.getHair();
         ImageView hairImage = findViewById(R.id.hairImage);
-        hairImage.setImageResource(getResources().getIdentifier(DatabaseManager.getHair(), "drawable", getPackageName()));
+        hairImage.setImageResource(getResources().getIdentifier(selectedHair, "drawable", getPackageName()));
 
+        selectedSkinColour = DatabaseManager.getSkinColour();
         ImageView skinColourImage = findViewById(R.id.skinColourImage);
-        skinColourImage.setImageResource(getResources().getIdentifier(DatabaseManager.getSkinColour(), "drawable", getPackageName()));
+        skinColourImage.setImageResource(getResources().getIdentifier(selectedSkinColour, "drawable", getPackageName()));
 
+        selectedShirt = DatabaseManager.getShirt();
         ImageView shirtImage = findViewById(R.id.shirtImage);
-        shirtImage.setImageResource(getResources().getIdentifier(DatabaseManager.getShirt(), "drawable", getPackageName()));
+        shirtImage.setImageResource(getResources().getIdentifier(selectedShirt, "drawable", getPackageName()));
     }
 }
