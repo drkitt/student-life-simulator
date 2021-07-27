@@ -11,8 +11,7 @@ import com.example.studentlifesimulator.R;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
 
-public class CharacterCustomizationActivity extends AppCompatActivity {
-    String selectedEyes, selectedHair, selectedSkinColour, selectedShirt;
+public class CharacterCustomizationActivity extends CharacterActivity {
     boolean fromNewGame;
 
     @Override
@@ -59,10 +58,7 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     }
 
     public void onSaveClick(View view) {
-        DatabaseManager.updateEyes(selectedEyes);
-        DatabaseManager.updateHair(selectedHair);
-        DatabaseManager.updateSkinColour(selectedSkinColour);
-        DatabaseManager.updateShirt(selectedShirt);
+        saveCharacter();
 
         Intent nextActivity;
         if (fromNewGame) {
@@ -72,23 +68,5 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
             nextActivity = new Intent(this, ApartmentActivity.class);
         }
         startActivity(nextActivity);
-    }
-
-    private void loadCharacter() {
-        selectedEyes = DatabaseManager.getEyes();
-        ImageView eyesImage = findViewById(R.id.eyesImage);
-        eyesImage.setImageResource(getResources().getIdentifier(selectedEyes, "drawable", getPackageName()));
-
-        selectedHair = DatabaseManager.getHair();
-        ImageView hairImage = findViewById(R.id.hairImage);
-        hairImage.setImageResource(getResources().getIdentifier(selectedHair, "drawable", getPackageName()));
-
-        selectedSkinColour = DatabaseManager.getSkinColour();
-        ImageView skinColourImage = findViewById(R.id.skinColourImage);
-        skinColourImage.setImageResource(getResources().getIdentifier(selectedSkinColour, "drawable", getPackageName()));
-
-        selectedShirt = DatabaseManager.getShirt();
-        ImageView shirtImage = findViewById(R.id.shirtImage);
-        shirtImage.setImageResource(getResources().getIdentifier(selectedShirt, "drawable", getPackageName()));
     }
 }
