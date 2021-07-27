@@ -31,6 +31,7 @@ import comp3350.studentlifesimulator.objects.Weekday;
 public class ApartmentActivity extends AppCompatActivity {
     private Time time;
     private Student student;
+    private boolean backPressed;
     private static final int MINUTES_PER_TIME_UNIT = 15;
 
     private Button marathonButton;
@@ -48,6 +49,8 @@ public class ApartmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apartment_activity);
+
+        backPressed = false;
 
         StateManager.initialize();
         time = StateManager.getTime();
@@ -78,11 +81,22 @@ public class ApartmentActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        backPressed = true;
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
 
         StateManager.dataWriteBack();
         Main.closeDBAccess();
+
+        if (backPressed) {
+            Main.openDBAccess();
+        }
     }
 
     @Override
