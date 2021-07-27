@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Assignment/2021 Summer Term/Comp3350/application/student-life-simulator/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
+        <entry key="..\:/Assignment/2021 Summer Term/Comp3350/application/student-life-simulator/app/src/main/res/drawable/ic_launcher_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/Assignment/2021 Summer Term/Comp3350/application/student-life-simulator/app/src/main/res/layout/activity_main.xml" value="0.4441747572815534" />
         <entry key="..\:/Assignment/2021 Summer Term/Comp3350/application/student-life-simulator/app/src/main/res/layout/apartment_activity.xml" value="0.39987864077669905" />
       </map>
     </option>
