@@ -28,7 +28,7 @@ import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.objects.ActionStates;
 import comp3350.studentlifesimulator.objects.Weekday;
 
-public class ApartmentActivity extends AppCompatActivity {
+public class ApartmentActivity extends CharacterActivity {
     private Time time;
     private Student student;
     private boolean backPressed;
@@ -78,6 +78,7 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentTime();
         displayCurrentEnergy();
         displayCurrentScore();
+        loadCharacter();
     }
 
     @Override
