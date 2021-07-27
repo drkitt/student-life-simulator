@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/energyBar" />
 
     <FrameLayout
-        android:id="@+id/apartment"
+        android:id="@+id/background"
         android:layout_width="614dp"
         android:layout_height="502dp"
         android:layout_marginTop="128dp"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/wall"
+            android:id="@+id/backgroundImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="95dp"
