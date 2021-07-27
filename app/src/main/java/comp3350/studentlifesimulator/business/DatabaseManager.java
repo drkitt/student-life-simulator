@@ -79,4 +79,16 @@ public class DatabaseManager {
     public static void updateEyes(String eyesTag) {
         database.updateCharacterAsset(CharacterAssetTypes.EYES.ordinal(), eyesTag);
     }
+
+    public static void updateHair(String hairTag) {
+        database.updateCharacterAsset(CharacterAssetTypes.HAIR.ordinal(), hairTag);
+    }
+
+    public static void updateSkinColour(String skinColourTag) {
+        database.updateCharacterAsset(CharacterAssetTypes.SKIN_COLOUR.ordinal(), skinColourTag);
+    }
+
+    public static void updateShirt(String shirtTag) {
+        database.updateCharacterAsset(CharacterAssetTypes.SHIRT.ordinal(), shirtTag);
+    }
 }
