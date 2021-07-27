@@ -64,11 +64,6 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
         DatabaseManager.updateSkinColour(selectedSkinColour);
         DatabaseManager.updateShirt(selectedShirt);
 
-        System.out.println(selectedEyes);
-        System.out.println(selectedHair);
-        System.out.println(selectedSkinColour);
-        System.out.println(selectedShirt);
-
         Intent nextActivity;
         if (fromNewGame) {
             nextActivity = new Intent(this, CoursesActivity.class);
@@ -80,11 +75,6 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     }
 
     private void loadCharacter() {
-        System.out.println(DatabaseManager.getEyes());
-        System.out.println(DatabaseManager.getHair());
-        System.out.println(DatabaseManager.getSkinColour());
-        System.out.println(DatabaseManager.getShirt());
-
         selectedEyes = DatabaseManager.getEyes();
         ImageView eyesImage = findViewById(R.id.eyesImage);
         eyesImage.setImageResource(getResources().getIdentifier(selectedEyes, "drawable", getPackageName()));
