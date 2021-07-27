@@ -28,7 +28,7 @@ public class CoursesActivity extends AppCompatActivity {
 
         courseList = findViewById(R.id.courses);
 
-        registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.registerButton);
 
         courseArray = DatabaseManager.getAvailableCourses();
         courseList.setAdapter(new ArrayAdapter<>(
@@ -37,7 +37,7 @@ public class CoursesActivity extends AppCompatActivity {
                 courseArray)
         );
 
-        registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(view -> completeRegistration());
     }
 
