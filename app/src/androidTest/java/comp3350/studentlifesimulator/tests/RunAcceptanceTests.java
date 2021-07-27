@@ -7,10 +7,8 @@ import comp3350.studentlifesimulator.tests.acceptance.TimeManagementTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({TimeManagementTest.class})
-public class RunAcceptanceTests
-{
-    public RunAcceptanceTests()
-    {
+public class RunAcceptanceTests {
+    public RunAcceptanceTests() {
         System.out.println("Acceptance Tests");
     }
 }
