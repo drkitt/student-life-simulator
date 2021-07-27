@@ -45,6 +45,8 @@ public class CoursesActivity extends AppCompatActivity {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
         int numOfCoursesSelected = 0;
 
+        apartmentActivity.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+
         for (int index = 0; index < courseArray.size(); index++) {
             if (courseList.isItemChecked(index)) {
                 numOfCoursesSelected++;
@@ -67,6 +69,7 @@ public class CoursesActivity extends AppCompatActivity {
         }
         else {
             startActivity(apartmentActivity);
+            this.finish();
         }
     }
 }
