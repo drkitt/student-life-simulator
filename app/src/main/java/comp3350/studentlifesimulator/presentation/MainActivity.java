@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Making the new game button go to the character customization activity temporarily, for testing purposes
         nextActivity = new Intent(this, CharacterCustomizationActivity.class);
+        nextActivity.putExtra("fromNewGame", true);
 
         startActivity(nextActivity);
     }

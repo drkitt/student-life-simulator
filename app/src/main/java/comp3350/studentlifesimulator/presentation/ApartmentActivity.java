@@ -1,5 +1,6 @@
 package comp3350.studentlifesimulator.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -102,6 +103,13 @@ public class ApartmentActivity extends CharacterActivity {
         super.onResume();
 
         Main.openDBAccess();
+        loadCharacter();
+    }
+
+    public void onCustomizeButtonClick(View view) {
+        Intent nextActivity = new Intent(this, CharacterCustomizationActivity.class);
+        nextActivity.putExtra("fromNewGame", false);
+        startActivity(nextActivity);
     }
 
     private void setActionButtons(ActionStates curState, Dictionary<String, Action> actionList) {

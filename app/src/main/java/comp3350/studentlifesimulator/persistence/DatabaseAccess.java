@@ -231,7 +231,6 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 currentTime = results1.getInt("CURRENTTIME");
                 timeInDay = results1.getInt("TIMEINDAY");
                 days = results1.getInt("DAYS");
-                System.out.println("Current Time: " + currentTime);
                 time = new Time(currentTime + (timeInDay * (days - 1)), timeInDay);
             }
         }

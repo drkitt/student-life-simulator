@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.studentlifesimulator.R;
 
+import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 
 public class CharacterCustomizationActivity extends CharacterActivity {
@@ -49,13 +50,11 @@ public class CharacterCustomizationActivity extends CharacterActivity {
     public void onSaveClick(View view) {
         saveCharacter();
 
-        Intent nextActivity;
         if (fromNewGame) {
-            nextActivity = new Intent(this, CoursesActivity.class);
+            startActivity(new Intent(this, CoursesActivity.class));
         }
         else {
-            nextActivity = new Intent(this, ApartmentActivity.class);
+            finish();
         }
-        startActivity(nextActivity);
     }
 }

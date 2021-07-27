@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studentlifesimulator.R;
 
+import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 
 public abstract class CharacterActivity extends AppCompatActivity {
@@ -31,6 +32,7 @@ public abstract class CharacterActivity extends AppCompatActivity {
     }
 
     protected void saveCharacter() {
+        Main.openDBAccess();
         DatabaseManager.updateEyes(selectedEyes);
         DatabaseManager.updateHair(selectedHair);
         DatabaseManager.updateSkinColour(selectedSkinColour);
