@@ -24,13 +24,26 @@ import comp3350.studentlifesimulator.application.Main;
 
 public class MainActivity extends AppCompatActivity {
     Button newGame, continueGame, credits, howToPlay;
-    boolean newGamePressed = false;
+    boolean newGamePressed;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initialize();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initialize();
+    }
+
+    private void initialize() {
+        newGamePressed = false;
 
         copyDatabaseToDevice();
         Main.openDBAccess();
@@ -40,16 +53,20 @@ public class MainActivity extends AppCompatActivity {
         credits = findViewById(R.id.creditsButton);
         howToPlay = findViewById(R.id.howToPlayButton);
 
-        if (Main.checkPreviousData()){
+        if (Main.checkPreviousData()) {
             continueGame.setVisibility(View.VISIBLE);
+        }
+        else {
+            continueGame.setVisibility(View.INVISIBLE);
         }
 
         newGame.setOnClickListener(v -> {
             newGamePressed = true;
+            Main.closeDBAccess();
             copyDatabaseToDevice();
+            Main.openDBAccess();
             switchActivity();
-
-        });//
+        });
         continueGame.setOnClickListener(View -> switchActivity());
 
         credits.setOnClickListener(v -> {
@@ -70,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.setTitle("How To Play");
             alertDialog.setMessage(getString(R.string.how_to_play));
 
-            //noinspection deprecation
-            alertDialog.setButton("I Know", new DialogInterface.OnClickListener() {
+            alertDialog.setButton("Close", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
 
                 }
@@ -79,20 +95,16 @@ public class MainActivity extends AppCompatActivity {
             alertDialog.show();
 
         });
-
     }
 
-    private void switchActivity() {//nextActivity = new Intent(this, ApartmentActivity.class);
+    private void switchActivity() {
         Intent nextActivity;
 
-        System.out.println("Data " + Main.checkPreviousData());
-
-
-        if (Main.checkPreviousData()) {
-            nextActivity = new Intent(this, ApartmentActivity.class);
+        if (!Main.checkPreviousData() || newGamePressed) {
+            nextActivity = new Intent(this, CoursesActivity.class);
         }
         else {
-            nextActivity = new Intent(this, CoursesActivity.class);
+            nextActivity = new Intent(this, ApartmentActivity.class);
         }
         startActivity(nextActivity);
     }
@@ -137,15 +149,11 @@ public class MainActivity extends AppCompatActivity {
             buffer = new char[1024];
             outFile = new File(copyPath);
 
-            System.out.println(outFile.exists());
-            System.out.println(newGamePressed);
-
             if (outFile.exists() && newGamePressed){
                 outFile.delete();
-                System.out.println("In if");
             }
 
-            if (!outFile.exists() && !newGamePressed) {
+            if (!outFile.exists()) {
                 in = new InputStreamReader(assetManager.open(asset));
                 out = new FileWriter(outFile);
 
