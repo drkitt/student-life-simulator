@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.application.Main;
@@ -402,6 +401,49 @@ public class TestPersistenceDatabaseSeam extends TestCase {
             assertEquals(1, db.getTime().getDays());
             assertEquals(96, db.getTime().getTimePerDay());
             assertEquals(24, db.getTime().getStartTime());
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        DatabaseServices.closeDatabaseAccess();
+    }
+
+    public void testCharacterAssetPersistence() {
+        ResultSet results;
+
+        initializeDB();
+
+        testDb.testCharacterAssets();
+        DatabaseServices.closeDatabaseAccess();
+        initializeDB();
+        try {
+            results = statement1.executeQuery("SELECT * FROM CHARACTERASSETS");
+            assertTrue(results.next());
+            assertEquals("eye_string", results.getString("ASSETTAG"));
+            assertTrue(results.next());
+            assertEquals("hair_string", results.getString("ASSETTAG"));
+            assertTrue(results.next());
+            assertEquals("skin_string", results.getString("ASSETTAG"));
+            assertTrue(results.next());
+            assertEquals("shirt_string", results.getString("ASSETTAG"));
+
+            statement1.executeUpdate(
+                    "UPDATE CHARACTERASSETS SET ASSETTAG = 'eyes_glasses' WHERE ATTRIBUTETYPE = 0"
+            );
+            statement1.executeUpdate(
+                    "UPDATE CHARACTERASSETS SET ASSETTAG = 'hair4_medium' WHERE ATTRIBUTETYPE = 1"
+            );
+            statement1.executeUpdate(
+                    "UPDATE CHARACTERASSETS SET ASSETTAG = 'skin_fair' WHERE ATTRIBUTETYPE = 2"
+            );
+            statement1.executeUpdate(
+                    "UPDATE CHARACTERASSETS SET ASSETTAG = 'shirt_purple_featuring_whee' WHERE ATTRIBUTETYPE = 3"
+            );
+            assertEquals("eyes_glasses", db.getCharacterAsset(0));
+            assertEquals("hair4_medium", db.getCharacterAsset(1));
+            assertEquals("skin_fair", db.getCharacterAsset(2));
+            assertEquals("shirt_purple_featuring_whee", db.getCharacterAsset(3));
         }
         catch (SQLException e) {
             e.printStackTrace();

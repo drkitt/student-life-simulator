@@ -69,6 +69,26 @@ public class TestDatabaseManager extends TestCase {
         DatabaseServices.closeDatabaseAccess();
     }
 
+    public void testCharacterCreation() {
+        DatabaseServices.openDatabaseAccess(db);
+
+        assertEquals("eyes_glasses", DatabaseManager.getEyes());
+        assertEquals("hair4_medium", DatabaseManager.getHair());
+        assertEquals("skin_fair", DatabaseManager.getSkinColour());
+        assertEquals("shirt_purple_featuring_whee", DatabaseManager.getShirt());
+
+        DatabaseManager.updateEyes("eye_string");
+        DatabaseManager.updateHair("hair_string");
+        DatabaseManager.updateSkinColour("skin_string");
+        DatabaseManager.updateShirt("shirt_string");
+        assertEquals("eye_string", DatabaseManager.getEyes());
+        assertEquals("hair_string", DatabaseManager.getHair());
+        assertEquals("skin_string", DatabaseManager.getSkinColour());
+        assertEquals("shirt_string", DatabaseManager.getShirt());
+
+        DatabaseServices.closeDatabaseAccess();
+    }
+
     public void testStandardSavingRoutine() {
         DatabaseServices.openDatabaseAccess(db);
 

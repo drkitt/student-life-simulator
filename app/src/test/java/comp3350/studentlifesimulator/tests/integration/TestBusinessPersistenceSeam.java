@@ -134,6 +134,29 @@ public class TestBusinessPersistenceSeam extends TestCase {
         DatabaseServices.closeDatabaseAccess();
     }
 
+    public void testCharacterAssetAccess() {
+        initializeDB();
+
+        testDatabaseManager.testCharacterCreation();
+        DatabaseServices.closeDatabaseAccess();
+        initializeDB();
+        assertEquals("eye_string", db.getCharacterAsset(0));
+        assertEquals("hair_string", db.getCharacterAsset(1));
+        assertEquals("skin_string", db.getCharacterAsset(2));
+        assertEquals("shirt_string", db.getCharacterAsset(3));
+
+        db.updateCharacterAsset(0, "eyes_glasses");
+        db.updateCharacterAsset(1, "hair4_medium");
+        db.updateCharacterAsset(2, "skin_fair");
+        db.updateCharacterAsset(3, "shirt_purple_featuring_whee");
+        assertEquals("eyes_glasses", DatabaseManager.getEyes());
+        assertEquals("hair4_medium", DatabaseManager.getHair());
+        assertEquals("skin_fair", DatabaseManager.getSkinColour());
+        assertEquals("shirt_purple_featuring_whee", DatabaseManager.getShirt());
+
+        DatabaseServices.closeDatabaseAccess();
+    }
+
     private void initializeDB() {
         testDatabaseManager = new TestDatabaseManager(null);
 

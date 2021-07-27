@@ -145,4 +145,20 @@ public class TestDatabase extends TestCase {
         assertEquals(16, db.getActions(3).get("Sleep").getTimeUnit());
         assertEquals(6, db.getActions(3).get("Sleep").getPointsUnit());
     }
+
+    public void testCharacterAssets() {
+        assertEquals("eyes_glasses", db.getCharacterAsset(0));
+        assertEquals("hair4_medium", db.getCharacterAsset(1));
+        assertEquals("skin_fair", db.getCharacterAsset(2));
+        assertEquals("shirt_purple_featuring_whee", db.getCharacterAsset(3));
+
+        db.updateCharacterAsset(0, "eye_string");
+        db.updateCharacterAsset(1, "hair_string");
+        db.updateCharacterAsset(2, "skin_string");
+        db.updateCharacterAsset(3, "shirt_string");
+        assertEquals("eye_string", db.getCharacterAsset(0));
+        assertEquals("hair_string", db.getCharacterAsset(1));
+        assertEquals("skin_string", db.getCharacterAsset(2));
+        assertEquals("shirt_string", db.getCharacterAsset(3));
+    }
 }
