@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Course;
+import comp3350.studentlifesimulator.objects.Weekday;
 
 public class CoursesActivity extends AppCompatActivity {
     ListView courseList;
@@ -37,13 +38,14 @@ public class CoursesActivity extends AppCompatActivity {
                 courseArray)
         );
 
-        registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(view -> completeRegistration());
     }
 
     private void completeRegistration() {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
         int numOfCoursesSelected = 0;
+
+        apartmentActivity.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
 
         for (int index = 0; index < courseArray.size(); index++) {
             if (courseList.isItemChecked(index)) {
@@ -67,6 +69,7 @@ public class CoursesActivity extends AppCompatActivity {
         }
         else {
             startActivity(apartmentActivity);
+            this.finish();
         }
     }
 }
