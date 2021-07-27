@@ -23,20 +23,9 @@ public class CharacterCustomizationActivity extends CharacterActivity {
     }
 
     public void setEyes(View view) {
-        System.out.println(view.getTag().toString());
-
         ImageView eyesImage = findViewById(R.id.eyesImage);
-//        eyesImage.setImageDrawable(((ImageView) view).getDrawable());
-        // TODO: Change all butttons' tags to their file names, uncomment the above to restore the correct behaviour, and use the below as a base to save the resource name and load the image based on it later
-
-        String filename = view.getTag().toString();
-        int resID = getResources().getIdentifier(filename, "drawable", getPackageName());
-
-        selectedEyes = filename;
-
-        System.out.println(resID);
-
-        eyesImage.setImageResource(resID);
+        selectedEyes = view.getTag().toString();
+        eyesImage.setImageDrawable(((ImageView) view).getDrawable());
     }
 
     public void setHair(View view) {
