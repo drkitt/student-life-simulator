@@ -12,13 +12,23 @@
     <string name="edit_btn_desc">Button to edit the student</string>
     <string name="student_desc">The student</string>
     <string name="register_btn">REGISTER</string>
-    <string name="new_game_btn">Start</string>
     <string name="character_save_btn">Save</string>
+    <string name="new_game_btn">New Game</string>
     <string name="menu_desc">Select courses to be enrolled in</string>
     <string name="attend_btn">Attend</string>
     <string name="listen_btn">Listen</string>
     <string name="talk_btn">Gossip</string>
     <string name="skip_class_btn">Skip Class</string>
+    <string name="continue_game_btn">Continue</string>
+    <string name="credits_btn">Credits</string>
+    <string name="how_to_play_btn">How To Play</string>
+    <string name="dialog_credits">
+        Alex Kitt\nCaleb Beynon\nHaotian Chen\nKyle Calinisan\nOghenekome Egbedi
+    </string>>
+
+    <string name="how_to_play">
+        click buttons to make actions\nchoose good options will get points\nchoose bad options will lose points
+    </string>>
 
     <string name="character_customization_desc">Customize your character</string>
 

@@ -2,10 +2,14 @@ package comp3350.studentlifesimulator.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.studentlifesimulator.R;
@@ -18,34 +22,90 @@ import java.io.InputStreamReader;
 import comp3350.studentlifesimulator.application.Main;
 
 public class MainActivity extends AppCompatActivity {
-    Button newGame;
+    Button newGame, continueGame, credits, howToPlay;
+    boolean newGamePressed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initialize();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initialize();
+    }
+
+    private void initialize() {
+        newGamePressed = false;
+
         copyDatabaseToDevice();
         Main.openDBAccess();
 
         newGame = findViewById(R.id.newGameButton);
-        newGame.setOnClickListener(view -> switchActivity());
+        continueGame = findViewById(R.id.continueButton);
+        credits = findViewById(R.id.creditsButton);
+        howToPlay = findViewById(R.id.howToPlayButton);
+
+        if (Main.checkPreviousData()) {
+            continueGame.setVisibility(View.VISIBLE);
+        }
+        else {
+            continueGame.setVisibility(View.INVISIBLE);
+        }
+
+        newGame.setOnClickListener(v -> {
+            newGamePressed = true;
+            Main.closeDBAccess();
+            copyDatabaseToDevice();
+            Main.openDBAccess();
+            switchActivity();
+        });
+        continueGame.setOnClickListener(View -> switchActivity());
+
+        credits.setOnClickListener(v -> {
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+            alertDialog.setTitle("Credits");
+            alertDialog.setMessage(getString(R.string.dialog_credits));
+
+            alertDialog.setButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                }
+            });
+            alertDialog.show();
+        });
+
+        howToPlay.setOnClickListener(v ->{
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("How To Play");
+            alertDialog.setMessage(getString(R.string.how_to_play));
+
+            alertDialog.setButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+
+                }
+            });
+            alertDialog.show();
+
+        });
     }
 
     private void switchActivity() {
         Intent nextActivity;
 
-        if (Main.checkPreviousData()) {
-            nextActivity = new Intent(this, ApartmentActivity.class);
+        if (!Main.checkPreviousData() || newGamePressed) {
+            nextActivity = new Intent(this, CharacterCustomizationActivity.class);
+            nextActivity.putExtra("fromNewGame", true);
         }
         else {
-            nextActivity = new Intent(this, CoursesActivity.class);
+            nextActivity = new Intent(this, ApartmentActivity.class);
         }
-
-        // Making the new game button go to the character customization activity temporarily, for testing purposes
-        nextActivity = new Intent(this, CharacterCustomizationActivity.class);
-        nextActivity.putExtra("fromNewGame", true);
-
         startActivity(nextActivity);
     }
 
@@ -87,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
             copyPath = targetDirectory.toString() + "/" + components[components.length - 1];
             buffer = new char[1024];
             outFile = new File(copyPath);
+
+            if (outFile.exists() && newGamePressed){
+                outFile.delete();
+            }
 
             if (!outFile.exists()) {
                 in = new InputStreamReader(assetManager.open(asset));
