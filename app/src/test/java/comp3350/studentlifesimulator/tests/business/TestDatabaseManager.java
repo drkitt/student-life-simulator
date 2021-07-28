@@ -12,18 +12,27 @@ import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 import comp3350.studentlifesimulator.objects.Weekday;
 import comp3350.studentlifesimulator.tests.persistence.StubDatabase;
 
 import static org.junit.Assert.*;
 
 public class TestDatabaseManager extends TestCase {
+    DatabaseAccessInterface db;
+
     public TestDatabaseManager(String arg0) {
         super(arg0);
+
+        db = new StubDatabase();
+    }
+
+    public void setDB(DatabaseAccessInterface database) {
+        db = database;
     }
 
     public void testStandardCourseSelection() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
         ArrayList<Course> courses = DatabaseManager.getAvailableCourses();
 
         assertEquals("COMP1010", courses.get(0).getCourseID());
@@ -41,27 +50,47 @@ public class TestDatabaseManager extends TestCase {
         DatabaseManager.addCourse(courses.get(3));
 
         assertEquals(
-                courses.get(0).getCourseID(),
+                "COMP1010",
                 DatabaseManager.getSelectedCourses().get(0).getCourseID()
         );
         assertEquals(
-                courses.get(1).getCourseID(),
+                "COMP1020",
                 DatabaseManager.getSelectedCourses().get(1).getCourseID()
         );
         assertEquals(
-                courses.get(2).getCourseID(),
+                "COMP2140",
                 DatabaseManager.getSelectedCourses().get(2).getCourseID()
         );
         assertEquals(
-                courses.get(3).getCourseID(),
+                "COMP2150",
                 DatabaseManager.getSelectedCourses().get(3).getCourseID()
         );
 
         DatabaseServices.closeDatabaseAccess();
     }
 
+    public void testCharacterCreation() {
+        DatabaseServices.openDatabaseAccess(db);
+
+        assertEquals("eyes_glasses", DatabaseManager.getEyes());
+        assertEquals("hair4_medium", DatabaseManager.getHair());
+        assertEquals("skin_fair", DatabaseManager.getSkinColour());
+        assertEquals("shirt_purple_featuring_whee", DatabaseManager.getShirt());
+
+        DatabaseManager.updateEyes("eye_string");
+        DatabaseManager.updateHair("hair_string");
+        DatabaseManager.updateSkinColour("skin_string");
+        DatabaseManager.updateShirt("shirt_string");
+        assertEquals("eye_string", DatabaseManager.getEyes());
+        assertEquals("hair_string", DatabaseManager.getHair());
+        assertEquals("skin_string", DatabaseManager.getSkinColour());
+        assertEquals("shirt_string", DatabaseManager.getShirt());
+
+        DatabaseServices.closeDatabaseAccess();
+    }
+
     public void testStandardSavingRoutine() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
 
         assertEquals(24, DatabaseManager.getTime().getCurrentTime());
         assertEquals(0, DatabaseManager.getStudent().getScore());
@@ -90,7 +119,7 @@ public class TestDatabaseManager extends TestCase {
     }
 
     public void testUnexpectedDatabaseRoutines() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
 
         assertFalse(DatabaseManager.removeCourse(new Course(
                 "",
@@ -109,7 +138,7 @@ public class TestDatabaseManager extends TestCase {
     }
 
     public void testInvalidDatabaseInteractions() {
-        DatabaseServices.openDatabaseAccess(new StubDatabase());
+        DatabaseServices.openDatabaseAccess(db);
 
         assertThrows(
                 NullPointerException.class,

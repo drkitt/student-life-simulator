@@ -18,8 +18,12 @@ public class TimeFormatter {
         time = new Time(newTime , 96);
     }
 
-    public int getHour() {
-        int hour = twentyFourHour();
+    public int getHour24() {
+        return time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
+    }
+
+    public int getHour12() {
+        int hour = getHour24();
 
         if (hour > 12) {
             hour -= 12;
@@ -35,11 +39,11 @@ public class TimeFormatter {
     public String getSuffix() {
         String suffix;
 
-        if (twentyFourHour() < 12) {
+        if (getHour24() < 12) {
             suffix = "AM";
         }
         else {
-            if (twentyFourHour() > 12) {
+            if (getHour24() > 12) {
                 decreaseHour();
             }
             suffix = "PM";
@@ -64,10 +68,6 @@ public class TimeFormatter {
     }
 
     public int  decreaseHour(){
-        return  this.getHour() - 12;
-    }
-
-    private int twentyFourHour() {
-        return time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
+        return  this.getHour12() - 12;
     }
 }

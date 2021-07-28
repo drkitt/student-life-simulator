@@ -43,7 +43,7 @@ public class Course {
     }
 
     public String toString() {
-        String courseTime = "";
+        StringBuilder courseTime = new StringBuilder();
         TimeFormatter timeForClass = new TimeFormatter(classTime);
         String minute;
 
@@ -57,18 +57,18 @@ public class Course {
         for(int index = 0; index < classDays.size(); index++) {
 
             if(classDays.get(index) == Weekday.Thursday) {
-                courseTime += "TR";
+                courseTime.append("TR");
             }
             else {
-                courseTime += classDays.get(index).name().charAt(0) ;
+                courseTime.append(classDays.get(index).name().charAt(0));
             }
 
             if(index != classDays.size() - 1) {
-                courseTime += ", ";
+                courseTime.append(", ");
             }
         }
         return courseID + " - "+ courseName + "\n"
-                + courseTime + " - "+ timeForClass.getHour() + ":"+ minute + " "
+                + courseTime + " - "+ timeForClass.getHour12() + ":"+ minute + " "
                 + timeForClass.getSuffix() ;
     }
 
