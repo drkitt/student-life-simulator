@@ -1,5 +1,6 @@
 package comp3350.studentlifesimulator.tests.acceptance;
 
+import androidx.test.espresso.Espresso;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -13,10 +14,12 @@ import comp3350.studentlifesimulator.presentation.MainActivity;
 
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
+import static org.hamcrest.Matchers.anything;
 
-//import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -25,55 +28,257 @@ public class TimeManagementTest {
     @Rule
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(MainActivity.class);
 
-    // TODO: move this method to game progression test
-    @Test
-    public void testStartNewGame() {
-        // TODO: do we want to put the title of the app on the screen for testing?
-        // onView(withText("Student Life Simulator")).check(matches(isDisplayed()));
-        onView(withId(R.id.newGameButton)).check(matches(isDisplayed())).check(matches(isEnabled()));
-        //onView(withText(R.id.creditsButton)).check(matches(isDisplayed())).check(matches(isEnabled()));
-
-        // TODO: double-check button visibility
-        // if INVISIBLE:
-        // onView(withText("Continue")).check(matches(not(isDisplayed())));
-        // if GONE/is not in the layout at all
-        onView(withText("Continue")).check(doesNotExist());
-    }
-
     @Test
     public void testPartTimeStudent() {
         onView(withId(R.id.newGameButton)).perform(click());
-        // TODO: Take tags for each attribute
-        // onView(withTagKey(equalTo(R.id.)))
-        // onView(withTagKey(equalTo(R.id.)))
-        // onView(withTagKey(equalTo(R.id.)))
-        // onView(withTagKey(equalTo(R.id.)))
-        onView(withText("Continue")).perform(click());
-        onView(withText("Select courses")).check(matches(isDisplayed()));
+        onView(withText("Customize your character")).check(matches(isDisplayed()));
+
+        onView(withText("Save")).perform(click());
+        onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
 
         onView(withId(R.id.registerButton)).perform(click());
-        // confirm toast/tooltip
+        onView(withText("Pick a course!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
+        onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
 
-        onView(withText("COMP1010")).perform(click());
-        onView(withText("COMP1020")).perform(click());
-        onView(withText(R.id.registerButton)).perform(click());
-        onView(withText("Week 1")).check(matches(isDisplayed()));
-        onView(withText("Day 1")).check(matches(isDisplayed()));
-        onView(withText("6:00 AM")).check(matches(isDisplayed()));
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(3).perform(click());
+        onView(withId(R.id.registerButton)).perform(click());
+        onView(withText("6:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("8:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Attend")).perform(click());
+        onView(withText("Gossip")).check(matches(isDisplayed()));
+        onView(withText("Listen")).check(matches(isDisplayed()));
+        onView(withText("Quick Study")).check(matches(isDisplayed()));
+        onView(withText("Nap")).check(matches(isDisplayed()));
+
+        onView(withText("Listen")).perform(click());
+        onView(withText("9:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("11:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Attend")).perform(click());
+        onView(withText("Gossip")).check(matches(isDisplayed()));
+        onView(withText("Listen")).check(matches(isDisplayed()));
+        onView(withText("Quick Study")).check(matches(isDisplayed()));
+        onView(withText("Nap")).check(matches(isDisplayed()));
+
+        onView(withText("Listen")).perform(click());
+        onView(withText("12:00 PM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Hibernate")).perform(click());
+        onView(withText("0:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+
+        Espresso.pressBack();
+        Espresso.pressBack();
+        onView(withText("Continue")).check(matches(isDisplayed()));
     }
 
-//    @Test
-//    public void testFullTimeStudent() {
-//
-//    }
-//
-//    @Test
-//    public void testSleeperStudent() {
-//
-//    }
-//
-//    @Test
-//    public void testStudyAndSkipStudent() {
-//
-//    }
+    @Test
+    public void testFullTimeStudent() {
+        onView(withId(R.id.newGameButton)).perform(click());
+        onView(withText("Customize your character")).check(matches(isDisplayed()));
+
+        onView(withText("Save")).perform(click());
+        onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
+
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(1).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(2).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(3).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(4).perform(click());
+        onView(withId(R.id.registerButton)).perform(click());
+        onView(withText("You can only select a maximum of 4 courses!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
+        onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
+        // De-selecting
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(1).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(2).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(3).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(4).perform(click());
+
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(2).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(3).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(4).perform(click());
+        onView(withId(R.id.registerButton)).perform(click());
+        onView(withText("6:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("8:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Attend")).perform(click());
+        onView(withText("Gossip")).check(matches(isDisplayed()));
+        onView(withText("Listen")).check(matches(isDisplayed()));
+        onView(withText("Quick Study")).check(matches(isDisplayed()));
+        onView(withText("Nap")).check(matches(isDisplayed()));
+
+        onView(withText("Listen")).perform(click());
+        onView(withText("9:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Nap")).perform(click());
+        onView(withText("10:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("11:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Skip Class")).perform(click());
+        onView(withText("Attend")).check(matches(not(isDisplayed())));
+        onView(withText("Skip Class")).check(matches(not(isDisplayed())));
+
+        onView(withText("Study")).perform(click());
+        onView(withText("Study")).perform(click());
+        onView(withText("7:00 PM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Hibernate")).perform(click());
+        onView(withText("7:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("10:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Attend")).perform(click());
+        onView(withText("Gossip")).check(matches(isDisplayed()));
+        onView(withText("Listen")).check(matches(isDisplayed()));
+        onView(withText("Quick Study")).check(matches(isDisplayed()));
+        onView(withText("Nap")).check(matches(isDisplayed()));
+
+        onView(withText("Gossip")).perform(click());
+        onView(withText("11:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Marathon Study")).perform(click());
+        onView(withText("7:00 PM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Study")).perform(click());
+        onView(withText("You're out of energy!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
+        onView(withText("7:00 PM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Hibernate")).perform(click());
+        onView(withText("7:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("8:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Attend")).perform(click());
+        onView(withText("Gossip")).check(matches(isDisplayed()));
+        onView(withText("Listen")).check(matches(isDisplayed()));
+        onView(withText("Quick Study")).check(matches(isDisplayed()));
+        onView(withText("Nap")).check(matches(isDisplayed()));
+
+        onView(withText("Quick Study")).perform(click());
+        onView(withText("9:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        Espresso.pressBack();
+        Espresso.pressBack();
+        onView(withText("Continue")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testSleeperSkipperStudent() {
+        onView(withId(R.id.newGameButton)).perform(click());
+        onView(withText("Customize your character")).check(matches(isDisplayed()));
+
+        onView(withText("Save")).perform(click());
+        onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
+
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(1).perform(click());
+        onView(withId(R.id.registerButton)).perform(click());
+        onView(withText("6:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Hibernate")).check(matches(isDisplayed()));
+
+        onView(withText("Hibernate")).perform(click());
+        onView(withText("6:00 PM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Hibernate")).perform(click());
+        onView(withText("6:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Study")).perform(click());
+        onView(withText("10:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("Nap")).perform(click());
+        onView(withText("8:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Attend")).check(matches(isDisplayed()));
+        onView(withText("Skip Class")).check(matches(isDisplayed()));
+
+        onView(withText("Skip Class")).perform(click());
+        onView(withText("Attend")).check(matches(not(isDisplayed())));
+        onView(withText("Skip Class")).check(matches(not(isDisplayed())));
+
+        onView(withText("Marathon Study")).perform(click());
+        onView(withText("Marathon Study")).perform(click());
+        onView(withText("0:00 AM\nThursday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(not(isDisplayed())));
+        onView(withText("Study")).check(matches(not(isDisplayed())));
+        onView(withText("Quick Study")).check(matches(not(isDisplayed())));
+
+        onView(withText("Hibernate")).perform(click());
+        onView(withText("12:00 PM\nThursday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("Marathon Study")).check(matches(isDisplayed()));
+        onView(withText("Study")).check(matches(isDisplayed()));
+        onView(withText("Quick Study")).check(matches(isDisplayed()));
+
+        Espresso.pressBack();
+        Espresso.pressBack();
+        onView(withText("Continue")).check(matches(isDisplayed()));
+    }
+
 }
