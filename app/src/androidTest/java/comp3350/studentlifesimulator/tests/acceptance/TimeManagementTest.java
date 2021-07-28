@@ -14,6 +14,7 @@ import comp3350.studentlifesimulator.presentation.MainActivity;
 
 import static androidx.test.espresso.Espresso.*;
 import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static org.hamcrest.Matchers.anything;
@@ -36,7 +37,7 @@ public class TimeManagementTest {
         onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
 
         onView(withId(R.id.registerButton)).perform(click());
-        // No change in activity TODO: can we check for the tooltip?
+        onView(withText("Pick a course!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
         onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
 
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
@@ -103,7 +104,7 @@ public class TimeManagementTest {
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(3).perform(click());
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(4).perform(click());
         onView(withId(R.id.registerButton)).perform(click());
-        // No change in activity TODO: can we check for the tooltip?
+        onView(withText("You can only select a maximum of 4 courses!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
         onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
         // De-selecting
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
@@ -180,7 +181,7 @@ public class TimeManagementTest {
         onView(withText("7:00 PM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
 
         onView(withText("Study")).perform(click());
-        // No change in time TODO: can we check for the tooltip?
+        onView(withText("You're out of energy!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
         onView(withText("7:00 PM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
 
         onView(withText("Hibernate")).perform(click());
