@@ -1,10 +1,10 @@
 package comp3350.studentlifesimulator.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,19 +16,16 @@ import com.example.studentlifesimulator.R;
 import java.util.Dictionary;
 import java.util.Locale;
 
-import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
-import comp3350.studentlifesimulator.business.TimeFormatter;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 import comp3350.studentlifesimulator.objects.ActionStates;
-import comp3350.studentlifesimulator.objects.Weekday;
 
-public class ApartmentActivity extends AppCompatActivity {
+public class ApartmentActivity extends CharacterActivity {
     private Time time;
     private Student student;
     private boolean backPressed;
@@ -78,6 +75,8 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentTime();
         displayCurrentEnergy();
         displayCurrentScore();
+        displayCurrentBackground();
+        loadCharacter();
     }
 
     @Override
@@ -104,6 +103,13 @@ public class ApartmentActivity extends AppCompatActivity {
         super.onResume();
 
         Main.openDBAccess();
+        loadCharacter();
+    }
+
+    public void onCustomizeButtonClick(View view) {
+        Intent nextActivity = new Intent(this, CharacterCustomizationActivity.class);
+        nextActivity.putExtra("fromNewGame", false);
+        startActivity(nextActivity);
     }
 
     private void setActionButtons(ActionStates curState, Dictionary<String, Action> actionList) {
@@ -259,6 +265,7 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentTime();
         displayCurrentEnergy();
         displayCurrentScore();
+        displayCurrentBackground();
         setActionButtons(
                 StateManager.getState(),
                 StateManager.getCurrentPossibleActions(StateManager.getState())
@@ -273,7 +280,7 @@ public class ApartmentActivity extends AppCompatActivity {
 
         TimeFormatter timeFormatter = new TimeFormatter();
 
-        hour = timeFormatter.getHour();
+        hour = timeFormatter.getHour12();
         minute = timeFormatter.getMinute();
         weekCount = timeFormatter.getWeekCount();
         suffix = timeFormatter.getSuffix();
@@ -304,5 +311,31 @@ public class ApartmentActivity extends AppCompatActivity {
         String displayedScore = String.format(Locale.getDefault(), "Score: %d", score);
 
         scoreView.setText(displayedScore);
+    }
+
+    private void displayCurrentBackground() {
+        ImageView background = findViewById(R.id.backgroundImage);
+        String filename;
+
+        TimeFormatter timeFormatter = new TimeFormatter();
+        int currentHour = timeFormatter.getHour24();
+        if (currentHour < 5) {
+            filename = "apartment_bg_night";
+        }
+        else if (currentHour < 8) {
+            filename = "apartment_bg_evening";
+        }
+        else if (currentHour < 19) {
+            filename = "apartment_bg_day";
+        }
+        else if (currentHour < 21) {
+            filename = "apartment_bg_evening";
+        }
+        else {
+            filename = "apartment_bg_night";
+        }
+
+        int resID = getResources().getIdentifier(filename, "drawable", getPackageName());
+        background.setImageResource(resID);
     }
 }

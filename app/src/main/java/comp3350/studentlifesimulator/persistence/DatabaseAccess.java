@@ -21,7 +21,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     private final String database;
 
     private Connection connection;
-    private Statement statement1, statement2, statement3, statement4, statement5, statement6;
+    private Statement statement1, statement2, statement3, statement4, statement5, statement6, statement7;
     private ResultSet results1, results2;
     private String command;
 
@@ -42,6 +42,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             statement4 = connection.createStatement();
             statement5 = connection.createStatement();
             statement6 = connection.createStatement();
+            statement7 = connection.createStatement();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -57,6 +58,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 
     public Student getStudent() {
@@ -179,9 +184,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = '" + course.getCourseID() + "'";
-            statement3.executeUpdate(command);
-
-            deleted = true;
+            deleted = statement3.executeUpdate(command) != 0;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -230,7 +233,6 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                 currentTime = results1.getInt("CURRENTTIME");
                 timeInDay = results1.getInt("TIMEINDAY");
                 days = results1.getInt("DAYS");
-                System.out.println("Current Time: " + currentTime);
                 time = new Time(currentTime + (timeInDay * (days - 1)), timeInDay);
             }
         }
@@ -247,6 +249,35 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                     ", TIMEINDAY = " + time.getTimePerDay() + ", DAYS = " + time.getDays() +
                     " WHERE TIMEID = 0";
             statement5.executeUpdate(command);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getCharacterAsset(int type) {
+        String asset = null;
+
+        try {
+            command = "SELECT * FROM CHARACTERASSETS WHERE ATTRIBUTETYPE = " + type;
+            results1 = statement7.executeQuery(command);
+
+            if (results1.next()) {
+                asset = results1.getString("ASSETTAG");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return asset;
+    }
+
+    public void updateCharacterAsset(int type, String newAsset) {
+        try {
+            command = "UPDATE CHARACTERASSETS SET ASSETTAG = '" + newAsset +
+                    "' WHERE ATTRIBUTETYPE = " + type;
+            statement7.executeUpdate(command);
         }
         catch (Exception e) {
             e.printStackTrace();
