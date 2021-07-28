@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 import com.example.studentlifesimulator.R;
 
 import java.io.File;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             nextActivity = new Intent(this, ApartmentActivity.class);
         }
+      
         startActivity(nextActivity);
     }
 
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         FileWriter out;
         int count;
 
+
         for (String asset : assets) {
             components = asset.split("/");
             copyPath = targetDirectory.toString() + "/" + components[components.length - 1];
@@ -167,4 +170,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 }

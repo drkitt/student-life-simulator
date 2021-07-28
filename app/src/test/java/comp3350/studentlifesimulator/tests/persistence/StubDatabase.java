@@ -19,6 +19,7 @@ public class StubDatabase implements DatabaseAccessInterface {
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
     private Dictionary<String, Action>[] actions;
+    private String[] assets;
 
     public void openDB(String databasePath) {
         initializeData();
@@ -30,6 +31,7 @@ public class StubDatabase implements DatabaseAccessInterface {
         courses = null;
         selected = null;
         actions = null;
+        assets = null;
     }
 
     public void updateStudent(Student newStudent) {
@@ -103,11 +105,11 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public String getCharacterAsset(int type) {
-        return null;
+        return assets[type];
     }
 
     public void updateCharacterAsset(int type, String newAsset) {
-        // TODO: Caleb test this lol
+        assets[type] = newAsset;
     }
 
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
@@ -115,7 +117,7 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         for (int i = 0; i < courseList.size(); i++) {
             tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName(),
-                            courseList.get(i).getClassDays() , courseList.get(i).getClassTime()));
+                            courseList.get(i).getClassDays(), courseList.get(i).getClassTime()));
         }
 
         return tempCourses;
@@ -169,6 +171,13 @@ public class StubDatabase implements DatabaseAccessInterface {
         selected = new ArrayList<>();
 
         initializeActions();
+
+        assets = new String[4];
+
+        assets[0] = "eyes_glasses";
+        assets[1] = "hair4_medium";
+        assets[2] = "skin_fair";
+        assets[3] = "shirt_purple_featuring_whee";
     }
 
     private void initializeActions() {

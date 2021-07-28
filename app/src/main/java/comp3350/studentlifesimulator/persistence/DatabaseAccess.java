@@ -60,6 +60,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public Student getStudent() {
         Student student = null;
         String studentName;
@@ -180,9 +184,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = '" + course.getCourseID() + "'";
-            statement3.executeUpdate(command);
-
-            deleted = true;
+            deleted = statement3.executeUpdate(command) != 0;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -258,10 +260,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM CHARACTERASSETS WHERE ATTRIBUTETYPE = " + type;
-            results2 = statement7.executeQuery(command);
+            results1 = statement7.executeQuery(command);
 
-            if (results2.next()) {
-                asset = results2.getString("ASSETTAG");
+            if (results1.next()) {
+                asset = results1.getString("ASSETTAG");
             }
         }
         catch (Exception e) {
