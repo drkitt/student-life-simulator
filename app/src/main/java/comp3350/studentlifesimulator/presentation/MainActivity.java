@@ -101,15 +101,13 @@ public class MainActivity extends AppCompatActivity {
         Intent nextActivity;
 
         if (!Main.checkPreviousData() || newGamePressed) {
-            nextActivity = new Intent(this, CoursesActivity.class);
+            nextActivity = new Intent(this, CharacterCustomizationActivity.class);
+            nextActivity.putExtra("fromNewGame", true);
         }
         else {
             nextActivity = new Intent(this, ApartmentActivity.class);
         }
       
-        // Making the new game button go to the character customization activity temporarily, for testing purposes
-        // nextActivity = new Intent(this, CharacterCustomizationActivity.class);
-
         startActivity(nextActivity);
     }
 

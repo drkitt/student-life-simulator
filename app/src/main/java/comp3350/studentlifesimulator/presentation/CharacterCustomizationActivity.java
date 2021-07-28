@@ -9,10 +9,10 @@ import android.widget.ImageView;
 
 import com.example.studentlifesimulator.R;
 
+import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 
-public class CharacterCustomizationActivity extends AppCompatActivity {
-    String selectedEyes, selectedHair, selectedSkinColour, selectedShirt;
+public class CharacterCustomizationActivity extends CharacterActivity {
     boolean fromNewGame;
 
     @Override
@@ -24,20 +24,9 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     }
 
     public void setEyes(View view) {
-        System.out.println(view.getTag().toString());
-
         ImageView eyesImage = findViewById(R.id.eyesImage);
-//        eyesImage.setImageDrawable(((ImageView) view).getDrawable());
-        // TODO: Change all butttons' tags to their file names, uncomment the above to restore the correct behaviour, and use the below as a base to save the resource name and load the image based on it later
-
-        String filename = view.getTag().toString();
-        int resID = getResources().getIdentifier(filename, "drawable", getPackageName());
-
-        selectedEyes = filename;
-
-        System.out.println(resID);
-
-        eyesImage.setImageResource(resID);
+        selectedEyes = view.getTag().toString();
+        eyesImage.setImageDrawable(((ImageView) view).getDrawable());
     }
 
     public void setHair(View view) {
@@ -59,36 +48,13 @@ public class CharacterCustomizationActivity extends AppCompatActivity {
     }
 
     public void onSaveClick(View view) {
-        DatabaseManager.updateEyes(selectedEyes);
-        DatabaseManager.updateHair(selectedHair);
-        DatabaseManager.updateSkinColour(selectedSkinColour);
-        DatabaseManager.updateShirt(selectedShirt);
+        saveCharacter();
 
-        Intent nextActivity;
         if (fromNewGame) {
-            nextActivity = new Intent(this, CoursesActivity.class);
+            startActivity(new Intent(this, CoursesActivity.class));
         }
         else {
-            nextActivity = new Intent(this, ApartmentActivity.class);
+            finish();
         }
-        startActivity(nextActivity);
-    }
-
-    private void loadCharacter() {
-        selectedEyes = DatabaseManager.getEyes();
-        ImageView eyesImage = findViewById(R.id.eyesImage);
-        eyesImage.setImageResource(getResources().getIdentifier(selectedEyes, "drawable", getPackageName()));
-
-        selectedHair = DatabaseManager.getHair();
-        ImageView hairImage = findViewById(R.id.hairImage);
-        hairImage.setImageResource(getResources().getIdentifier(selectedHair, "drawable", getPackageName()));
-
-        selectedSkinColour = DatabaseManager.getSkinColour();
-        ImageView skinColourImage = findViewById(R.id.skinColourImage);
-        skinColourImage.setImageResource(getResources().getIdentifier(selectedSkinColour, "drawable", getPackageName()));
-
-        selectedShirt = DatabaseManager.getShirt();
-        ImageView shirtImage = findViewById(R.id.shirtImage);
-        shirtImage.setImageResource(getResources().getIdentifier(selectedShirt, "drawable", getPackageName()));
     }
 }

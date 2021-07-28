@@ -7,9 +7,12 @@
     <string name="sleep_btn">Sleep</string>
     <string name="nap_btn">Nap</string>
     <string name="energy_lbl">Energy</string>
-    <string name="background_desc">The student\'s surroundings</string>
+    <string name="background_desc">The student\'s apartment</string>
+    <string name="desk_desc">The student\'s desk and monitor</string>
+    <string name="edit_btn_desc">Button to edit the student</string>
     <string name="student_desc">The student</string>
     <string name="register_btn">REGISTER</string>
+    <string name="character_save_btn">Save</string>
     <string name="new_game_btn">New Game</string>
     <string name="menu_desc">Select courses to be enrolled in</string>
     <string name="attend_btn">Attend</string>
@@ -22,7 +25,10 @@
     <string name="dialog_credits">
         Alex Kitt\nCaleb Beynon\nHaotian Chen\nKyle Calinisan\nOghenekome Egbedi
     </string>
-  
+
+    <string name="how_to_play">
+        click buttons to make actions\nchoose good options will get points\nchoose bad options will lose points
+    </string>
     <string name="character_customization_desc">Customize your character</string>
 
     <string name="placeholder_btn_desc">Non-functional button for refining the layout</string>
@@ -67,8 +73,4 @@
     <string name="mouth_desc">Your character\'s mouth</string>
     <string name="body_desc">Your character</string>
     <string name="eyes_desc">Your character\'s eyes</string>
-
-    <string name="how_to_play">
-        click buttons to make actions\nchoose good options will get points\nchoose bad options will lose points
-    </string>
 </resources>
