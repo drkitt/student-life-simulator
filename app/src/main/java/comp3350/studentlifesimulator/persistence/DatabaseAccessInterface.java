@@ -30,4 +30,8 @@ public interface DatabaseAccessInterface {
     Time getTime();
 
     void updateTime(Time time);
+
+    String getCharacterAsset(int type);
+
+    void updateCharacterAsset(int type, String newAsset);
 }
