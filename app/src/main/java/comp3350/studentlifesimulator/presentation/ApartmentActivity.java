@@ -1,20 +1,21 @@
 package comp3350.studentlifesimulator.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import comp3350.studentlifesimulator.business.TimeFormatter;
 
 import com.example.studentlifesimulator.R;
 
 import java.util.Dictionary;
 import java.util.Locale;
 
-import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.StateManager;
 import comp3350.studentlifesimulator.business.StudentPerformingActions;
@@ -24,9 +25,10 @@ import comp3350.studentlifesimulator.objects.Time;
 
 import comp3350.studentlifesimulator.objects.ActionStates;
 
-public class ApartmentActivity extends AppCompatActivity {
+public class ApartmentActivity extends CharacterActivity {
     private Time time;
     private Student student;
+    private boolean backPressed;
     private static final int MINUTES_PER_TIME_UNIT = 15;
 
     private Button marathonButton;
@@ -44,6 +46,8 @@ public class ApartmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apartment_activity);
+
+        backPressed = false;
 
         StateManager.initialize();
         time = StateManager.getTime();
@@ -71,6 +75,15 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentTime();
         displayCurrentEnergy();
         displayCurrentScore();
+        displayCurrentBackground();
+        loadCharacter();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        backPressed = true;
     }
 
     @Override
@@ -79,6 +92,10 @@ public class ApartmentActivity extends AppCompatActivity {
 
         StateManager.dataWriteBack();
         Main.closeDBAccess();
+
+        if (backPressed) {
+            Main.openDBAccess();
+        }
     }
 
     @Override
@@ -86,6 +103,13 @@ public class ApartmentActivity extends AppCompatActivity {
         super.onResume();
 
         Main.openDBAccess();
+        loadCharacter();
+    }
+
+    public void onCustomizeButtonClick(View view) {
+        Intent nextActivity = new Intent(this, CharacterCustomizationActivity.class);
+        nextActivity.putExtra("fromNewGame", false);
+        startActivity(nextActivity);
     }
 
     private void setActionButtons(ActionStates curState, Dictionary<String, Action> actionList) {
@@ -241,6 +265,7 @@ public class ApartmentActivity extends AppCompatActivity {
         displayCurrentTime();
         displayCurrentEnergy();
         displayCurrentScore();
+        displayCurrentBackground();
         setActionButtons(
                 StateManager.getState(),
                 StateManager.getCurrentPossibleActions(StateManager.getState())
@@ -250,25 +275,25 @@ public class ApartmentActivity extends AppCompatActivity {
 
     private void displayCurrentTime() {
         TextView timeView = findViewById(R.id.currentTime);
-        int hour = time.getCurrentTime() * MINUTES_PER_TIME_UNIT / 60;
-        String suffix;
-        if (hour < 12) {
-            suffix = "AM";
-        }
-        else {
-            if (hour > 12) {
-                hour -= 12;
-            }
-            suffix = "PM";
-        }
-        int minute = time.getCurrentTime() * MINUTES_PER_TIME_UNIT % 60;
+        int hour, minute, weekCount;
+        String suffix, dayInWeek;
+
+        TimeFormatter timeFormatter = new TimeFormatter();
+
+        hour = timeFormatter.getHour12();
+        minute = timeFormatter.getMinute();
+        weekCount = timeFormatter.getWeekCount();
+        suffix = timeFormatter.getSuffix();
+        dayInWeek = timeFormatter.getDayInWeek();
+
         String displayedTime = String.format(
                 Locale.getDefault(),
-                "%d:%02d %s\nDay %d",
+                "%d:%02d %s\n%s\nWeek %d",
                 hour,
                 minute,
                 suffix,
-                time.getDays()
+                dayInWeek,
+                weekCount
         );
 
         timeView.setText(displayedTime);
@@ -286,5 +311,31 @@ public class ApartmentActivity extends AppCompatActivity {
         String displayedScore = String.format(Locale.getDefault(), "Score: %d", score);
 
         scoreView.setText(displayedScore);
+    }
+
+    private void displayCurrentBackground() {
+        ImageView background = findViewById(R.id.backgroundImage);
+        String filename;
+
+        TimeFormatter timeFormatter = new TimeFormatter();
+        int currentHour = timeFormatter.getHour24();
+        if (currentHour < 5) {
+            filename = "apartment_bg_night";
+        }
+        else if (currentHour < 8) {
+            filename = "apartment_bg_evening";
+        }
+        else if (currentHour < 19) {
+            filename = "apartment_bg_day";
+        }
+        else if (currentHour < 21) {
+            filename = "apartment_bg_evening";
+        }
+        else {
+            filename = "apartment_bg_night";
+        }
+
+        int resID = getResources().getIdentifier(filename, "drawable", getPackageName());
+        background.setImageResource(resID);
     }
 }

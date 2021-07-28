@@ -5,9 +5,11 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.objects.Weekday;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -17,6 +19,7 @@ public class StubDatabase implements DatabaseAccessInterface {
     private ArrayList<Course> courses;
     private ArrayList<Course> selected;
     private Dictionary<String, Action>[] actions;
+    private String[] assets;
 
     public void openDB(String databasePath) {
         initializeData();
@@ -28,6 +31,7 @@ public class StubDatabase implements DatabaseAccessInterface {
         courses = null;
         selected = null;
         actions = null;
+        assets = null;
     }
 
     public void updateStudent(Student newStudent) {
@@ -36,7 +40,7 @@ public class StubDatabase implements DatabaseAccessInterface {
     }
 
     public void addSelectedCourse(Course course) {
-        selected.add(new Course(course.getCourseID(), course.getCourseName()));
+        selected.add(new Course(course.getCourseID(), course.getCourseName() , course.getClassDays() , course.getClassTime()));
     }
 
     public boolean removeSelectedCourse(Course course) {
@@ -100,11 +104,20 @@ public class StubDatabase implements DatabaseAccessInterface {
         );
     }
 
+    public String getCharacterAsset(int type) {
+        return assets[type];
+    }
+
+    public void updateCharacterAsset(int type, String newAsset) {
+        assets[type] = newAsset;
+    }
+
     private ArrayList<Course> copyCourseList(ArrayList<Course> courseList) {
         ArrayList<Course> tempCourses = new ArrayList<>();
 
         for (int i = 0; i < courseList.size(); i++) {
-            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName()));
+            tempCourses.add(new Course(courseList.get(i).getCourseID(), courseList.get(i).getCourseName(),
+                            courseList.get(i).getClassDays(), courseList.get(i).getClassTime()));
         }
 
         return tempCourses;
@@ -119,20 +132,52 @@ public class StubDatabase implements DatabaseAccessInterface {
 
         courses = new ArrayList<>();
 
-        course = new Course("COMP1010", "Introductory Computer Science 1");
+        course = new Course(
+                "COMP1010",
+                "Introductory Computer Science 1",
+                new ArrayList<>(Arrays.asList(Weekday.Monday , Weekday.Wednesday)),
+                32
+        );
         courses.add(course);
-        course = new Course("COMP1020", "Introductory Computer Science 2");
+        course = new Course(
+                "COMP1020",
+                "Introductory Computer Science 2",
+                new ArrayList<>(Arrays.asList(Weekday.Thursday , Weekday.Friday)),
+                72
+        );
         courses.add(course);
-        course = new Course("COMP2140", "Data Structures and Algorithms");
+        course = new Course(
+                "COMP2140",
+                "Data Structures and Algorithms",
+                new ArrayList<>(Arrays.asList(Weekday.Tuesday, Weekday.Thursday)),
+                40
+        );
         courses.add(course);
-        course = new Course("COMP2150", "Object Orientation");
+        course = new Course(
+                "COMP2150",
+                "Object Orientation",
+                new ArrayList<>(Arrays.asList(Weekday.Monday, Weekday.Wednesday)),
+                44
+        );
         courses.add(course);
-        course = new Course("COMP2160", "Programming Practices");
+        course = new Course(
+                "COMP2160",
+                "Programming Practices",
+                new ArrayList<>(Arrays.asList(Weekday.Wednesday, Weekday.Friday)),
+                60
+        );
         courses.add(course);
 
         selected = new ArrayList<>();
 
         initializeActions();
+
+        assets = new String[4];
+
+        assets[0] = "eyes_glasses";
+        assets[1] = "hair4_medium";
+        assets[2] = "skin_fair";
+        assets[3] = "shirt_purple_featuring_whee";
     }
 
     private void initializeActions() {

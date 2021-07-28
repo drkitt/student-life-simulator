@@ -5,21 +5,24 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.TreeSet;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
+import comp3350.studentlifesimulator.objects.Weekday;
 
 public class DatabaseAccess implements DatabaseAccessInterface {
     private final String database;
 
     private Connection connection;
-    private Statement statement1, statement2, statement3, statement4, statement5;
-    private ResultSet results;
+    private Statement statement1, statement2, statement3, statement4, statement5, statement6, statement7;
+    private ResultSet results1, results2;
     private String command;
 
     public DatabaseAccess(String databaseName) {
@@ -38,6 +41,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
             statement3 = connection.createStatement();
             statement4 = connection.createStatement();
             statement5 = connection.createStatement();
+            statement6 = connection.createStatement();
+            statement7 = connection.createStatement();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -55,6 +60,10 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         }
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     public Student getStudent() {
         Student student = null;
         String studentName;
@@ -63,12 +72,12 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM STUDENTS";
-            results = statement1.executeQuery(command);
+            results1 = statement1.executeQuery(command);
 
-            if(results.next()) {
-                studentName = results.getString("STUDENTNAME");
-                currEnergy = results.getInt("CURRENTENERGY");
-                score = results.getInt("STUDENTSCORE");
+            if(results1.next()) {
+                studentName = results1.getString("STUDENTNAME");
+                currEnergy = results1.getInt("CURRENTENERGY");
+                score = results1.getInt("STUDENTSCORE");
                 student = new Student(studentName, new EnergyBar(currEnergy), score);
             }
         }
@@ -95,16 +104,27 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         ArrayList<Course> courses = null;
         String courseID;
         String courseName;
+        ArrayList<Weekday> classDays;
+        int classTime;
 
         try {
             command = "SELECT * FROM COURSES";
-            results = statement2.executeQuery(command);
+            results1 = statement2.executeQuery(command);
 
             courses = new ArrayList<>();
-            while (results.next()) {
-                courseID = results.getString("COURSEID");
-                courseName = results.getString("COURSENAME");
-                courses.add(new Course(courseID, courseName));
+            while (results1.next()) {
+                classDays = new ArrayList<>();
+                courseID = results1.getString("COURSEID");
+                courseName = results1.getString("COURSENAME");
+                classTime = results1.getInt("COURSETIME");
+
+                command = "SELECT * FROM COURSEDATES WHERE COURSEID = '" + courseID + "'";
+                results2 = statement6.executeQuery(command);
+                while (results2.next()) {
+                    classDays.add(Weekday.values()[results2.getInt("DAY")]);
+                }
+
+                courses.add(new Course(courseID, courseName , classDays , classTime));
             }
         }
         catch (Exception e) {
@@ -118,16 +138,27 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         ArrayList<Course> courses = null;
         String courseID;
         String courseName;
+        ArrayList<Weekday> classDays;
+        int classTime;
 
         try {
             command = "SELECT * FROM SELECTEDCOURSES";
-            results = statement3.executeQuery(command);
+            results1 = statement3.executeQuery(command);
 
             courses = new ArrayList<>();
-            while (results.next()) {
-                courseID = results.getString("COURSEID");
-                courseName = results.getString("COURSENAME");
-                courses.add(new Course(courseID, courseName));
+            while (results1.next()) {
+                classDays = new ArrayList<>();
+                courseID = results1.getString("COURSEID");
+                courseName = results1.getString("COURSENAME");
+                classTime = results1.getInt("COURSETIME");
+
+                command = "SELECT * FROM COURSEDATES WHERE COURSEID = '" + courseID + "'";
+                results2 = statement6.executeQuery(command);
+                while (results2.next()) {
+                    classDays.add(Weekday.values()[results2.getInt("DAY")]);
+                }
+
+                courses.add(new Course(courseID, courseName , classDays , classTime));
             }
         }
         catch (Exception e) {
@@ -140,7 +171,7 @@ public class DatabaseAccess implements DatabaseAccessInterface {
     public void addSelectedCourse(Course course) {
         try {
             command = "INSERT INTO SELECTEDCOURSES VALUES ('" + course.getCourseID() +
-                    "', '" + course.getCourseName() + "')";
+                    "', '" + course.getCourseName() + "', '" + course.getClassTime() + "')";
             statement3.executeUpdate(command);
         }
         catch (Exception e) {
@@ -152,10 +183,8 @@ public class DatabaseAccess implements DatabaseAccessInterface {
         boolean deleted = false;
 
         try {
-            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = " + course.getCourseID();
-            statement3.executeUpdate(command);
-
-            deleted = true;
+            command = "DELETE FROM SELECTEDCOURSES WHERE COURSEID = '" + course.getCourseID() + "'";
+            deleted = statement3.executeUpdate(command) != 0;
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -173,13 +202,13 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM ACTIONS WHERE VIEWID = " + key;
-            results = statement4.executeQuery(command);
+            results1 = statement4.executeQuery(command);
 
-            while (results.next()) {
-                actionName = results.getString("ACTIONNAME");
-                energyUnit = results.getInt("ENERGYUNIT");
-                timeUnit = results.getInt("TIMEUNIT");
-                score = results.getInt("SCORE");
+            while (results1.next()) {
+                actionName = results1.getString("ACTIONNAME");
+                energyUnit = results1.getInt("ENERGYUNIT");
+                timeUnit = results1.getInt("TIMEUNIT");
+                score = results1.getInt("SCORE");
                 actions.put(actionName, new Action(actionName, energyUnit, timeUnit, score));
             }
         }
@@ -198,13 +227,12 @@ public class DatabaseAccess implements DatabaseAccessInterface {
 
         try {
             command = "SELECT * FROM TIMES";
-            results = statement5.executeQuery(command);
+            results1 = statement5.executeQuery(command);
 
-            if (results.next()) {
-                currentTime = results.getInt("CURRENTTIME");
-                timeInDay = results.getInt("TIMEINDAY");
-                days = results.getInt("DAYS");
-                System.out.println("Current Time: " + currentTime);
+            if (results1.next()) {
+                currentTime = results1.getInt("CURRENTTIME");
+                timeInDay = results1.getInt("TIMEINDAY");
+                days = results1.getInt("DAYS");
                 time = new Time(currentTime + (timeInDay * (days - 1)), timeInDay);
             }
         }
@@ -221,6 +249,35 @@ public class DatabaseAccess implements DatabaseAccessInterface {
                     ", TIMEINDAY = " + time.getTimePerDay() + ", DAYS = " + time.getDays() +
                     " WHERE TIMEID = 0";
             statement5.executeUpdate(command);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getCharacterAsset(int type) {
+        String asset = null;
+
+        try {
+            command = "SELECT * FROM CHARACTERASSETS WHERE ATTRIBUTETYPE = " + type;
+            results1 = statement7.executeQuery(command);
+
+            if (results1.next()) {
+                asset = results1.getString("ASSETTAG");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return asset;
+    }
+
+    public void updateCharacterAsset(int type, String newAsset) {
+        try {
+            command = "UPDATE CHARACTERASSETS SET ASSETTAG = '" + newAsset +
+                    "' WHERE ATTRIBUTETYPE = " + type;
+            statement7.executeUpdate(command);
         }
         catch (Exception e) {
             e.printStackTrace();
