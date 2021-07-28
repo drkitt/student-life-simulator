@@ -25,30 +25,13 @@ public class TimeManagementTest {
     @Rule
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(MainActivity.class);
 
-    // TODO: move this method to game progression test
-    @Test
-    public void testStartNewGame() {
-        // TODO: do we want to put the title of the app on the screen for testing?
-        // onView(withText("Student Life Simulator")).check(matches(isDisplayed()));
-        onView(withId(R.id.newGameButton)).check(matches(isDisplayed())).check(matches(isEnabled()));
-        //onView(withText(R.id.creditsButton)).check(matches(isDisplayed())).check(matches(isEnabled()));
-
-        // TODO: double-check button visibility
-        // if INVISIBLE:
-        // onView(withText("Continue")).check(matches(not(isDisplayed())));
-        // if GONE/is not in the layout at all
-        onView(withText("Continue")).check(doesNotExist());
-    }
-
     @Test
     public void testPartTimeStudent() {
         onView(withId(R.id.newGameButton)).perform(click());
-        // TODO: Take tags for each attribute
-        // onView(withTagKey(equalTo(R.id.)))
-        // onView(withTagKey(equalTo(R.id.)))
-        // onView(withTagKey(equalTo(R.id.)))
-        // onView(withTagKey(equalTo(R.id.)))
+
+        // Skipping the Character customization and just continue
         onView(withText("Continue")).perform(click());
+
         onView(withText("Select courses")).check(matches(isDisplayed()));
 
         onView(withId(R.id.registerButton)).perform(click());
@@ -68,12 +51,8 @@ public class TimeManagementTest {
 //    }
 //
 //    @Test
-//    public void testSleeperStudent() {
+//    public void testSleeperSkipperStudent() {
 //
 //    }
 //
-//    @Test
-//    public void testStudyAndSkipStudent() {
-//
-//    }
 }
