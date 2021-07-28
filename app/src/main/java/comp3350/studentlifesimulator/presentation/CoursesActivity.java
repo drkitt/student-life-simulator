@@ -29,7 +29,7 @@ public class CoursesActivity extends AppCompatActivity {
 
         courseList = findViewById(R.id.courses);
 
-        registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.registerButton);
 
         courseArray = DatabaseManager.getAvailableCourses();
         courseList.setAdapter(new ArrayAdapter<>(
