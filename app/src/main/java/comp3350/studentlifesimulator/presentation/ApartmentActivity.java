@@ -252,7 +252,7 @@ public class ApartmentActivity extends CharacterActivity {
         boolean result = StudentPerformingActions.makeStudentPerformAction(student, action, time);
 
         if (!result) {
-            Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You don't have enough energy!", Toast.LENGTH_SHORT).show();
         }
 
         if (StateManager.getInClass()) {
