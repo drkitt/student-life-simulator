@@ -84,13 +84,13 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.editCharacterButton)).perform(click());
 
         onView(withId(R.id.eyesGreenButton)).perform(click());
-        onView(withId(R.id.hair4LightButton)).perform(scrollTo(), click());
+        onView(withId(R.id.hair1LightButton)).perform(scrollTo(), click());
         onView(withId(R.id.skinColourTanButton)).perform(scrollTo(), click());
         onView(withId(R.id.shirtBlueButton)).perform(scrollTo(), click());
         onView(withId(R.id.saveButton)).perform(click());
 
         onView(withId(R.id.eyesImage)).check(matches(withDrawable(R.drawable.eyes_green)));
-        onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair4_light)));
+        onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair1_light)));
         onView(withId(R.id.skinColourImage)).check(matches(withDrawable(R.drawable.skin_tan)));
         onView(withId(R.id.shirtImage)).check(matches(withDrawable(R.drawable.shirt_blue)));
         Espresso.pressBack();
@@ -124,13 +124,13 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.editCharacterButton)).perform(click());
 
         onView(withId(R.id.eyesGreenButton)).perform(click());
-        onView(withId(R.id.hair4LightButton)).perform(scrollTo(), click());
+        onView(withId(R.id.hair1LightButton)).perform(scrollTo(), click());
         onView(withId(R.id.skinColourTanButton)).perform(scrollTo(), click());
         onView(withId(R.id.shirtBlueButton)).perform(scrollTo(), click());
         onView(withId(R.id.saveButton)).perform(click());
 
         onView(withId(R.id.eyesImage)).check(matches(withDrawable(R.drawable.eyes_green)));
-        onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair4_light)));
+        onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair1_light)));
         onView(withId(R.id.skinColourImage)).check(matches(withDrawable(R.drawable.skin_tan)));
         onView(withId(R.id.shirtImage)).check(matches(withDrawable(R.drawable.shirt_blue)));
 
@@ -141,7 +141,7 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.continueButton)).check(matches(isDisplayed()));
         onView(withId(R.id.continueButton)).perform(click());
         onView(withId(R.id.eyesImage)).check(matches(withDrawable(R.drawable.eyes_green)));
-        onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair4_light)));
+        onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair1_light)));
         onView(withId(R.id.skinColourImage)).check(matches(withDrawable(R.drawable.skin_tan)));
         onView(withId(R.id.shirtImage)).check(matches(withDrawable(R.drawable.shirt_blue)));
 
