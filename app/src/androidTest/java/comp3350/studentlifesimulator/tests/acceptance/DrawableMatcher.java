@@ -32,6 +32,7 @@ import org.hamcrest.TypeSafeMatcher;
         if (expectedId == EMPTY) {
             return imageView.getDrawable() == null;
         }
+
         if (expectedId == ANY) {
             return imageView.getDrawable() != null;
         }
