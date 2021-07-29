@@ -38,7 +38,7 @@ import org.hamcrest.TypeSafeMatcher;
         }
 
         resources = target.getContext().getResources();
-        Drawable expectedDrawable = resources.getDrawable(expectedId);
+        expectedDrawable = resources.getDrawable(expectedId);
         resourceName = resources.getResourceEntryName(expectedId);
 
         if (expectedDrawable == null) {
