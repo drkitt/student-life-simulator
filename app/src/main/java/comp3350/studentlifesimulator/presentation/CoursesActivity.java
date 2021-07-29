@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Course;
-import comp3350.studentlifesimulator.objects.Weekday;
 
 public class CoursesActivity extends AppCompatActivity {
     ListView courseList;
@@ -29,7 +28,7 @@ public class CoursesActivity extends AppCompatActivity {
 
         courseList = findViewById(R.id.courses);
 
-        registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.registerButton);
 
         courseArray = DatabaseManager.getAvailableCourses();
         courseList.setAdapter(new ArrayAdapter<>(
@@ -38,6 +37,7 @@ public class CoursesActivity extends AppCompatActivity {
                 courseArray)
         );
 
+        registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(view -> completeRegistration());
     }
 
