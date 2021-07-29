@@ -101,7 +101,7 @@ public class TimeManagementTest {
         onView(withText("Nap")).check(matches(isDisplayed()));
 
         onView(withText("Hibernate")).perform(click());
-        onView(withText("0:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("12:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
         onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
 
         Espresso.pressBack();
@@ -323,7 +323,7 @@ public class TimeManagementTest {
 
         onView(withText("Marathon Study")).perform(click());
         onView(withText("Marathon Study")).perform(click());
-        onView(withText("0:00 AM\nThursday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withText("12:00 AM\nThursday\nWeek 1")).check(matches(isDisplayed()));
         onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(not(isDisplayed())));
         onView(withText("Study")).check(matches(not(isDisplayed())));
