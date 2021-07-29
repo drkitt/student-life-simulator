@@ -28,7 +28,7 @@ public class CoursesActivity extends AppCompatActivity {
 
         courseList = findViewById(R.id.courses);
 
-        registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.registerButton);
 
         courseArray = DatabaseManager.getAvailableCourses();
         courseList.setAdapter(new ArrayAdapter<>(
@@ -37,13 +37,15 @@ public class CoursesActivity extends AppCompatActivity {
                 courseArray)
         );
 
-        registerButton = findViewById(R.id.register_button);
+        registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(view -> completeRegistration());
     }
 
     private void completeRegistration() {
         Intent apartmentActivity = new Intent(this, ApartmentActivity.class);
         int numOfCoursesSelected = 0;
+
+        apartmentActivity.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
 
         for (int index = 0; index < courseArray.size(); index++) {
             if (courseList.isItemChecked(index)) {
@@ -67,6 +69,7 @@ public class CoursesActivity extends AppCompatActivity {
         }
         else {
             startActivity(apartmentActivity);
+            this.finish();
         }
     }
 }
