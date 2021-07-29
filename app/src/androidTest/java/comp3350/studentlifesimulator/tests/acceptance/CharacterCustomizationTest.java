@@ -23,7 +23,6 @@ import static comp3350.studentlifesimulator.tests.acceptance.EspressoTestsMatche
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class CharacterCustomizationTest {
-
     @Rule
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(MainActivity.class);
 
