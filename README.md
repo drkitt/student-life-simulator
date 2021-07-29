@@ -106,9 +106,11 @@ androidTest.comp3350.studentlifesimulator.tests
 For this iteration, we focused development on refining and testing existing features.
 
 
-TODO: Talk about new tests
+TODO: Talk about Integration tests and seams
 
-
+The addition of the acceptance tests focused on performing user scripts that take different paths through the big user stories implemented in the game. TimeManagementTest holds 3 test methods: testPartTimeStudent, testFullTimeStudent, and testSleeperSkipperStudent. Each test has its own set of user choices at different times with different courses and validating the correct appearance of actions, energry bar and time checks.
+CharacterCustomizationTest holds 3 test methods: testStartGame, testCustomizeCharacter, and testLoadFromContinueGame, determining the possible scenarios of how a user will be accessing the character customization functionality.
+GameProgressionScoreTest holds 2 test methods: testContinueGameScore and testNewGameScore, testing the use cases of playing through a completely new game or loading previous game and continue the run with the expectation of preserving the previous state including the time and the player's core
 
 The most significant new feature in this iteration is the character customization screen. We introduced a new activity for customizing the player's character and made the activity accessible when starting a new game. The player can also make changes to their character without starting the game over by editing it from the apartment activity. The player's chosen character attributes are stored in the database and loaded when they continue the game. Additionally, we added an apartment background that changes according to the in-game time in lieu of a customizable background. 
 
