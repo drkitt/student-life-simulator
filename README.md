@@ -105,8 +105,9 @@ androidTest.comp3350.studentlifesimulator.tests
 
 For this iteration, we focused development on refining and testing existing features.
 
-
-TODO: Talk about Integration tests and seams
+The integration tests are centered around ensuring that interactions, along the seams of the application's architecture, do what they are supposed to.
+TestBusinessPersistenceSeam has 6 test methods: testStudentAccess, testCoursesAccess, testTimeAccess, testActionAccess, testSavingRoutine, and testCharacterAssetAccess. Each of these tests ensure that the Database Access in the business layer is interacting with the database interface as expected, validating that the DatabaseManager fetches and updates data correctly via the DatabaseAccessInnterface.
+TestPersistenceDatabaseSeam has 5 test methods: testStudentPersistence, testTimePersistence, testCharactrPersistence, testCoursePersistence, and testActionPersistence. These tests ensure that the HSQL Database is updated and accessed correctly by the database interface implementation in the persistence layer.
 
 The addition of the acceptance tests focused on performing user scripts that take different paths through the big user stories implemented in the game. TimeManagementTest holds 3 test methods: testPartTimeStudent, testFullTimeStudent, and testSleeperSkipperStudent. Each test has its own set of user choices at different times with different courses and validating the correct appearance of actions, energry bar and time checks.
 CharacterCustomizationTest holds 3 test methods: testStartGame, testCustomizeCharacter, and testLoadFromContinueGame, determining the possible scenarios of how a user will be accessing the character customization functionality.
