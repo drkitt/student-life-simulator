@@ -47,6 +47,7 @@ import org.hamcrest.TypeSafeMatcher;
 
         Bitmap bitmap = getBitmap(imageView.getDrawable());
         Bitmap otherBitmap = getBitmap(expectedDrawable);
+
         return bitmap.sameAs(otherBitmap);
     }
 
