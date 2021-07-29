@@ -37,7 +37,9 @@ public class TimeManagementTest {
         onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
 
         onView(withId(R.id.registerButton)).perform(click());
-        onView(withText("Pick a course!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
+        onView(withText("Pick a course!")).inRoot(
+                withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))
+        ).check(matches(isDisplayed()));
         onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
 
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
@@ -55,6 +57,7 @@ public class TimeManagementTest {
         onView(withText("Quick Study")).perform(click());
         onView(withText("Quick Study")).perform(click());
         onView(withText("8:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -66,6 +69,7 @@ public class TimeManagementTest {
 
         onView(withText("Listen")).perform(click());
         onView(withText("9:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(isDisplayed()));
         onView(withText("Study")).check(matches(isDisplayed()));
         onView(withText("Quick Study")).check(matches(isDisplayed()));
@@ -76,6 +80,7 @@ public class TimeManagementTest {
         onView(withText("Quick Study")).perform(click());
         onView(withText("Quick Study")).perform(click());
         onView(withText("11:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -87,6 +92,7 @@ public class TimeManagementTest {
 
         onView(withText("Listen")).perform(click());
         onView(withText("12:00 PM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(isDisplayed()));
         onView(withText("Study")).check(matches(isDisplayed()));
         onView(withText("Quick Study")).check(matches(isDisplayed()));
@@ -96,6 +102,7 @@ public class TimeManagementTest {
 
         onView(withText("Hibernate")).perform(click());
         onView(withText("0:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
 
         Espresso.pressBack();
         Espresso.pressBack();
@@ -116,7 +123,9 @@ public class TimeManagementTest {
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(3).perform(click());
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(4).perform(click());
         onView(withId(R.id.registerButton)).perform(click());
-        onView(withText("You can only select a maximum of 4 courses!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
+        onView(withText("You can only select a maximum of 4 courses!")).inRoot(
+                withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))
+        ).check(matches(isDisplayed()));
         onView(withText("Select courses to be enrolled in")).check(matches(isDisplayed()));
         // De-selecting
         onData(anything()).inAdapterView(withId(R.id.courses)).atPosition(0).perform(click());
@@ -142,6 +151,7 @@ public class TimeManagementTest {
         onView(withText("Quick Study")).perform(click());
         onView(withText("Quick Study")).perform(click());
         onView(withText("8:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -153,6 +163,7 @@ public class TimeManagementTest {
 
         onView(withText("Listen")).perform(click());
         onView(withText("9:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(isDisplayed()));
         onView(withText("Study")).check(matches(isDisplayed()));
         onView(withText("Quick Study")).check(matches(isDisplayed()));
@@ -165,6 +176,7 @@ public class TimeManagementTest {
 
         onView(withText("Quick Study")).perform(click());
         onView(withText("11:00 AM\nMonday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -189,6 +201,7 @@ public class TimeManagementTest {
         onView(withText("Quick Study")).perform(click());
         onView(withText("Quick Study")).perform(click());
         onView(withText("10:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -200,6 +213,7 @@ public class TimeManagementTest {
 
         onView(withText("Gossip")).perform(click());
         onView(withText("11:00 AM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(isDisplayed()));
         onView(withText("Study")).check(matches(isDisplayed()));
         onView(withText("Quick Study")).check(matches(isDisplayed()));
@@ -211,14 +225,18 @@ public class TimeManagementTest {
         onView(withText("7:00 PM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
 
         onView(withText("Study")).perform(click());
-        onView(withText("You don't have enough energy!")).inRoot(withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))) .check(matches(isDisplayed()));
+        onView(withText("You don't have enough energy!")).inRoot(
+                withDecorView(not(mainActivity.getActivity().getWindow().getDecorView()))
+        ).check(matches(isDisplayed()));
         onView(withText("7:00 PM\nTuesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
 
         onView(withText("Hibernate")).perform(click());
         onView(withText("7:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
 
         onView(withText("Quick Study")).perform(click());
         onView(withText("8:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -230,6 +248,7 @@ public class TimeManagementTest {
 
         onView(withText("Quick Study")).perform(click());
         onView(withText("9:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(isDisplayed()));
         onView(withText("Study")).check(matches(isDisplayed()));
         onView(withText("Quick Study")).check(matches(isDisplayed()));
@@ -294,6 +313,7 @@ public class TimeManagementTest {
         onView(withText("Nap")).perform(click());
         onView(withText("Nap")).perform(click());
         onView(withText("8:00 AM\nWednesday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Attend")).check(matches(isDisplayed()));
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
@@ -304,12 +324,14 @@ public class TimeManagementTest {
         onView(withText("Marathon Study")).perform(click());
         onView(withText("Marathon Study")).perform(click());
         onView(withText("0:00 AM\nThursday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(not(isDisplayed())));
         onView(withText("Study")).check(matches(not(isDisplayed())));
         onView(withText("Quick Study")).check(matches(not(isDisplayed())));
 
         onView(withText("Hibernate")).perform(click());
         onView(withText("12:00 PM\nThursday\nWeek 1")).check(matches(isDisplayed()));
+        onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
         onView(withText("Marathon Study")).check(matches(isDisplayed()));
         onView(withText("Study")).check(matches(isDisplayed()));
         onView(withText("Quick Study")).check(matches(isDisplayed()));
