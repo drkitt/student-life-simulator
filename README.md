@@ -116,3 +116,10 @@ GameProgressionScoreTest holds 2 test methods: testContinueGameScore and testNew
 The most significant new feature in this iteration is the character customization screen. We introduced a new activity for customizing the player's character and made the activity accessible when starting a new game. The player can also make changes to their character without starting the game over by editing it from the apartment activity. The player's chosen character attributes are stored in the database and loaded when they continue the game. Additionally, we added an apartment background that changes according to the in-game time in lieu of a customizable background. 
 
 In this iteration we also introduced some minor new features. The time formatter, formats the time based on the in game Time object, which is used to access what time/day should be displayed on the front end, in the apartment activity. As an alternative to displaying how many in game days had passed in the apartment activity, we implemented weekdays and started displaying how many in game weeks had passed and which day of the week it was, in the apartment activity. Building off of the weekdays, we added course schedules to courses, which included a start time and a list of the days of the week they take place on. The course selection screen was edited to include information on course schedules.
+
+## FAQ
+Any issues surrounding the loading of acceptance test should be solved by re-syncing the Gradle build:
+File -> Sync Project with Gradle Files
+
+The canonical DBscript is located in: 
+src/main/assets/db/StudentDB.script
