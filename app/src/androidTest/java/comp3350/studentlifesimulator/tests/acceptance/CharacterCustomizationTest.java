@@ -140,7 +140,6 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.hairImage)).check(matches(withDrawable(R.drawable.hair1_light)));
         onView(withId(R.id.skinColourImage)).check(matches(withDrawable(R.drawable.skin_tan)));
         onView(withId(R.id.shirtImage)).check(matches(withDrawable(R.drawable.shirt_blue)));
-
     }
 
 }
