@@ -36,7 +36,8 @@ import org.hamcrest.TypeSafeMatcher;
         if (expectedId == ANY) {
             return imageView.getDrawable() != null;
         }
-        Resources resources = target.getContext().getResources();
+
+        resources = target.getContext().getResources();
         Drawable expectedDrawable = resources.getDrawable(expectedId);
         resourceName = resources.getResourceEntryName(expectedId);
 
