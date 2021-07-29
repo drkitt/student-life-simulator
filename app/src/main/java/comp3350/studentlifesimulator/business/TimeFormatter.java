@@ -1,9 +1,7 @@
 package comp3350.studentlifesimulator.business;
 
-
 import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.objects.Weekday;
-
 
 public class TimeFormatter {
     private static final int MINUTES_PER_TIME_UNIT = 15;
@@ -45,9 +43,6 @@ public class TimeFormatter {
             suffix = "AM";
         }
         else {
-            if (getHour24() > 12) {
-                decreaseHour();
-            }
             suffix = "PM";
         }
 
@@ -68,9 +63,5 @@ public class TimeFormatter {
         weekCount ++;
 
         return weekCount;
-    }
-
-    private int decreaseHour() {
-        return  this.getHour12() - 12;
     }
 }

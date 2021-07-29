@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import comp3350.studentlifesimulator.application.DatabaseServices;
-import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
@@ -455,7 +454,7 @@ public class TestPersistenceDatabaseSeam extends TestCase {
     private void initializeDB() {
         testDb = new TestDatabase(null);
 
-        DatabaseServices.openDatabaseAccess(Main.getDBName());
+        DatabaseServices.openDatabaseAccess();
         db = (DatabaseAccess)DatabaseServices.getDatabaseAccess();
         try {
             statement1 = db.getConnection().createStatement();

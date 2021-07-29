@@ -1,10 +1,10 @@
 package comp3350.studentlifesimulator.objects;
 
 public class Action {
-    private String actionName;
-    private int energyUnit;
-    private int timeUnit;
-    private int pointsUnit;
+    private final String actionName;
+    private final int energyUnit;
+    private final int timeUnit;
+    private final int pointsUnit;
 
     public Action(String newAction) {
         actionName = newAction;

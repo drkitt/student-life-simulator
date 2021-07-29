@@ -7,7 +7,6 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.example.studentlifesimulator.R;
 
-
 import org.junit.*;
 import org.junit.runner.RunWith;
 

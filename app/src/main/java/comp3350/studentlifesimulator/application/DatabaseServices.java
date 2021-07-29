@@ -7,19 +7,13 @@ import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 public class DatabaseServices {
     private static DatabaseAccessInterface database = null;
 
-    public static boolean openDatabaseAccess(String databaseName) {
-        boolean opened = false;
-
+    public static void openDatabaseAccess() {
         if (database == null) {
-            database = new DatabaseAccess(databaseName);
+            database = new DatabaseAccess();
             database.openDB(Main.getDBPath());
 
             DatabaseManager.setDatabase();
-
-            opened = true;
         }
-
-        return opened;
     }
 
     public static void openDatabaseAccess(DatabaseAccessInterface newDatabase) {

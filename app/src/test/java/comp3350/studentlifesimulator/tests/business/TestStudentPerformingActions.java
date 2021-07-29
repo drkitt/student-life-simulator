@@ -9,8 +9,8 @@ import comp3350.studentlifesimulator.objects.Student;
 import comp3350.studentlifesimulator.objects.Time;
 
 public class TestStudentPerformingActions extends TestCase {
-    private Time time;
-    private Student student;
+    private final Time time;
+    private final Student student;
 
     public TestStudentPerformingActions(String arg0) {
         super(arg0);

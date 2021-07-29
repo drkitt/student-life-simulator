@@ -93,5 +93,4 @@ public class TestCourses extends TestCase {
                 32
         )));
     }
-
 }

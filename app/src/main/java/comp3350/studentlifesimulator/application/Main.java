@@ -1,11 +1,11 @@
 package comp3350.studentlifesimulator.application;
 
 public class Main {
-    private static String databaseName = "StudentDB";
+    private static final String databaseName = "StudentDB";
     private static String databasePath = "db/StudentDB";
 
     public static void main(String[] args) {
-        DatabaseServices.openDatabaseAccess(databaseName);
+        DatabaseServices.openDatabaseAccess();
     }
 
     public static String getDBPath() {
@@ -21,7 +21,7 @@ public class Main {
     }
 
     public static void openDBAccess() {
-        DatabaseServices.openDatabaseAccess(databaseName);
+        DatabaseServices.openDatabaseAccess();
     }
 
     public static void closeDBAccess() {

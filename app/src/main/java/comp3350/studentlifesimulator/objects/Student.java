@@ -1,8 +1,8 @@
 package comp3350.studentlifesimulator.objects;
 
 public class Student {
-    private String studentName;
-    private EnergyBar energyBar;
+    private final String studentName;
+    private final EnergyBar energyBar;
     private int score;
 
     public Student(String newStudentName, EnergyBar energy, int currScore) {

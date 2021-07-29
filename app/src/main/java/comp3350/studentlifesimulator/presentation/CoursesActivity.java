@@ -34,8 +34,8 @@ public class CoursesActivity extends AppCompatActivity {
         courseList.setAdapter(new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_multiple_choice,
-                courseArray)
-        );
+                courseArray
+        ));
 
         registerButton.setOnClickListener(view -> completeRegistration());
     }

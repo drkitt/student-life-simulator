@@ -31,8 +31,10 @@ public class TestStateManager extends TestCase {
                 32
         ));
         StateManager.initialize();
+
         assertEquals(ActionStates.HAS_CLASS, StateManager.getState());
         assertNull(StateManager.getCurrentPossibleActions(ActionStates.HAS_CLASS));
+
         DatabaseServices.closeDatabaseAccess();
     }
 
@@ -40,6 +42,7 @@ public class TestStateManager extends TestCase {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
         DatabaseManager.updateTime(new Time(24, 96));
         StateManager.initialize();
+
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Nap"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Sleep"));
@@ -48,6 +51,7 @@ public class TestStateManager extends TestCase {
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Study"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Marathon Study"));
         assertEquals(6, StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).size());
+
         DatabaseServices.closeDatabaseAccess();
     }
 
@@ -55,11 +59,13 @@ public class TestStateManager extends TestCase {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
         DatabaseManager.updateStudent(new Student("Test Student", new EnergyBar(0), 1));
         StateManager.initialize();
+
         assertEquals(ActionStates.LOW_ENERGY, StateManager.getState());
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.LOW_ENERGY).get("Nap"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.LOW_ENERGY).get("Sleep"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.LOW_ENERGY).get("Hibernate"));
         assertEquals(3, StateManager.getCurrentPossibleActions(ActionStates.LOW_ENERGY).size());
+
         DatabaseServices.closeDatabaseAccess();
     }
 
@@ -68,9 +74,11 @@ public class TestStateManager extends TestCase {
         DatabaseManager.updateStudent(new Student("Test Student", new EnergyBar(0), 1));
         StateManager.initialize();
         StateManager.switchInClass();
+
         assertEquals(ActionStates.IN_CLASS_LOW, StateManager.getState());
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_LOW).get("Nap"));
         assertEquals(1, StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_LOW).size());
+
         DatabaseServices.closeDatabaseAccess();
     }
 
@@ -79,12 +87,14 @@ public class TestStateManager extends TestCase {
         DatabaseManager.updateStudent(new Student("Test Student", new EnergyBar(EnergyBar.getMaxEnergy()), 1));
         StateManager.initialize();
         StateManager.switchInClass();
+
         assertEquals(ActionStates.IN_CLASS_HIGH, StateManager.getState());
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_HIGH).get("Quick Study"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_HIGH).get("Nap"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_HIGH).get("Listen to Instructor"));
         assertNotNull(StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_HIGH).get("Talk with Friends"));
         assertEquals(4, StateManager.getCurrentPossibleActions(ActionStates.IN_CLASS_HIGH).size());
+
         DatabaseServices.closeDatabaseAccess();
     }
 
@@ -92,7 +102,9 @@ public class TestStateManager extends TestCase {
         DatabaseServices.openDatabaseAccess(new StubDatabase());
         DatabaseManager.updateTime(new Time(32, 96));
         StateManager.initialize();
+
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
+
         DatabaseServices.closeDatabaseAccess();
     }
 
@@ -118,12 +130,16 @@ public class TestStateManager extends TestCase {
                 new ArrayList<>(Collections.singletonList(Weekday.Wednesday)),
                 60
         ));
+
         StateManager.initialize();
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
+
         StateManager.getTime().addToTime(4);
         assertEquals(ActionStates.HAS_CLASS, StateManager.getState());
+
         StateManager.switchSkipped();
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
+
         StateManager.getCurrentStudent().doAction(
                 StateManager.getCurrentPossibleActions(ActionStates.FREE_TIME).get("Marathon Study")
         );
@@ -149,6 +165,7 @@ public class TestStateManager extends TestCase {
         StateManager.switchInClass();
         StateManager.getTime().addToTime(1);
         assertEquals(ActionStates.FREE_TIME, StateManager.getState());
+
         DatabaseServices.closeDatabaseAccess();
     }
 }

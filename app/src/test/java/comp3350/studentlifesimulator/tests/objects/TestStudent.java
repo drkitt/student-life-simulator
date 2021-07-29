@@ -9,16 +9,16 @@ import comp3350.studentlifesimulator.objects.Action;
 import static org.junit.Assert.*;
 
 public class TestStudent extends TestCase {
-    private Student student;
+    private final Student student;
 
     public TestStudent(String arg0) {
         super(arg0);
 
-        student = new Student("Son Johnsmith", new EnergyBar(10), 10);
+        student = new Student("John Braico", new EnergyBar(10), 10);
     }
 
     public void testStudentCredentials() {
-        assertEquals("Son Johnsmith", student.getStudentName());
+        assertEquals("John Braico", student.getStudentName());
         assertEquals(12, Student.getMaxEnergy());
         student.addToScore(3);
         assertEquals(13, student.getScore());

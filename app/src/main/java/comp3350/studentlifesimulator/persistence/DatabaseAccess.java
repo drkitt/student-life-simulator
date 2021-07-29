@@ -5,10 +5,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.Connection;
-import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.TreeSet;
 
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Course;
@@ -18,16 +16,10 @@ import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.objects.Weekday;
 
 public class DatabaseAccess implements DatabaseAccessInterface {
-    private final String database;
-
     private Connection connection;
     private Statement statement1, statement2, statement3, statement4, statement5, statement6, statement7;
     private ResultSet results1, results2;
     private String command;
-
-    public DatabaseAccess(String databaseName) {
-        database = databaseName;
-    }
 
     public void openDB(String databasePath) {
         String url;

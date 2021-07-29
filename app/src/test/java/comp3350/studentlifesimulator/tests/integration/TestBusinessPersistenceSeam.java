@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 import static org.junit.Assert.*;
 
 import comp3350.studentlifesimulator.application.DatabaseServices;
-import comp3350.studentlifesimulator.application.Main;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.EnergyBar;
 import comp3350.studentlifesimulator.objects.Student;
@@ -160,7 +159,7 @@ public class TestBusinessPersistenceSeam extends TestCase {
     private void initializeDB() {
         testDatabaseManager = new TestDatabaseManager(null);
 
-        DatabaseServices.openDatabaseAccess(Main.getDBName());
+        DatabaseServices.openDatabaseAccess();
         db = (DatabaseAccess)DatabaseServices.getDatabaseAccess();
         testDatabaseManager.setDB(db);
     }

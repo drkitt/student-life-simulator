@@ -1,16 +1,11 @@
 package comp3350.studentlifesimulator.presentation;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.studentlifesimulator.R;
-
-import comp3350.studentlifesimulator.application.Main;
-import comp3350.studentlifesimulator.business.DatabaseManager;
 
 public class CharacterCustomizationActivity extends CharacterActivity {
     boolean fromNewGame;

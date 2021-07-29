@@ -2,9 +2,9 @@ package comp3350.studentlifesimulator.objects;
 
 public class Time {
     private final int unitsPerDay;
+    private final int startTime;
     private int day;
     private int currentUnit;
-    private int startTime;
 
     public Time(int startTime, int unitsPerDay) {
        this.unitsPerDay = unitsPerDay;

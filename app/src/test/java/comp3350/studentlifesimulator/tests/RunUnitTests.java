@@ -14,7 +14,7 @@ import comp3350.studentlifesimulator.tests.objects.TestStudent;
 import comp3350.studentlifesimulator.tests.objects.TestTime;
 import comp3350.studentlifesimulator.tests.persistence.TestDatabase;
 
-public class AllTests {
+public class RunUnitTests {
     public static TestSuite suite;
 
     public static Test suite() {

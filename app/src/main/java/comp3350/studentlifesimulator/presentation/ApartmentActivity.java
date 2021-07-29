@@ -29,7 +29,6 @@ public class ApartmentActivity extends CharacterActivity {
     private Time time;
     private Student student;
     private boolean backPressed;
-    private static final int MINUTES_PER_TIME_UNIT = 15;
 
     private Button marathonButton;
     private Button studyButton;
@@ -71,6 +70,7 @@ public class ApartmentActivity extends CharacterActivity {
                 StateManager.getState(),
                 StateManager.getCurrentPossibleActions(StateManager.getState())
         );
+
         displayActions(StateManager.getState());
         displayCurrentTime();
         displayCurrentEnergy();

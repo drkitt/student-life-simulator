@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
  class DrawableMatcher extends TypeSafeMatcher<View> {
@@ -33,7 +32,7 @@ import org.hamcrest.TypeSafeMatcher;
         if (!(target instanceof ImageView)) {
             return false;
         }
-       imageView = (ImageView) target;
+        imageView = (ImageView) target;
        
         if (expectedId == EMPTY) {
             return imageView.getDrawable() == null;
@@ -71,6 +70,7 @@ import org.hamcrest.TypeSafeMatcher;
     public void describeTo(Description description) {
         description.appendText("with drawable from resource id: ");
         description.appendValue(expectedId);
+
         if (resourceName != null) {
             description.appendText("[");
             description.appendText(resourceName);

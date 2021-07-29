@@ -46,7 +46,7 @@ comp3350.studentlifesimulator
       - CoursesActivity
          - This allows the player to choose their courses when starting a new game.
       - MainActivity
-         - This is the main menu. It allows the player to start a new game, continue their current one, view the game's credits, and view a tutorial.
+         - This is the main menu. It allows the player to start a new game, continue their current one, and view the game's credits.
       - CharacterCustomizationActivity
          - This allows the player to customize their character. It can be accessed by starting a new game or pressing an edit button in ApartmentActivity.
       - CharacterActivity
@@ -119,5 +119,5 @@ In this iteration we also introduced some minor new features. The time formatter
 Any issues surrounding the loading of acceptance test should be solved by re-syncing the Gradle build:
 File -> Sync Project with Gradle Files
 
-The canonical DBscript is located in: 
+The canonical version of the database script, DBscript, is located in: 
 src/main/assets/db/StudentDB.script

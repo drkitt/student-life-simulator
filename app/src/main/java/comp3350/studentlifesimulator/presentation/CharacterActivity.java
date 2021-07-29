@@ -1,6 +1,5 @@
 package comp3350.studentlifesimulator.presentation;
 
-import android.app.Activity;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;

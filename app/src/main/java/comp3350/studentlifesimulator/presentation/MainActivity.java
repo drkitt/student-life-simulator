@@ -5,13 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
 
 import com.example.studentlifesimulator.R;
 
@@ -68,15 +66,11 @@ public class MainActivity extends AppCompatActivity {
         continueGame.setOnClickListener(View -> switchActivity());
 
         credits.setOnClickListener(v -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create(); //Read Update
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle("Credits");
             alertDialog.setMessage(getString(R.string.dialog_credits));
 
-            alertDialog.setButton("Close", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-
-                }
-            });
+            alertDialog.setButton("Close", (dialog, whichButton) -> {});
             alertDialog.show();
         });
     }
