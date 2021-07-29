@@ -9,13 +9,12 @@ public class TimeFormatter {
     private static final int MINUTES_PER_TIME_UNIT = 15;
     private final Time time;
 
-
     public TimeFormatter() {
         this.time = StateManager.getTime();
     }
 
-    public TimeFormatter(int newTime){
-        time = new Time(newTime , 96);
+    public TimeFormatter(int newTime) {
+        time = new Time(newTime, 96);
     }
 
     public int getHour24() {
@@ -27,6 +26,9 @@ public class TimeFormatter {
 
         if (hour > 12) {
             hour -= 12;
+        }
+        else if (hour == 0) {
+            hour = 12;
         }
 
         return hour;
@@ -48,6 +50,7 @@ public class TimeFormatter {
             }
             suffix = "PM";
         }
+
         return suffix;
     }
 
@@ -67,7 +70,7 @@ public class TimeFormatter {
         return weekCount;
     }
 
-    public int  decreaseHour(){
+    private int decreaseHour() {
         return  this.getHour12() - 12;
     }
 }
