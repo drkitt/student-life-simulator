@@ -29,7 +29,6 @@ public class CharacterCustomizationTest {
 
     @Test
     public void testStartGame() {
-
         onView(withId(R.id.newGameButton)).check(matches(isDisplayed()));
         onView(withId(R.id.newGameButton)).check(matches(isEnabled()));
         onView(withId(R.id.creditsButton)).check(matches(isDisplayed()));
