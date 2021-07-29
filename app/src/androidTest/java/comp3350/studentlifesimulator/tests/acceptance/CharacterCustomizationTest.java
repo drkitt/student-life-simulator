@@ -50,7 +50,6 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.backgroundImage)).check(matches(isDisplayed()));
 
         Espresso.pressBack();
-        Espresso.pressBack();
     }
 
     @Test
@@ -90,7 +89,6 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.skinColourImage)).check(matches(withDrawable(R.drawable.skin_tan)));
         onView(withId(R.id.shirtImage)).check(matches(withDrawable(R.drawable.shirt_blue)));
         Espresso.pressBack();
-        Espresso.pressBack();
     }
 
     @Test
@@ -129,7 +127,6 @@ public class CharacterCustomizationTest {
         onView(withId(R.id.skinColourImage)).check(matches(withDrawable(R.drawable.skin_tan)));
         onView(withId(R.id.shirtImage)).check(matches(withDrawable(R.drawable.shirt_blue)));
 
-        Espresso.pressBack();
         Espresso.pressBack();
 
         onView(withId(R.id.newGameButton)).check(matches(isDisplayed()));

@@ -67,7 +67,6 @@ public class GameProgressionScoreTest {
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
         Espresso.pressBack();
-        Espresso.pressBack();
         onView(withText("Continue")).check(matches(isDisplayed()));
 
         onView(withText("Continue")).perform(click());
@@ -144,7 +143,6 @@ public class GameProgressionScoreTest {
         onView(withText("Skip Class")).check(matches(isDisplayed()));
 
         Espresso.pressBack();
-        Espresso.pressBack();
         onView(withText("Continue")).check(matches(isDisplayed()));
 
         onView(withId(R.id.newGameButton)).perform(click());
@@ -165,7 +163,6 @@ public class GameProgressionScoreTest {
         onView(withText("2:00 PM\nMonday\nWeek 1")).check(matches(isDisplayed()));
         onView(withText("Score: 12")).check(matches(isDisplayed()));
 
-        Espresso.pressBack();
         Espresso.pressBack();
         onView(withText("Continue")).check(matches(isDisplayed()));
 

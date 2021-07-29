@@ -4,10 +4,11 @@ import org.junit.runners.Suite;
 import org.junit.runner.RunWith;
 
 import comp3350.studentlifesimulator.tests.acceptance.CharacterCustomizationTest;
+import comp3350.studentlifesimulator.tests.acceptance.GameProgressionScoreTest;
 import comp3350.studentlifesimulator.tests.acceptance.TimeManagementTest;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TimeManagementTest.class, CharacterCustomizationTest.class})
+@Suite.SuiteClasses({TimeManagementTest.class, CharacterCustomizationTest.class, GameProgressionScoreTest.class})
 public class RunAcceptanceTests {
     public RunAcceptanceTests() {
         System.out.println("Acceptance Tests");
