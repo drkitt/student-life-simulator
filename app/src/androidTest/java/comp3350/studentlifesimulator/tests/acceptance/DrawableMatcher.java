@@ -24,6 +24,12 @@ import org.hamcrest.TypeSafeMatcher;
 
     @Override
     protected boolean matchesSafely(View target) {
+        ImageView imageView;
+        Drawable expectedDrawable;
+        Resources resources;
+        Bitmap bitmap;
+        Bitmap otherBitmap;
+        
         if (!(target instanceof ImageView)) {
             return false;
         }
