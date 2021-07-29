@@ -252,7 +252,7 @@ public class ApartmentActivity extends CharacterActivity {
         boolean result = StudentPerformingActions.makeStudentPerformAction(student, action, time);
 
         if (!result) {
-            Toast.makeText(this, "You're out of energy!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "You don't have enough energy!", Toast.LENGTH_SHORT).show();
         }
 
         if (StateManager.getInClass()) {
@@ -316,9 +316,10 @@ public class ApartmentActivity extends CharacterActivity {
     private void displayCurrentBackground() {
         ImageView background = findViewById(R.id.backgroundImage);
         String filename;
-
         TimeFormatter timeFormatter = new TimeFormatter();
         int currentHour = timeFormatter.getHour24();
+        int resID;
+
         if (currentHour < 5) {
             filename = "apartment_bg_night";
         }
@@ -335,7 +336,7 @@ public class ApartmentActivity extends CharacterActivity {
             filename = "apartment_bg_night";
         }
 
-        int resID = getResources().getIdentifier(filename, "drawable", getPackageName());
+        resID = getResources().getIdentifier(filename, "drawable", getPackageName());
         background.setImageResource(resID);
     }
 }

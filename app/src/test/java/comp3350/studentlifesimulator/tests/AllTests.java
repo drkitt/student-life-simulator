@@ -6,6 +6,7 @@ import junit.framework.TestSuite;
 import comp3350.studentlifesimulator.tests.business.TestDatabaseManager;
 import comp3350.studentlifesimulator.tests.business.TestStateManager;
 import comp3350.studentlifesimulator.tests.business.TestStudentPerformingActions;
+import comp3350.studentlifesimulator.tests.business.TestTimeFormatter;
 import comp3350.studentlifesimulator.tests.objects.TestAction;
 import comp3350.studentlifesimulator.tests.objects.TestCourses;
 import comp3350.studentlifesimulator.tests.objects.TestEnergyBar;
@@ -37,6 +38,7 @@ public class AllTests {
         suite.addTestSuite(TestDatabaseManager.class);
         suite.addTestSuite(TestStateManager.class);
         suite.addTestSuite(TestStudentPerformingActions.class);
+        suite.addTestSuite(TestTimeFormatter.class);
     }
 
     private static void testPersistence() {
