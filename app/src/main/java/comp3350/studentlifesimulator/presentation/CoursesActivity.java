@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Course;
-import comp3350.studentlifesimulator.objects.Weekday;
 
 public class CoursesActivity extends AppCompatActivity {
     ListView courseList;
@@ -25,7 +24,7 @@ public class CoursesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.courses_activity);
+        setContentView(R.layout.activity_courses);
 
         courseList = findViewById(R.id.courses);
 

@@ -8,8 +8,6 @@ import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.objects.Weekday;
 import comp3350.studentlifesimulator.persistence.DatabaseAccessInterface;
 
-import static org.junit.Assert.*;
-
 public class TestDatabase extends TestCase {
     private static DatabaseAccessInterface db;
 

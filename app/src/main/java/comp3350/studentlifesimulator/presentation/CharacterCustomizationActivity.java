@@ -48,13 +48,16 @@ public class CharacterCustomizationActivity extends CharacterActivity {
     }
 
     public void onSaveClick(View view) {
+        Intent nextIntent;
+
         saveCharacter();
 
         if (fromNewGame) {
-            startActivity(new Intent(this, CoursesActivity.class));
+            nextIntent = new Intent(this, CoursesActivity.class);
+            nextIntent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+            startActivity(nextIntent);
         }
-        else {
-            finish();
-        }
+
+        finish();
     }
 }

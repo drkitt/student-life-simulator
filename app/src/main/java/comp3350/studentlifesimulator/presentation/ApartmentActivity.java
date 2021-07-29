@@ -45,7 +45,7 @@ public class ApartmentActivity extends CharacterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.apartment_activity);
+        setContentView(R.layout.activity_apartment);
 
         backPressed = false;
 

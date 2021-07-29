@@ -1,14 +1,13 @@
 package comp3350.studentlifesimulator.tests.business;
+
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Hashtable;
 
 import comp3350.studentlifesimulator.application.DatabaseServices;
 import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.business.StateManager;
-import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.ActionStates;
 import comp3350.studentlifesimulator.objects.Course;
 import comp3350.studentlifesimulator.objects.EnergyBar;
