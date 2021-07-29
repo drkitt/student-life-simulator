@@ -56,7 +56,6 @@ public class CharacterCustomizationTest {
 
     @Test
     public void testCustomizeCharacter() {
-
         onView(withId(R.id.newGameButton)).perform(click());
         onView(withId(R.id.eyesBlueButton)).perform(click());
         onView(withId(R.id.hair6Button)).perform(scrollTo(), click());
