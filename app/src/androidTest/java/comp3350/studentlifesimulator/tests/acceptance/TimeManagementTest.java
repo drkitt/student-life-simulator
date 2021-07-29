@@ -105,7 +105,6 @@ public class TimeManagementTest {
         onView(withId(R.id.energyBar)).check(matches(isDisplayed()));
 
         Espresso.pressBack();
-        Espresso.pressBack();
         onView(withText("Continue")).check(matches(isDisplayed()));
     }
 
@@ -257,7 +256,6 @@ public class TimeManagementTest {
         onView(withText("Nap")).check(matches(isDisplayed()));
 
         Espresso.pressBack();
-        Espresso.pressBack();
         onView(withText("Continue")).check(matches(isDisplayed()));
     }
 
@@ -337,8 +335,6 @@ public class TimeManagementTest {
         onView(withText("Quick Study")).check(matches(isDisplayed()));
 
         Espresso.pressBack();
-        Espresso.pressBack();
         onView(withText("Continue")).check(matches(isDisplayed()));
     }
-
 }

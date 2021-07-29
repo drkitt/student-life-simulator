@@ -3,7 +3,6 @@ package comp3350.studentlifesimulator.tests.objects;
 import junit.framework.TestCase;
 
 import comp3350.studentlifesimulator.objects.EnergyBar;
-import comp3350.studentlifesimulator.objects.Student;
 
 import static org.junit.Assert.*;
 

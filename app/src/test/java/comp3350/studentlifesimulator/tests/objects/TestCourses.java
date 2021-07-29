@@ -5,11 +5,8 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 import comp3350.studentlifesimulator.objects.Course;
-import comp3350.studentlifesimulator.objects.Time;
 import comp3350.studentlifesimulator.objects.Weekday;
 
 import static org.junit.Assert.*;

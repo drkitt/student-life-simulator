@@ -24,7 +24,7 @@ public class CoursesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.courses_activity);
+        setContentView(R.layout.activity_courses);
 
         courseList = findViewById(R.id.courses);
 
@@ -37,7 +37,6 @@ public class CoursesActivity extends AppCompatActivity {
                 courseArray)
         );
 
-        registerButton = findViewById(R.id.registerButton);
         registerButton.setOnClickListener(view -> completeRegistration());
     }
 

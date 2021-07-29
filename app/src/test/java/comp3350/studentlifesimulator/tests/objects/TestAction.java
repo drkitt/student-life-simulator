@@ -2,7 +2,6 @@ package comp3350.studentlifesimulator.tests.objects;
 
 import junit.framework.TestCase;
 
-import comp3350.studentlifesimulator.business.DatabaseManager;
 import comp3350.studentlifesimulator.objects.Action;
 import comp3350.studentlifesimulator.objects.Student;
 

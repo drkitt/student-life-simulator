@@ -23,9 +23,8 @@ import java.io.InputStreamReader;
 import comp3350.studentlifesimulator.application.Main;
 
 public class MainActivity extends AppCompatActivity {
-    Button newGame, continueGame, credits, howToPlay;
+    Button newGame, continueGame, credits;
     boolean newGamePressed;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         newGame = findViewById(R.id.newGameButton);
         continueGame = findViewById(R.id.continueButton);
         credits = findViewById(R.id.creditsButton);
-        howToPlay = findViewById(R.id.howToPlayButton);
 
         if (Main.checkPreviousData()) {
             continueGame.setVisibility(View.VISIBLE);
@@ -80,20 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             alertDialog.show();
-        });
-
-        howToPlay.setOnClickListener(v ->{
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-            alertDialog.setTitle("How To Play");
-            alertDialog.setMessage(getString(R.string.how_to_play));
-
-            alertDialog.setButton("Close", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-
-                }
-            });
-            alertDialog.show();
-
         });
     }
 
@@ -170,5 +154,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 }
