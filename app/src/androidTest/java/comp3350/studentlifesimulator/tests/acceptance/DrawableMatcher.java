@@ -27,7 +27,8 @@ import org.hamcrest.TypeSafeMatcher;
         if (!(target instanceof ImageView)) {
             return false;
         }
-        ImageView imageView = (ImageView) target;
+       imageView = (ImageView) target;
+       
         if (expectedId == EMPTY) {
             return imageView.getDrawable() == null;
         }
