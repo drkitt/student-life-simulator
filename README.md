@@ -15,7 +15,7 @@ Developers - Group 10
 * Dev Log: The log is maintained as google-doc shared amongst team members. It contains a summary of meeting notes, design decisions and work entries. The current assigned dev tasks are also included in this file.
 
 ## Project Architecture
-```
+
 comp3350.studentlifesimulator
    - application
       - DatabaseServices
@@ -71,8 +71,7 @@ comp3350.studentlifesimulator.tests
    - persistence
       - StubDatabase
       - TestDatabase
-         - This file accounts for testing the stubDatabse which can be switched with the
-         HSQLDB via dependency injection
+         - This file accounts for testing the stubDatabse which can be switched with the HSQLDB via dependency injection
    - AllTests
    
 androidTest.comp3350.studentlifesimulator.tests
@@ -82,7 +81,6 @@ androidTest.comp3350.studentlifesimulator.tests
       - EspressoTestsMatcher
       - TimeManagementTest
    - RunAcceptanceTests
-```
 
 ## Iteration 3 Implementation
 
